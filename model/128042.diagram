@@ -1,0 +1,64 @@
+format 74
+
+classcanvas 128042 class_ref 128042 // Ouvinte
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 34 30 2000
+end
+usecasecanvas 128170 usecase_ref 128042 // (Re)submeter exercicio
+  xyzwh 163 47 3005 64 32 label_xy 132 79
+end
+usecasecanvas 128298 usecase_ref 128170 // Relatorio de acertos/erros
+  xyzwh 320 48 3005 64 32 label_xy 282 80
+end
+usecasecanvas 128426 usecase_ref 128298 // Nota cadastrada
+  xyzwh 458 132 3005 64 32 label_xy 445 164
+end
+usecasecanvas 128810 usecase_ref 128042 // (Re)submeter exercicio
+  xyzwh 164 132 3005 64 32 label_xy 133 180
+end
+classcanvas 128938 class_ref 128170 // Aluno
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 44 188 2000
+end
+usecasecanvas 129194 usecase_ref 128170 // Relatorio de acertos/erros
+  xyzwh 316 133 3005 64 32 label_xy 278 165
+end
+usecasecanvas 129578 usecase_ref 128426 // Notas anteriores
+  xyzwh 156 240 3005 64 32 label_xy 143 272
+end
+classcanvas 129834 class_ref 128298 // Professor
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 27 344 2000
+end
+usecasecanvas 129962 usecase_ref 128554 // Notas dos alunos
+  xyzwh 200 305 3005 64 32 label_xy 185 337
+end
+usecasecanvas 130090 usecase_ref 128682 // Cadastrar exercicios
+  xyzwh 199 361 3005 64 32 label_xy 175 393
+end
+usecasecanvas 130218 usecase_ref 128810 // Relatorios
+  xyzwh 201 418 3005 64 32 label_xy 205 450
+end
+note 130730 "Relatorios: Sumarios de porcentagem de entrega, notas, maiores dificuldades, \"pulos\" de quantil"
+  xyzwh 311 422 2000 173 97
+note 130858 "Cadastrar exercicios envolve criar, editar, remover. Tambem determinar prazos de entrega"
+  xyzwh 305 339 2000 199 71
+line 128554 --->
+  from ref 128042 z 3006 to ref 128170
+line 128682 --->
+  from ref 128170 z 3006 to ref 128298
+line 129066 --->
+  from ref 128938 z 3006 to ref 128810
+line 129322 --->
+  from ref 128810 z 3006 to ref 129194
+line 129450 --->
+  from ref 129194 z 3006 to ref 128426
+line 129706 --->
+  from ref 128938 z 3006 to ref 129578
+line 130346 --->
+  from ref 129834 z 3006 to ref 129962
+line 130474 --->
+  from ref 129834 z 3006 to ref 130090
+line 130602 --->
+  from ref 129834 z 3006 to ref 130218
+end
