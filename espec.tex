@@ -55,12 +55,17 @@ Para utilizar o notaR em um curso, s\~ao necess\'arios os seguintes passos:
 			MySQL:
 			\begin{verbatim}
 			apt-get install mysql-server libdbd-mysql libmysqlclient-dev
+			mysql --user=root --password=rootpw mysql
+			  create database notaR;
+			  create user notaR identified by 'autonota';
+			  grant all on notaR.* to notar@'%';
 			\end{verbatim}
 			R:
 			\begin{verbatim}
 			apt-get install r-base
-			install.packages(``RMySQL'')
-			install.packages(``Rpad'')
+			R
+			  install.packages(``RMySQL'')
+			  install.packages(``Rpad'')
 			\end{verbatim}
 			Dokuwiki:
 			???
