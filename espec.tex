@@ -50,7 +50,20 @@ O sistema \'e composto pelos seguintes m\'odulos:
 \section{Instala\c c\~ao}
 Para utilizar o notaR em um curso, s\~ao necess\'arios os seguintes passos:
 \begin{enumerate}
-	\item Instala\c c\~ao do software de suporte (Dokuwiki, MySQL, R),
+	\item Instala\c c\~ao do software de suporte
+
+			MySQL:
+			\begin{verbatim}
+			apt-get install mysql-server libdbd-mysql libmysqlclient-dev
+			\end{verbatim}
+			R:
+			\begin{verbatim}
+			apt-get install r-base
+			install.packages(``RMySQL'')
+			install.packages(``Rpad'')
+			\end{verbatim}
+			Dokuwiki:
+			???
 	\item Instala\c c\~ao do notaR em si,
 	\item Prepara\c c\~ao e cadastramento dos exerc\'icios no notaR.
 \end{enumerate}
