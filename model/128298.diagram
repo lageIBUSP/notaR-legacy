@@ -2,15 +2,21 @@ format 74
 
 classcanvas 128042 class_ref 128170 // Aluno
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 103 78 2000
+  xyz 5 42 2000
 end
 classcanvas 128170 class_ref 128426 // Nota
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 215 68 2000
+  xyz 157 6 2000
 end
 classcanvas 128426 class_ref 128554 // Exercicio
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 312 49 2000
+  xyz 326 15 2000
+end
+note 129322 "nome_aluno corresponde ao nome de usuario no DokuWiki"
+  xyzwh 8 119 2005 119 89
+classcanvas 129450 class_ref 135082 // Teste
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 341 176 2000
 end
 relationcanvas 129066 relation_ref 128682 // <aggregation>
   from ref 128042 z 2001 to ref 128170
@@ -19,6 +25,11 @@ relationcanvas 129066 relation_ref 128682 // <aggregation>
 end
 relationcanvas 129194 relation_ref 128810 // <aggregation>
   from ref 128426 z 2001 to ref 128170
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129578 relation_ref 135338 // <aggregation>
+  from ref 129450 z 2001 to ref 128426
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end

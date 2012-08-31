@@ -1,6 +1,6 @@
 format 74
 "model"
-  revision 1
+  revision 3
   modified_by 42 "chalom"
 
 
@@ -135,7 +135,15 @@ format 74
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 128042 "nome"
+      classrelation 129322 // <aggregation>
+	relation 128682 o---
+	  a role_name "" private
+	    classrelation_ref 129322 // <aggregation>
+	  b role_name "" private
+	    classrelation_ref 129450 // <aggregation>
+      end
+
+      attribute 135338 "id_aluno"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -144,12 +152,13 @@ format 74
 	idl_decl ""
       end
 
-      classrelation 129322 // <aggregation>
-	relation 128682 o---
-	  a role_name "" private
-	    classrelation_ref 129322 // <aggregation>
-	  b role_name "" private
-	    classrelation_ref 129450 // <aggregation>
+      attribute 128042 "nome_aluno"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
 
@@ -316,6 +325,15 @@ format 74
       idl_decl ""
       explicit_switch_type ""
       
+      attribute 136490 "id_nota"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
       attribute 128170 "data"
 	private explicit_type ""
 	cpp_decl ""
@@ -341,6 +359,33 @@ format 74
       classrelation 129706 // <aggregation>
 	relation_ref 128810 // <aggregation>
       end
+
+      attribute 136234 "id_aluno"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136362 "id_exercicio"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136618 "texto"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
     end
 
     class 128554 "Exercicio"
@@ -352,7 +397,16 @@ format 74
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 128426 "numero"
+      attribute 135466 "id_exercicio"
+	unique private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135594 "numero_aula"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -361,16 +415,7 @@ format 74
 	idl_decl ""
       end
 
-      attribute 128554 "teste"
-	private explicit_type ""
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 128682 "resposta"
+      attribute 128426 "numero_exercicio"
 	private explicit_type ""
 	cpp_decl ""
 	java_decl ""
@@ -394,6 +439,66 @@ format 74
 	    classrelation_ref 129578 // <aggregation>
 	  b role_name "" private
 	    classrelation_ref 129706 // <aggregation>
+      end
+
+      classrelation 136362 // <aggregation>
+	relation_ref 135338 // <aggregation>
+      end
+
+      attribute 136106 "precondicoes"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+    end
+
+    class 135082 "Teste"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 135722 "id_teste"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "
+"
+      end
+
+      attribute 135850 "id_exercicio"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135978 "condicao"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 136234 // <aggregation>
+	relation 135338 o---
+	  a role_name "" private
+	    classrelation_ref 136234 // <aggregation>
+	  b role_name "" private
+	    classrelation_ref 136362 // <aggregation>
       end
     end
   end
