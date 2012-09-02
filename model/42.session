@@ -1,14 +1,15 @@
-window_sizes 1280 672 320 954 534 64
+window_sizes 1280 672 320 954 598 0
 diagrams
   active  classdiagram_ref 128298 // Diagrama
-    504 334 100 4 0 0
+    662 495 100 4 0 0
+  usecasediagram_ref 128042 // Diagrama
+    763 567 100 4 139 0
+  componentdiagram_ref 128170 // Diagrama
+    763 427 100 4 0 0
 end
 show_stereotypes
-selected attribute_ref 136618 // texto
+selected componentdiagram_ref 128170 // Diagrama
 open
-  attribute_ref 136490 // id_nota
-  attribute_ref 135594 // numero_aula
-  attribute_ref 128426 // numero_exercicio
-  class_ref 135082 // Teste
+  componentview_ref 128042 // Modulos
 end
 end

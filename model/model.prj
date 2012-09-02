@@ -1,6 +1,6 @@
 format 74
 "model"
-  revision 3
+  revision 6
   modified_by 42 "chalom"
 
 
@@ -159,6 +159,19 @@ format 74
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      attribute 149802 "id_turma"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 143274 // <aggregation>
+	relation_ref 141994 // <aggregation>
       end
     end
 
@@ -424,25 +437,12 @@ format 74
 	idl_decl ""
       end
 
-      attribute 128810 "prazo"
-	private explicit_type ""
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       classrelation 129578 // <aggregation>
 	relation 128810 o---
 	  a role_name "" private
 	    classrelation_ref 129578 // <aggregation>
 	  b role_name "" private
 	    classrelation_ref 129706 // <aggregation>
-      end
-
-      classrelation 136362 // <aggregation>
-	relation_ref 135338 // <aggregation>
       end
 
       attribute 136106 "precondicoes"
@@ -452,6 +452,22 @@ format 74
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      classrelation 144170 // <aggregation>
+	relation 142506 o---
+	  a role_name "" private
+	    classrelation_ref 144170 // <aggregation>
+	  b role_name "" private
+	    classrelation_ref 144298 // <aggregation>
+      end
+
+      classrelation 144426 // <aggregation>
+	relation 142634 o---
+	  a role_name "" private
+	    classrelation_ref 144426 // <aggregation>
+	  b role_name "" private
+	    classrelation_ref 144554 // <aggregation>
       end
     end
 
@@ -493,12 +509,115 @@ format 74
 	idl_decl ""
       end
 
-      classrelation 136234 // <aggregation>
-	relation 135338 o---
+      attribute 143146 "ordem"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143274 "dica"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 144554 // <aggregation>
+	relation_ref 142634 // <aggregation>
+      end
+    end
+
+    class 141610 "Turma"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 143146 // <aggregation>
+	relation 141994 o---
 	  a role_name "" private
-	    classrelation_ref 136234 // <aggregation>
+	    classrelation_ref 143146 // <aggregation>
 	  b role_name "" private
-	    classrelation_ref 136362 // <aggregation>
+	    classrelation_ref 143274 // <aggregation>
+      end
+
+      attribute 149930 "id_turma"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 150058 "nome_turma"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 143914 // <aggregation>
+	relation 142378 o---
+	  a role_name "" private
+	    classrelation_ref 143914 // <aggregation>
+	  b role_name "" private
+	    classrelation_ref 144042 // <aggregation>
+      end
+    end
+
+    class 141738 "Prazo"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 144042 // <aggregation>
+	relation_ref 142378 // <aggregation>
+      end
+
+      classrelation 144298 // <aggregation>
+	relation_ref 142506 // <aggregation>
+      end
+
+      attribute 150186 "id_exercicio"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 150314 "id_turma"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 150442 "prazo"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
   end

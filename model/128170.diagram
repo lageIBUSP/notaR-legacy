@@ -2,19 +2,19 @@ format 74
 
 componentcanvas 128042 component_ref 128042 // PHP
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 89 53 2000 163 57
+  color red xyzwh 89 53 2000 163 57
 end
 componentcanvas 128170 component_ref 128170 // MySQL
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 423 54 2000 155 57
+  color mediumgreen xyzwh 423 54 2000 155 57
 end
 componentcanvas 128426 component_ref 128298 // R?
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 246 165 2000 183 57
+  color gold xyzwh 246 165 2000 183 57
 end
 componentcanvas 128554 component_ref 128426 // R
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 259 285 2000 155 57
+  color mediumgreen xyzwh 259 285 2000 155 57
 end
 textcanvas 129066 "Rpad"
   xyzwh 251 120 2006 31 16
