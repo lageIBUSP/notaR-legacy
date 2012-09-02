@@ -1,8 +1,8 @@
 format 74
 
-componentcanvas 128042 component_ref 128042 // PHP
+componentcanvas 128042 component_ref 128042 // HTML/PHP
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  color red xyzwh 223 48 2000 163 57
+  color gold xyzwh 223 48 2000 163 57
 end
 componentcanvas 128170 component_ref 128170 // MySQL
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default

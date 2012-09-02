@@ -1,6 +1,6 @@
 format 74
 "model"
-  revision 7
+  revision 8
   modified_by 42 "chalom"
 
 
@@ -273,7 +273,7 @@ format 74
       size A4
     end
 
-    component 128042 "PHP"
+    component 128042 "HTML/PHP"
       stereotype "Visualizacao"
       simplerelation 128042
 	-_->
@@ -320,7 +320,7 @@ format 74
       stereotype "Dokuwiki"
       simplerelation 135082
 	-_->
-	  on component_ref 128042 // PHP
+	  on component_ref 128042 // HTML/PHP
       end
     end
   end

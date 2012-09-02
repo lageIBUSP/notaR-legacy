@@ -9,17 +9,12 @@ connect <- function () {
 con <- connect()
 
 # corretoR recebe: 
-# numero.aula, numero.exercicio
 # texto 
 # E devolve um um vector logico com o resultado dos testes
 # Caso o codigo tenha erros de sintaxe, retorna NULL
-corretoR <- function (numero.aula, numero.exercicio, texto) {
+corretoR <- function (id.exerc, texto) {
 		# Definicoes iniciais
 		corrEnv <- new.env()
-		id.exerc <- dbGetQuery(con, 
-							   paste("SELECT id_exercicio FROM exercicio 
-									 WHERE numero_aula=", numero.aula,
-									 " AND numero_exercicio=",numero.exercicio, sep=""));
 		testes <- dbGetQuery(con,
 							 paste("SELECT condicao FROM teste
 								   WHERE id_exercicio=", id.exerc,
@@ -48,16 +43,20 @@ corretoR <- function (numero.aula, numero.exercicio, texto) {
 }
 
 # Gera um output formatado em HTML a respeito de um exercicio corrigido
-relatorioNota <- function (numero.aula, numero.exercicio, nota) {
+relatorioNota <- function (id.exerc, nota) {
 		# Definicoes iniciais
-		id.exerc <- dbGetQuery(con, 
-							   paste("SELECT id_exercicio FROM exercicio 
-									 WHERE numero_aula=", numero.aula,
-									 " AND numero_exercicio=",numero.exercicio, sep=""));
 		dica <- dbGetQuery (con,
 							paste("SELECT dica FROM teste
 								  WHERE id_exercicio = ", id.exerc,
 								  " ORDER BY ordem ASC ", sep=""));
+		numero.aula <- dbGetQuery (con,
+							paste("SELECT numero_aula FROM exercicio
+								  WHERE id_exercicio = ", id.exerc,
+								  sep=""));
+		numero.exercicio <- dbGetQuery (con,
+							paste("SELECT numero_exercicio FROM exercicio
+								  WHERE id_exercicio = ", id.exerc,
+								  sep=""));
 		Rel <- paste("<p>Notas para aula ", numero.aula, ", exerc&iacute;cio ", numero.exercicio,":</p>", sep="");
 		if (is.null(nota))
 				return (paste(Rel, "<p><font color='#FF0000'>ERRO!</font> Seu exerc&iacute;cio cont&eacute;m algum
@@ -81,15 +80,11 @@ relatorioNota <- function (numero.aula, numero.exercicio, nota) {
 # texto: resposta dada pelo aluno
 # Valor de retorno: char, especificando mensagem de sucesso ou erro 
 # na insercao da nota
-gravarNota <- function (nome.aluno, numero.aula, numero.exercicio, texto, nota = corretoR(numero.aula, numero.exercicio, texto)) {
+gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, texto)) {
 		# Definicoes iniciais
 		id.aluno <- dbGetQuery(con, 
 							   paste("SELECT id_aluno FROM aluno 
 									 WHERE nome_aluno ='", nome.aluno,"'", sep=""));
-		id.exerc <- dbGetQuery(con, 
-							   paste("SELECT id_exercicio FROM exercicio 
-									 WHERE numero_aula=", numero.aula,
-									 " AND numero_exercicio=",numero.exercicio, sep=""));
 		prazo <- dbGetQuery(con,
 							paste("SELECT prazo FROM prazo p 
 								  JOIN turma t ON (p.id_turma=t.id_turma)
@@ -98,9 +93,9 @@ gravarNota <- function (nome.aluno, numero.aula, numero.exercicio, texto, nota =
 		Date <- format(Sys.time(), "%F %R");
 
 		# Condicoes para gravar a nota
-		if (sum(dim(id.aluno)) == 0) return ("<p>Aluno n&atilde;o cadastrado! A nota n&atilde;o foi gravada.</p>")
-		if (sum(dim(prazo)) > 0) if (Date > prazo) return ("<p>O prazo para entrega j&aacute; expirou! A nota n&atilde;o foi gravada.</p>")
-		if (is.null(nota)) return ("<p>Imposs&iacute;el gravar nota. C&oacute;digo com erros de sintaxe n&atilde;o.</p>")
+		if (sum(dim(id.aluno)) == 0) return ("<p><font color='#8c2618'>Aluno n&atilde;o cadastrado!</font> A nota n&atilde;o foi gravada.</p>")
+		if (sum(dim(prazo)) > 0) if (Date > prazo) return ("<p><font color='#8c2618'>O prazo para entrega j&aacute; expirou!</font> A nota n&atilde;o foi gravada.</p>")
+		if (is.null(nota)) return ("<p><font color='#8c2618'>Imposs&iacute;el gravar nota.</font> C&oacute;digo com erros de sintaxe.</p>")
 
 		# Faz a insercao da nota. TODO: possibilidade de erros na insercao??
 		res <- dbSendQuery(con,paste("INSERT INTO nota (id_aluno, id_exercicio, data, nota, texto) 
@@ -118,12 +113,19 @@ gravarNota <- function (nome.aluno, numero.aula, numero.exercicio, texto, nota =
 # Recebe o exercicio, corrige, grava a nota e gera um output formatado em HTML
 notaR <- function (nome.aluno, numero.aula, numero.exercicio, texto) {
 		# Definicoes iniciais
+		id.exerc <- dbGetQuery(con, 
+							   paste("SELECT id_exercicio FROM exercicio 
+									 WHERE numero_aula=", numero.aula,
+									 " AND numero_exercicio=",numero.exercicio, sep=""));
+
+		if (sum(dim(id.exerc))==0) return ("<p>Exerc&iacute;cio n&atilde;o cadastrado. Exerc&iacute;cios interpretativos e de resposta aberta devem ser entregues diretamente aos professores.</p>")
 		# Corrige o exercicio
-		nota <- corretoR (numero.aula, numero.exercicio, texto);
+
+		nota <- corretoR (id.exerc, texto);
 		# Grava a nota no banco:
-		notaGravada <- gravarNota(nome.aluno, numero.aula, numero.exercicio, texto, nota)
+		notaGravada <- gravarNota(nome.aluno, id.exerc, texto, nota)
 		# Gera o relatorio de notas:
-		Rel <- relatorioNota(numero.aula, numero.exercicio, nota);
+		Rel <- relatorioNota(id.exerc, nota);
 		return(paste(Rel, notaGravada,sep=""))
 
 }
@@ -145,6 +147,6 @@ notaR <- function (nome.aluno, numero.aula, numero.exercicio, texto) {
 # relatorioNota(3,2,corretoR(3,2,"hamsters <- data.frame()"));
 
 # Geral:
-notaR('chalom', 3,2,"hamsters <- data.frame()")
-notaR('chalom', 3, 2, "hamsters <- data.frae()");
-notaR('xuxa', 3, 2, "hamsters <- data.frame()");
+# notaR('chalom', 3,2,"hamsters <- data.frame()")
+# notaR('chalom', 3, 2, "hamsters <- data.frae()");
+# notaR('xuxa', 3, 2, "hamsters <- data.frame()");
