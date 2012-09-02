@@ -1,6 +1,6 @@
 format 74
 "model"
-  revision 6
+  revision 7
   modified_by 42 "chalom"
 
 
@@ -282,7 +282,7 @@ format 74
 
       simplerelation 128170
 	-_->
-	  on component_ref 128298 // R?
+	  on component_ref 128298 // notaR (R)
       end
     end
 
@@ -290,7 +290,7 @@ format 74
       stereotype "Dados"
     end
 
-    component 128298 "R?"
+    component 128298 "notaR (R)"
       stereotype "Processamento"
       simplerelation 128298
 	-_->
@@ -299,12 +299,29 @@ format 74
 
       simplerelation 128426
 	-_->
-	  on component_ref 128426 // R
+	  on component_ref 128426 // corretoR (R)
+      end
+
+      simplerelation 134954
+	-_->
+	  on component_ref 134954 // corretoR (C++)?
       end
     end
 
-    component 128426 "R"
+    component 128426 "corretoR (R)"
       stereotype "corretor"
+    end
+
+    component 134954 "corretoR (C++)?"
+      stereotype "corretor"
+    end
+
+    component 135082 "Plugin"
+      stereotype "Dokuwiki"
+      simplerelation 135082
+	-_->
+	  on component_ref 128042 // PHP
+      end
     end
   end
 

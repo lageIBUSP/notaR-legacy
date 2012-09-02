@@ -8,8 +8,9 @@ diagrams
     763 427 100 4 0 0
 end
 show_stereotypes
-selected componentdiagram_ref 128170 // Diagrama
+selected classdiagram_ref 128298 // Diagrama
 open
   componentview_ref 128042 // Modulos
+  classview_ref 128042 // Dados
 end
 end
