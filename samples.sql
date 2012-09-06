@@ -61,4 +61,21 @@ INSERT INTO teste (id_exercicio, condicao, ordem, dica) VALUES
 (@exerc, 'identical(hamsters, meus.hamsters)', 6,
 		'O data frame gerado n&atilde;o est&aacute; igual ao esperado');
 
+INSERT INTO exercicio (numero_aula, numero_exercicio, precondicoes)
+VALUES (3, 1, 'N <- rpois(1, 50)');
+
+SET @exerc := (SELECT id_exercicio FROM exercicio WHERE numero_aula=3 
+		AND numero_exercicio=1);
+INSERT INTO teste (id_exercicio, condicao, ordem, dica) VALUES 
+(@exerc, 'exists("meu.vetor")', 1,
+		'');
+INSERT INTO teste (id_exercicio, condicao, ordem, dica) VALUES 
+(@exerc, 'class(meu.vetor)=="character"', 2,
+		'');
+INSERT INTO teste (id_exercicio, condicao, ordem, dica) VALUES 
+(@exerc, 'all(meu.vetor=="a")', 3,
+		'');
+INSERT INTO teste (id_exercicio, condicao, ordem, dica) VALUES 
+(@exerc, 'length(meu.vetor) == N', 3,
+		'');
 COMMIT;

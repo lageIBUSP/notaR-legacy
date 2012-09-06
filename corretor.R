@@ -43,7 +43,7 @@ corretoR <- function (id.exerc, texto) {
 }
 
 # Gera um output formatado em HTML a respeito de um exercicio corrigido
-relatorioNota <- function (id.exerc, nota) {
+relatorioNota <- function (id.exerc, nota, texto) {
 		# Definicoes iniciais
 		dica <- dbGetQuery (con,
 							paste("SELECT dica FROM teste
@@ -57,18 +57,18 @@ relatorioNota <- function (id.exerc, nota) {
 							paste("SELECT numero_exercicio FROM exercicio
 								  WHERE id_exercicio = ", id.exerc,
 								  sep=""));
-		Rel <- paste("<p>Notas para aula ", numero.aula, ", exerc&iacute;cio ", numero.exercicio,":</p>", sep="");
+		Rel <- paste("<p>Aproveitamento para o exerc&iacute;cio  ", numero.exercicio, " da aula ", numero.aula,":</p>", sep="");
+		Rel <- paste(Rel, "<p>Sua resposta:</br>", texto,"</p>",sep="");
 		if (is.null(nota))
 				return (paste(Rel, "<p><font color='#FF0000'>ERRO!</font> Seu exerc&iacute;cio cont&eacute;m algum
 							  erro de sintaxe! Verifique no R se ele est&aacute; executando.</p>", sep=""));
 		notaMax <-dim(dica)[1]
-		Rel <- paste(Rel, "<p>Acertos: ",sum(nota),"/",notaMax," (<b>", round(100*mean(nota)),"%</b>).</p>", sep="")
-		for (i in 1:notaMax) {
-				if (nota[i])
-						Rel <- paste(Rel, "<br>Parte ",i,": <font color='#00FF00'>SUCESSO</font>", sep="")
-				else    Rel <- paste(Rel, "<br>Parte ",i,": <font color='#8c2618'>ATEN&Ccedil;&Atilde;O!</font><br>&nbsp;&nbsp;",
-									 dica[i,1], sep="");
-		}
+		Rel <- paste(Rel, "<p>Seu aproveitamento: <b>", round(100*mean(nota)),"%</b>.</p>", sep="")
+		if (sum(nota) != notaMax) Rel <- paste(Rel, "<font color='#8c2618'>ATEN&Ccedil;&Atilde;O!</font><br>")
+		# Envia a primeira mensagem de erro
+		primeiro.erro <- min(which(!nota))
+		Rel <- paste(Rel, "<br>", dica[primeiro.erro,1], 
+					 "<br>Corrija essa condi&ccedil;&atilde;o para continuar a corre&ccedil;&atilde;o.",	sep="");
 
 		return(Rel)
 }
@@ -125,7 +125,7 @@ notaR <- function (nome.aluno, numero.aula, numero.exercicio, texto) {
 		# Grava a nota no banco:
 		notaGravada <- gravarNota(nome.aluno, id.exerc, texto, nota)
 		# Gera o relatorio de notas:
-		Rel <- relatorioNota(id.exerc, nota);
+		Rel <- relatorioNota(id.exerc, nota, texto);
 		return(paste(Rel, notaGravada,sep=""))
 
 }
