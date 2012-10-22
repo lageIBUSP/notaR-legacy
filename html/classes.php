@@ -60,7 +60,7 @@ class Exercicio {
 			return $this->id;
 		}
 		public function nota() {
-				if (isset($this->login)) {
+				if ($this->user->getLogin()) {
 						$res = mysql_query("SELECT max(nota) FROM nota join aluno using (id_aluno) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
 						if (mysql_num_rows($res))
 						{
@@ -78,7 +78,7 @@ class Exercicio {
 				return $res[0];
 		}
 		public function prazo() {
-				if (isset($this->user->getLogin())) {
+				if ($this->user->getLogin()) {
 						$res = mysql_query("SELECT prazo FROM prazo join turma using (id_turma) join aluno using (id_turma) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
 						if (mysql_num_rows($res))
 						{

@@ -16,6 +16,7 @@ while ($exerc = mysql_fetch_array($res)) {
 		echo "<tr><td><a href='exercicio.php?exerc=".$X->getID()."'>".
 				$X->nome()."</a></td><td>".$X->nota()."</td><td>".
 				$X->prazo()."</td></tr>";
+}
 ?>
 </table>
 </p>
