@@ -35,13 +35,13 @@ class User {
 		}
 		public function loginForm() {
 				if (isset($this->login)) {
-						$T = "Usu&aacute;rio autenticado: $this->login";
+						$T = "Usu&aacute;rio: $this->login";
 						$T .="&nbsp;<a href='?logout=y'>logout</a>";
 				} else {
 						$T ="<form name=\"LoginForm\" action=\"index.php\" method=\"post\">";
 						$T.="<input type=\"hidden\" id=\"action\" name=\"action\" value=\"login\">";
-						$T.="<input type=\"text\" id=\"login\" name=\"login\" value=\"login\">";
-						$T.="<input type=\"password\" id=\"senha\" name=\"senha\" value=\"senha\">";
+						$T.="<input type=\"text\" id=\"login\" name=\"login\" value=\"login\"><br>";
+						$T.="<input type=\"password\" id=\"senha\" name=\"senha\" value=\"senha\"><br>";
 						$T.="	<input type=\"hidden\" id=\"uri\" name=\"uri\" value=\"";
 						$T.= $_SERVER['REQUEST_URI']; 
 						$T.="\"><button type=\"submit\" id=\"LoginButton\" value=\"Submit\">login</button>";

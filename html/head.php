@@ -5,12 +5,15 @@
 
 </head>
 <body>
-<div id="Top">
-	<h1>notaR</h1>
-<p>Um sistema para notas automatizadas em cursos que utilizam a linguagem R.
-<div style="float:right">
-	<?php echo $user->loginForm(); ?>
-</div>
-</p>
-</div>
-<div id="MainDiv">
+	<div id="Top">
+		<div style="float:left">
+			<h1>notaR</h1>
+			<p>Um sistema para notas automatizadas em cursos que 
+			utilizam a linguagem R</p>
+		</div>
+		<div style="float:right">
+			<br>&nbsp;
+			<?php echo $user->loginForm(); ?>
+		</div>
+	</div>
+	<div id="MainDiv">
