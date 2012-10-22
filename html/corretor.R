@@ -80,10 +80,9 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 							   paste("SELECT id_aluno FROM aluno 
 									 WHERE nome_aluno ='", nome.aluno,"'", sep=""));
 		prazo <- dbGetQuery(con,
-							paste("SELECT prazo FROM prazo
-								  JOIN turma USING (id_turma) JOIN aluno USING (id_turma)
-								  WHERE id_exercicio=", id.exerc, " AND nome_aluno='", nome.aluno,"'",
-								  , sep=""));
+			paste("SELECT prazo FROM prazo
+			JOIN turma USING (id_turma) JOIN aluno USING (id_turma)
+			WHERE id_exercicio=", id.exerc, " AND id_aluno=", id.aluno));
 		Date <- format(Sys.time(), "%F %R");
 
 		# Condicoes para gravar a nota

@@ -1,5 +1,6 @@
 <?php
 define('RSERVE_HOST','localhost');
+$basedir = '/var/www/rserve';
 
 error_reporting(E_NONE);
 

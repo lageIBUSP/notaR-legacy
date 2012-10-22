@@ -34,6 +34,10 @@ input {
 #corrInput {
 	width: 580px;
 }
+#Rfile {
+	width: 200px;
+	height: 30px;
+}
 button {
 	margin: 4px 0px 4px 0px; 
 	padding-left: 3px; 
