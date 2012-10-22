@@ -1,11 +1,9 @@
-<?php require_once('classes.php');
+<?php require('head.php');
 $id = mysql_real_escape_string($_REQUEST['exerc']);
 $X = new Exercicio($user, $id);
 ?>
-<html><head><title>Exercicio</title>
-<body>
-<h1>Exerc&iacute;cios de leitura e manipula&ccedil;&atilde;o de dados</h1>
-<h2><?php echo $X->nome(); ?></h2>
+<h2>Exerc&iacute;cios de leitura e manipula&ccedil;&atilde;o de dados</h2>
+<h3><?php echo $X->nome(); ?></h3>
 <?php 
 echo $user->loginForm();
 echo $X->html();
@@ -21,7 +19,7 @@ echo $X->html();
 <button type="submit" value="Submit">OK</button>
 </form>
 
-<div style="border: 2px dashed black; background: #def">
+<div id="corretoR" >
 <?php 
 if (isset($_POST['texto'])) {
 
@@ -44,5 +42,7 @@ else
 ?>
 </div>
 <a href="index.php">In&iacute;cio</a>
+
+</div>
 </body>
 </html>

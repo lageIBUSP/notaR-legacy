@@ -1,8 +1,4 @@
-<?php require_once('classes.php') ?>
-<html><body>
-<h1>notaR</h1>
-<?php echo $user->loginForm(); ?>
-<p>Para ver suas notas e prazos, fa&ccedil;a login pelo form acima</p>
+<?php require("head.php"); ?>
 <br>&nbsp;
 <p>Exerc&iacute;cios cadastrados:
 <style>
@@ -20,5 +16,6 @@ while ($exerc = mysql_fetch_array($res)) {
 ?>
 </table>
 </p>
+</div>
 </body>
 </html>

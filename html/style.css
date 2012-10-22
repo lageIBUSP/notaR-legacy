@@ -1,0 +1,67 @@
+td {
+		border: 2px solid #fcc;
+}
+
+#Top {
+	position:relative; 
+	width: 85%;
+	left: 50px;
+	top: 50px;
+	height: 120px; 
+}
+input {
+	margin: 4px 0px 4px 0px;
+       	background-color: #eee;
+       	color: #555; 
+	border: 1px dashed #555;
+	width: 103px;
+	height: 20px;
+	font-style: italic;
+	padding: 3px;
+	outline: none;
+}
+button {
+	margin: 4px 0px 4px 0px; 
+	padding-left: 3px; 
+	padding-right:3px;
+	width: 103px;
+	height: 20px;
+	text-align: center;
+	font-style: italic;
+	display: block; 
+	background-color: #eee;
+	color: #555; 
+	border: none; 
+	cursor:pointer; 
+}
+#MainDiv {
+	margin-left: 155px;
+	height: auto;
+	width: 85%;
+	padding: 10px;
+	margin-bottom: 5px;
+	color: #555;
+	overflow: auto;
+	font-style: normal;
+}
+.small {
+		font-size: 9.5px;
+}
+body {
+	height: auto;
+	font-family: Sans-Serif;
+	font-size: 12px;
+	background-color; #FFF;
+	color: #555;
+	font-style: normal;
+} 
+a {
+	color: #078;
+}
+p {
+	line-height: 160%;
+}
+#corretoR {
+		border: 2px dashed black;
+		background: #def;
+}
