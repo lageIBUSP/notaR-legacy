@@ -51,12 +51,10 @@ relatorioNota <- function (id.exerc, nota, texto) {
 							paste("SELECT dica FROM teste
 								  WHERE id_exercicio = ", id.exerc,
 								  " ORDER BY ordem ASC ", sep=""));
-		Rel <- paste("<p>Sua resposta:</br>", texto,"</p>", sep="");
-		if (is.null(nota))
-				return (paste(Rel, "<p><font color='#FF0000'>ERRO!</font> Seu exerc&iacute;cio cont&eacute;m algum
-							  erro de sintaxe! Verifique no R se ele est&aacute; executando.</p>", sep=""));
 		notaMax <-dim(dica)[1]
-		Rel <- paste(Rel, "<p>Seu aproveitamento: <b>", round(100*mean(nota)),"%</b>.</p>", sep="")
+
+		
+		Rel <- "";
 		if (sum(nota) != notaMax) { 
 			Rel <- paste(Rel, "<font color='#8c2618'>ATEN&Ccedil;&Atilde;O!</font><br>")
 			# Envia a primeira mensagem de erro
@@ -64,6 +62,11 @@ relatorioNota <- function (id.exerc, nota, texto) {
 			Rel <- paste(Rel, "<br>", dica[primeiro.erro,1], 
 					 "<br>Corrija essa condi&ccedil;&atilde;o para continuar a corre&ccedil;&atilde;o.",	sep="");
 		}
+		if (is.null(nota)) {
+				Rel <- paste(Rel, "<p><font color='#FF0000'>ERRO!</font> Seu exerc&iacute;cio cont&eacute;m algum
+							  erro de sintaxe! Verifique no R se ele est&aacute; executando.</p>", sep="");
+		} else { Rel <- paste(Rel, "<p>Seu aproveitamento: <b>", round(100*mean(nota)),"%</b>.</p>", sep=""); }
+		Rel <- paste(Rel, "<p>Sua resposta:<br>", paste(texto, collapse="<br>"),"</p>", sep="");
 		return(Rel)
 }
 
@@ -104,7 +107,8 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 }
 
 # Recebe o exercicio, corrige, grava a nota e gera um output formatado em HTML
-notaR <- function (nome.aluno, id.exerc, texto) {
+notaR <- function (nome.aluno, id.exerc, arquivo) {
+		texto <- readLines(arquivo);
 		nota <- corretoR (id.exerc, texto);
 		# Grava a nota no banco:
 		notaGravada <- gravarNota(nome.aluno, id.exerc, texto, nota)
@@ -112,6 +116,5 @@ notaR <- function (nome.aluno, id.exerc, texto) {
 		Rel <- relatorioNota(id.exerc, nota, texto);
 		return(paste(Rel, notaGravada,sep=""))
 }
-
 # Exemplos: 
-# notaR('chalom', 2,"hamsters <- data.frame()")
+# notaR('chalom', 2,"xpto.R")
