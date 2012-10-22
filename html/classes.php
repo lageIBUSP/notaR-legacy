@@ -5,6 +5,10 @@ class User {
 		public function getLogin() {
 			return $this->login;
 		}
+		public function admin () {
+			$res = mysql_fetch_array(mysql_query("SELECT admin FROM aluno where nome_aluno='".$this->login."'"));
+			return $res[0];
+		}
 		public function __construct() {
 				if (!isset($_SESSION)) session_start();
 				// Para fazer logout:
@@ -77,6 +81,10 @@ class Exercicio {
 				$res = mysql_fetch_array(mysql_query("SELECT html FROM exercicio WHERE id_exercicio=$this->id"));
 				return $res[0];
 		}
+		public function precondicoes() {
+				$res = mysql_fetch_array(mysql_query("SELECT precondicoes FROM exercicio WHERE id_exercicio=$this->id"));
+				return $res[0];
+		}
 		public function prazo() {
 				if ($this->user->getLogin()) {
 						$res = mysql_query("SELECT prazo FROM prazo join turma using (id_turma) join aluno using (id_turma) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
@@ -93,5 +101,8 @@ class Exercicio {
 		}
 }
 
+class Teste {
+		private $id;
+}
 ?>
 

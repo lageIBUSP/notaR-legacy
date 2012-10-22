@@ -1,18 +1,27 @@
 <?php require('head.php');
+if (! $user->admin()) {
+	echo "Acesso negado";
+	exit;
+}
 $id = mysql_real_escape_string($_REQUEST['exerc']);
 $X = new Exercicio($user, $id);
 ?>
-<h2>Exerc&iacute;cios de leitura e manipula&ccedil;&atilde;o de dados</h2>
-<h3><?php echo $X->nome(); ?></h3>
+<h2>Cadastro de exerc&iacute;cios</h2>
+<form name="cadastro" action="#" method="post" enctype="multipart/form-data">
+<p>Para a descri&ccedil;&atilde;o dos campos e funcionamento do corretor, leia a documenta&ccedil;&atilde;o.
+<br>Nome do exerc&iacute;cio:
+<input type="text">
+
+<h3><?php echo $_POST['submit']; ?></h3>
 <?php 
 echo $X->html();
 ?>
 
-<form name="notaR" action="#" method="post" enctype="multipart/form-data">
 <input type="hidden" name="exerc" value="<?php echo $X->getId(); ?>">
 <input type="hidden" name="MAX_FILE_SIZE" value="30000">
 <input type="file" name="rfile" id="rfile" accept="text/*">
-<button type="submit" value="Submit">OK</button>
+<button type="submit" name="submit" value="submit">OK</button>
+<button type="submit" name="submit" value="alterar">alterar</button>
 </form>
 
 <div id="corretoR" >

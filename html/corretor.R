@@ -67,7 +67,7 @@ relatorioNota <- function (id.exerc, nota, texto) {
 		if (is.null(nota)) {
 				Rel <- paste(Rel, "<p><font color='#FF0000'>ERRO!</font> Seu exerc&iacute;cio cont&eacute;m algum
 							  erro de sintaxe! Verifique no R se ele est&aacute; executando.</p>", sep="");
-		} else { Rel <- paste(Rel, "<p>Seu aproveitamento: <b>", round(100*weighted.mean(nota, peso)),"%</b>.</p>", sep=""); }
+		} else { Rel <- paste(Rel, "<p>Seu aproveitamento: <b>", round(100*weighted.mean(nota, t(peso))),"%</b>.</p>", sep=""); }
 		Rel <- paste(Rel, "<p>Sua resposta:<br>", paste(texto, collapse="<br>"),"</p>", sep="");
 		return(Rel)
 }
@@ -101,7 +101,7 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 								  " ORDER BY ordem ASC ", sep=""));
 
 		res <- dbSendQuery(con,paste("INSERT INTO nota (id_aluno, id_exercicio, data, nota, texto) 
-									 VALUES (",id.aluno,",",id.exerc,",'",Date,"',",round(100*weighted.mean(nota, peso)), ",'",texto,"')",sep=""))
+									 VALUES (",id.aluno,",",id.exerc,",'",Date,"',",round(100*weighted.mean(nota, t(peso))), ",'",texto,"')",sep=""))
 		melhorNota <- dbGetQuery(con,
 								 paste("SELECT max(nota) FROM nota
 									   WHERE id_aluno = ",id.aluno, " AND id_exercicio=",

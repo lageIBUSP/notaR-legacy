@@ -16,6 +16,7 @@ while ($exerc = mysql_fetch_array($res)) {
 ?>
 </table>
 </p>
+<p><a href="cadastra.php">Cadastrar novo exerc&iacute;cio</a></p>
 </div>
 </body>
 </html>
