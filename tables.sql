@@ -23,6 +23,8 @@ CREATE TABLE exercicio (
 	numero_aula INT(4) NOT NULL,
 	numero_exercicio INT(4) NOT NULL,
 	precondicoes VARCHAR(2000), -- NOTA: Usar ; entre cada statement
+	nome VARCHAR(200) NOT NULL,
+	html VARCHAR(4000) NOT NULL,
 	UNIQUE (numero_aula, numero_exercicio)
 ) ENGINE=INNODB;
 

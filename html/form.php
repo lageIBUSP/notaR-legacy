@@ -17,8 +17,8 @@ $exerc=$_POST['id_exerc'];
 $texto=$_POST['texto'];
 $texto = str_replace('\n', '', $texto);
 
-require_once '/var/www/rserve/config.php';
-require_once '/var/www/rserve/Connection.php';
+require_once 'config.php';
+require_once 'Rserve.php';
 
    $r = new Rserve_Connection(RSERVE_HOST);
    $x = $r->evalString('source("/var/www/rserve/corretor.R");');

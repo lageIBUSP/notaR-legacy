@@ -6,17 +6,15 @@ classcanvas 128042 class_ref 128170 // Aluno
 end
 classcanvas 128170 class_ref 128426 // Nota
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 318 80 2000
+  xyz 307 87 2000
 end
 classcanvas 128426 class_ref 128554 // Exercicio
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 301 288 2000
 end
-note 129322 "nome_aluno corresponde ao nome de usuario no DokuWiki"
-  xyzwh 15 8 2005 119 89
 classcanvas 129450 class_ref 135082 // Teste
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 507 280 2000
+  xyz 508 269 2000
 end
 classcanvas 129706 class_ref 141610 // Turma
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -27,7 +25,7 @@ classcanvas 130090 class_ref 141738 // Prazo
   xyz 163 298 2000
 end
 note 130858 "TODO: Permitir pesos diferentes para os testes"
-  xyzwh 487 213 2000 119 67
+  xyzwh 488 194 2000 119 67
 relationcanvas 129066 relation_ref 128682 // <aggregation>
   from ref 128042 z 2001 to ref 128170
   no_role_a no_role_b

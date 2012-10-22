@@ -2,7 +2,7 @@ format 74
 
 componentcanvas 128042 component_ref 128042 // HTML/PHP
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  color gold xyzwh 223 48 2000 163 57
+  color mediumgreen xyzwh 223 48 2000 163 57
 end
 componentcanvas 128170 component_ref 128170 // MySQL
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
@@ -10,7 +10,7 @@ componentcanvas 128170 component_ref 128170 // MySQL
 end
 componentcanvas 128426 component_ref 128298 // notaR (R)
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  color gold xyzwh 380 160 2000 183 57
+  color mediumgreen xyzwh 380 160 2000 183 57
 end
 componentcanvas 128554 component_ref 128426 // corretoR (R)
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
@@ -23,10 +23,6 @@ textcanvas 129194 "RMySQL"
 componentcanvas 129322 component_ref 134954 // corretoR (C++)?
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
   color red xyzwh 555 281 2000 155 57
-end
-componentcanvas 129578 component_ref 135082 // Plugin
-  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  color red xyzwh 14 47 2000 155 57
 end
 simplerelationcanvas 128298 simplerelation_ref 128042
   from ref 128042 z 2001 to ref 128170
@@ -42,8 +38,5 @@ simplerelationcanvas 128938 simplerelation_ref 128426
 end
 simplerelationcanvas 129450 simplerelation_ref 134954
   from ref 128426 z 2001 to ref 129322
-end
-simplerelationcanvas 129706 simplerelation_ref 135082
-  from ref 129578 z 2001 to ref 128042
 end
 end

@@ -5,30 +5,6 @@ class User {
 		public function getLogin() {
 			return $this->login;
 		}
-		public function Nota($exerc) {
-			if (isset($this->login)) {
-			$res = mysql_query("SELECT max(nota) FROM nota join aluno using (id_aluno) where nome_aluno = '".$this->getLogin()."' and id_exercicio=$exerc");
-			if (mysql_num_rows($res))
-			{
-				$res = mysql_fetch_array($res);
-				return $res[0];
-			}
-			else
-				return "Nada cadastrado";
-			}
-		}
-		public function Prazo($exerc) {
-			if (isset($this->login)) {
-			$res = mysql_query("SELECT prazo FROM prazo join turma using (id_turma) join aluno using (id_turma) where nome_aluno = '".$this->getLogin()."' and id_exercicio=$exerc");
-			if (mysql_num_rows($res))
-			{
-				$res = mysql_fetch_array($res);
-				return $res[0];
-			}
-			else
-				return "";
-			}
-		}
 		public function __construct() {
 				if (!isset($_SESSION)) session_start();
 				// Para fazer logout:
@@ -76,5 +52,46 @@ class User {
 }
  // Toda pagina precisa de um objeto de usuario:
 $user = new User();
+
+class Exercicio {
+		private $id;
+		private $user;
+		public function getId() {
+			return $this->id;
+		}
+		public function nota() {
+				if (isset($this->login)) {
+						$res = mysql_query("SELECT max(nota) FROM nota join aluno using (id_aluno) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
+						if (mysql_num_rows($res))
+						{
+								$res = mysql_fetch_array($res);
+								return $res[0];
+						}
+				}
+		}
+		public function nome() {
+				$res = mysql_fetch_array(mysql_query("SELECT nome FROM exercicio WHERE id_exercicio=$this->id"));
+				return $res[0];
+		}
+		public function html() {
+				$res = mysql_fetch_array(mysql_query("SELECT html FROM exercicio WHERE id_exercicio=$this->id"));
+				return $res[0];
+		}
+		public function prazo() {
+				if (isset($this->user->getLogin())) {
+						$res = mysql_query("SELECT prazo FROM prazo join turma using (id_turma) join aluno using (id_turma) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
+						if (mysql_num_rows($res))
+						{
+								$res = mysql_fetch_array($res);
+								return $res[0];
+						}
+				}
+		}
+		public function __construct($user, $id) {
+				$this->user = $user;
+				$this->id = $id;
+		}
+}
+
 ?>
 

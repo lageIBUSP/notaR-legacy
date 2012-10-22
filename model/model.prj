@@ -1,6 +1,6 @@
 format 74
 "model"
-  revision 9
+  revision 10
   modified_by 42 "chalom"
 
 
@@ -172,6 +172,15 @@ format 74
 
       classrelation 143274 // <aggregation>
 	relation_ref 141994 // <aggregation>
+      end
+
+      attribute 156970 "senha"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
 
@@ -436,24 +445,6 @@ format 74
 	idl_decl ""
       end
 
-      attribute 135594 "numero_aula"
-	private explicit_type ""
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 128426 "numero_exercicio"
-	private explicit_type ""
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       classrelation 129578 // <aggregation>
 	relation 128810 o---
 	  a role_name "" private
@@ -485,6 +476,24 @@ format 74
 	    classrelation_ref 144426 // <aggregation>
 	  b role_name "" private
 	    classrelation_ref 144554 // <aggregation>
+      end
+
+      attribute 157098 "nome"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 157226 "html"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
 
@@ -546,6 +555,15 @@ format 74
 
       classrelation 144554 // <aggregation>
 	relation_ref 142634 // <aggregation>
+      end
+
+      attribute 157354 "peso"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
 
