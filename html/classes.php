@@ -104,5 +104,13 @@ class Exercicio {
 class Teste {
 		private $id;
 }
+function mres($q) {
+	if(is_array($q)) 
+		foreach($q as $k => $v) 
+			$q[$k] = mres($v); //recursive
+	elseif(is_string($q))
+		$q = mysql_real_escape_string($q);
+	return $q;
+}
 ?>
 

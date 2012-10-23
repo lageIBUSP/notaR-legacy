@@ -2,6 +2,7 @@ td {
 		border: 2px solid #fcc;
 }
 
+#Cadastra td { border: none;}
 #Top {
 	position:relative; 
 	width: 70%;
@@ -10,6 +11,7 @@ td {
 	padding: 10px;
 	height: 120px; 
 }
+#Top a {text-decoration: none;}
 #MainDiv {
 	margin-left: 155px;
 	height: auto;
