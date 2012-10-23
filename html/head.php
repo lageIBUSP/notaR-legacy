@@ -7,7 +7,7 @@
 <body>
 	<div id="Top">
 		<div style="float:left">
-			<h1>notaR</h1>
+			<h1><a href="index.php">notaR</a></h1>
 			<p>Um sistema para notas automatizadas em cursos que 
 			utilizam a linguagem R</p>
 		</div>

@@ -10,9 +10,30 @@ $X = new Exercicio($user, $id);
 <form name="cadastro" action="#" method="post" enctype="multipart/form-data">
 <p>Para a descri&ccedil;&atilde;o dos campos e funcionamento do corretor, leia a documenta&ccedil;&atilde;o.
 <br>Nome do exerc&iacute;cio:
-<input type="text">
+<input type="text" name="nome" value="<?php if (isset($_POST['nome'])) echo $_POST['nome']; ?>">
+<br>Precondi&ccedil;&otilde;es:
+<br><textarea name="precondicoes"><?php if (isset($_POST['precondicoes'])) echo $_POST['precondicoes']; ?></textarea>
+<br>HTML:
+<br><textarea name="html"><?php if (isset($_POST['html'])) echo $_POST['html']; ?></textarea>
+<br>N&uacute;mero de testes: 
+<input type="text" name="ntestes" value="<?php if (isset($_POST['ntestes'])) echo $_POST['ntestes']; ?>">
+<button type="submit" name="submit" value="alterar">alterar</button>
 
-<h3><?php echo $_POST['submit']; ?></h3>
+<h3>Testes</h3>
+<table><tr><td><b>Ordem</b></td><td><b>Peso</b></td><td><b>Condi&ccedil;&atilde;o<b></td><td><b>Dica</b></td></tr>
+<?php 
+for ($i = 0; $i < $_POST['ntestes']; $i ++) {
+		echo "<tr>";
+		echo "<td><input type='text' name='ordem[]' value='";
+		if (isset($_POST['ordem'][$i])) {echo $_POST['ordem'][$i];} else {echo $i;}
+		echo "'></td><td><input type='text' name='peso[]' value='";
+		if (isset($_POST['peso'][$i])) {echo $_POST['peso'][$i];} else {echo 1;}
+		echo "'></td><td><input type='text' name='condicao[]' value=''></td>";
+		echo "</tr>";
+}
+		echo "</table";
+
+?>
 <?php 
 echo $X->html();
 ?>
@@ -21,35 +42,8 @@ echo $X->html();
 <input type="hidden" name="MAX_FILE_SIZE" value="30000">
 <input type="file" name="rfile" id="rfile" accept="text/*">
 <button type="submit" name="submit" value="submit">OK</button>
-<button type="submit" name="submit" value="alterar">alterar</button>
 </form>
 
-<div id="corretoR" >
-<?php 
-if (isset($_POST['exerc'])) {
-	require_once 'Rserve.php';
-
-	if (empty($_FILES['rfile']["tmp_name"])) { 
-		echo "Nenhum arquivo recebido. Verifique se houve algum problema no upload.";
-		echo "<br>Poss&iacute;veis causas de erro: <ul><li>Voc&ecirc; esqueceu de fornecer um nome de arquivo?</li>";
-		echo "<li>O arquivo &eacute; grande demais? (m&aacute;ximo aceito: 15 mil caracteres)</li>";
-		echo "<li>Voc&ecirc; salvou o arquivo usando algum processador de texto, como o Word?</li>";
-		echo "</ul>";
-	} else {
-		$uploadfile = $basedir ."/tmp/".  basename($_FILES['rfile']['tmp_name']);
-		move_uploaded_file($_FILES['rfile']['tmp_name'], $uploadfile);
-
-		$r = new Rserve_Connection(RSERVE_HOST);
-		$x = $r->evalString('source("'.$basedir.'/corretor.R");');
-		$x = $r->evalString('notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")');   
-		echo $x;
-	}
-}
-else 
-{ echo "<p>Insira sua resposta no campo acima e aperte OK</p>";
-}
-?>
-</div>
 <a href="index.php">In&iacute;cio</a>
 
 </div>
