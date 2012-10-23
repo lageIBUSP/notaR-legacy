@@ -102,7 +102,25 @@ class Exercicio {
 }
 
 class Teste {
-		private $id;
+	private $id_exercicio;
+	private $ordem;
+	public function __construct($id, $i) {
+		$this->id_exercicio = $id;
+		$this->ordem = $i;
+	}
+	public function condicao() {
+		$res = mysql_fetch_array(mysql_query("SELECT condicao FROM teste WHERE id_exercicio=$this->id_exercicio AND ordem = $this->ordem"));
+		return $res[0];
+		}
+	public function peso() {
+		$res = mysql_fetch_array(mysql_query("SELECT peso FROM teste WHERE id_exercicio=$this->id_exercicio AND ordem = $this->ordem"));
+		return $res[0];
+		}
+	public function dica() {
+		$res = mysql_fetch_array(mysql_query("SELECT dica FROM teste WHERE id_exercicio=$this->id_exercicio AND ordem = $this->ordem"));
+		return $res[0];
+		}
+
 }
 function mres($q) {
 	if(is_array($q)) 
