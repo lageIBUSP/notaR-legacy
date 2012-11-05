@@ -3,7 +3,8 @@ require_once("config.php");
 class User {
 		private $login;
 		public function getLogin() {
-			return $this->login;
+			if (isset($this->login)) return $this->login;
+			return "xuxa";
 		}
 		public function admin () {
 			$res = mysql_fetch_array(mysql_query("SELECT admin FROM aluno where nome_aluno='".$this->login."'"));

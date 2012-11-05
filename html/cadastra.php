@@ -7,7 +7,7 @@ $id = mysql_real_escape_string($_REQUEST['exerc']);
 $X = new Exercicio($user, $id);
 
 if (isset($_POST['ntestes'])) {$ntestes = $_POST['ntestes'];} elseif (!empty($id)) {
-	$res = mysql_fetch_array(mysql_query("SELECT count(1) FROM teste WHERE id_exercicio=$id"));
+	$res = mysql_fetch_array(mysql_query("SELECT max(ordem) FROM teste WHERE id_exercicio=$id"));
 	$ntestes = $res[0];}else {$ntestes = 10;}
 
 ?>
@@ -15,12 +15,23 @@ if (isset($_POST['ntestes'])) {$ntestes = $_POST['ntestes'];} elseif (!empty($id
 <?php 
 if (isset($_POST['submit']) AND $_POST['submit'] == "submit") {
 $new = mres($_POST);
-# AQUI, PRECISA DECIDIR SE EH INSERT OU UPDATEEEEEE TODO TODO TODO TODO
+if (empty($id)) {
 	$res = mysql_query("INSERT INTO exercicio (precondicoes, html, nome)
 		VALUES (REPLACE('".
 		$new['precondicoes']."', CHAR(13), CHAR(10)), '".$new['html']."', '".$new['nome']."')");
 	$my_id = mysql_insert_id();
 	echo "Exerc&iacute;cio cadastrado ";	
+
+} else
+{
+	$res = mysql_query("UPDATE exercicio SET precondicoes = REPLACE('".
+		$new['precondicoes']."', CHAR(13), CHAR(10)), html='".$new['html']."', nome='".$new['nome']."'
+		WHERE id_exercicio=$id");
+	$res = mysql_query("DELETE FROM teste WHERE id_exercicio=$id");
+	echo "Exerc&iacute;cio alterado ";	
+	$my_id = $id;
+}
+
 	for ($i=0, $c=0; $i < $ntestes; $i++) {
 		$j = $i +1;
 		if (! empty($new['condicao'][$i])) {

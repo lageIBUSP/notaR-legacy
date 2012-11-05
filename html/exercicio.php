@@ -12,7 +12,7 @@ echo $X->html();
 <input type="hidden" name="exerc" value="<?php echo $X->getId(); ?>">
 <input type="hidden" name="MAX_FILE_SIZE" value="30000">
 <input type="file" name="rfile" id="rfile" accept="text/*">
-<button type="submit" value="Submit">OK</button>
+<br><button type="submit" value="Submit">OK</button>
 </form>
 
 <div id="corretoR" >
@@ -30,10 +30,20 @@ if (isset($_POST['exerc'])) {
 		$uploadfile = $basedir ."/tmp/".  basename($_FILES['rfile']['tmp_name']);
 		move_uploaded_file($_FILES['rfile']['tmp_name'], $uploadfile);
 
-		$r = new Rserve_Connection(RSERVE_HOST);
+
+
+		try{
+			$r = new Rserve_Connection(RSERVE_HOST);
+		} catch (Exception $e) {
+			echo 'Erro interno ao conectar no servidor: ',  $e->getMessage(), "<br>";
+		}
+		try {
 		$x = $r->evalString('source("'.$basedir.'/corretor.R");');
 		$x = $r->evalString('notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")');   
 		echo $x;
+		} catch (Exception $e) {
+			echo 'Erro interno ao executar o corretor: ', $e->getMessage(), "<br>";
+		}
 	}
 }
 else 

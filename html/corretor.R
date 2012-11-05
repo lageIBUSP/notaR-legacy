@@ -57,7 +57,7 @@ relatorioNota <- function (id.exerc, nota, texto) {
 								  " ORDER BY ordem ASC ", sep=""));
 		notaMax <-dim(dica)[1]
 		Rel <- "";
-		if (sum(nota) != notaMax) { 
+		if (! is.null(nota) && sum(nota) != notaMax) { 
 			Rel <- paste(Rel, "<font color='#8c2618'>ATEN&Ccedil;&Atilde;O!</font><br>")
 			# Envia a primeira mensagem de erro
 			primeiro.erro <- min(which(!nota))
@@ -84,6 +84,9 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 		id.aluno <- dbGetQuery(con, 
 							   paste("SELECT id_aluno FROM aluno 
 									 WHERE nome_aluno ='", nome.aluno,"'", sep=""));
+
+		if (sum(dim(id.aluno)) == 0) return ("<p><font color='#8c2618'>Voc&ecirc; n&atilde;o est&aacute; logado.</font> A nota n&atilde;o foi gravada.</p>")
+
 		prazo <- dbGetQuery(con,
 			paste("SELECT prazo FROM prazo
 			JOIN turma USING (id_turma) JOIN aluno USING (id_turma)
@@ -91,7 +94,6 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 		Date <- format(Sys.time(), "%F %R");
 
 		# Condicoes para gravar a nota
-		if (sum(dim(id.aluno)) == 0) return ("<p><font color='#8c2618'>Voc&ecirc; n&atilde;o est&aacute; logado.</font> A nota n&atilde;o foi gravada.</p>")
 		if (sum(dim(prazo)) > 0) if (Date > prazo) return ("<p><font color='#8c2618'>O prazo para entrega j&aacute; expirou!</font> A nota n&atilde;o foi gravada.</p>")
 		if (is.null(nota)) return (NULL);
 
