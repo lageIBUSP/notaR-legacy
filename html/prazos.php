@@ -5,8 +5,6 @@ if (! $user->admin()) {
 }
 ###### Codigo aqui
 ?>
-<a href="index.php">In&iacute;cio</a>
-
 </div>
 </body>
 </html>

@@ -2,6 +2,12 @@ td {
 		border: 2px solid #fcc;
 }
 
+#Menu {
+	position: relative;
+	width: 140;
+	float: right;
+	border: 2px dashed #fcc;
+}
 #Cadastra td { border: none;}
 #Top {
 	position:relative; 

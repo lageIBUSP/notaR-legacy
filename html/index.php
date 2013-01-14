@@ -1,9 +1,9 @@
 <?php require("head.php"); ?>
 <?php
 if ($user->admin()) {
-	echo "<div float='right' style='border: 2px dashed #fcc>";
+	echo "<div id='Menu'>";
 	echo "Administrar:<br><ul><li><a href='turmas.php'>Turmas</a></li>";
-	echo "<li><a href='alunos.php'>Alunos<</a>/li><li><a href='prazos.php'>Prazos</a></li></ul></div>";
+	echo "<li><a href='alunos.php'>Alunos</a></li><li><a href='prazos.php'>Prazos</a></li></ul></div>";
 }
 ?>
 <br>&nbsp;

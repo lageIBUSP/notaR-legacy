@@ -92,8 +92,6 @@ echo "<button type=\"submit\" name=\"submit\" value=\"submit\">OK</button>";
 echo "</form>";
 }
 ?>
-<a href="index.php">In&iacute;cio</a>
-
 </div>
 </body>
 </html>
