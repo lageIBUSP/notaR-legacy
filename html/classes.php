@@ -67,6 +67,10 @@ class Turma {
 				$res = mysql_fetch_array(mysql_query("SELECT nome_turma FROM turma WHERE id_turma=$this->id"));
 				return $res[0];
 		}
+		public function getAlunos() {
+				$res = mysql_fetch_array(mysql_query("SELECT count(1) FROM turma JOIN aluno WHERE id_turma=$this->id"));
+				return $res[0];
+		}
 		public function create($nome) {
 				$n = mysql_real_escape_string($nome);
 			mysql_query("INSERT INTO turma (nome_turma) VALUES ('$n');");
