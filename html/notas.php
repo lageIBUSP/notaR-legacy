@@ -6,7 +6,7 @@ if (! $user->admin()) {
 ###### Codigo aqui
 $post = mres($_REQUEST);
 ?>
-<h2>Administra&ccedil;&atilde;o de turmas</h2>
+<h2>Relat&oacute;rio de notas</h2>
 <?php
 if (isset($post['delete'])) {
 		$turma = new Turma($post['delete']);

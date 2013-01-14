@@ -21,7 +21,7 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 	<button type='submit'>ok</button>
 </form>
 <?php
-if(isset($_GET['turma']){
+if(isset($_GET['turma'])){
 ?>
 <p>Prazos cadastrados:</p>
 <form action='prazos.php' method='get'>
