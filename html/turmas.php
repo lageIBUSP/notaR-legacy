@@ -30,7 +30,7 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 
 <form name="cadastro" action="#" method="post">
 <p>Criar nova turma: <input type="text" name="nome" style="width: 300px;">
-<br><button type="submit" name="submit" value="submit">
+<br><button type="submit" name="submit" value="submit">cadastrar</button>
 </p>
 </form>
 
