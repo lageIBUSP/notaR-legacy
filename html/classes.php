@@ -73,7 +73,10 @@ class Turma {
 		}
 		public function create($nome) {
 				$n = mysql_real_escape_string($nome);
-			mysql_query("INSERT INTO turma (nome_turma) VALUES ('$n');");
+				return mysql_query("INSERT INTO turma (nome_turma) VALUES ('$n');");
+		}
+		public function remove() {
+				return mysql_query("DELETE FROM turma WHERE id_turma=$this->id");
 		}
 		public function __construct($id) {
 				$this->id = $id;
