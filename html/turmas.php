@@ -12,7 +12,7 @@ $lista_turmas = mysql_query("SELECT id_turma FROM turma");
 <?php
 while ($T = mysql_fetch_array($lista_turmas)) {
 	$turma = new Turma($T[0]);
-	echo "<tr><td>".$turma->nome()."</td><td>".$turma->alunos()."</td></tr>";
+	echo "<tr><td>".$turma->getNome()."</td><td>".$turma->getAlunos()."</td></tr>";
 }
 ?>
 </table>
