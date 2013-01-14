@@ -68,7 +68,7 @@ class Turma {
 				return $res[0];
 		}
 		public function getAlunos() {
-				$res = mysql_fetch_array(mysql_query("SELECT count(1) FROM turma JOIN aluno WHERE id_turma=$this->id"));
+				$res = mysql_fetch_array(mysql_query("SELECT count(1) FROM turma JOIN aluno USING (id_turma) WHERE id_turma=$this->id"));
 				return $res[0];
 		}
 		public function create($nome) {
