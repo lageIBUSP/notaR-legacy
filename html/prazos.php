@@ -15,7 +15,7 @@ if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 				if (strpos($key, "ld_")) {
 						$new = substr($key, 4);
 						if ($post[$key] != $post[$new]) {
-								if($post[$key]) =='') { // novo
+								if($post[$key] =='') { // novo
 echo "novo";
 								}
 								elseif($post[$new] == '') { // removido
