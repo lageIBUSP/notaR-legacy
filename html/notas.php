@@ -35,8 +35,9 @@ $lista_exs = mysql_query("SELECT DISTINCT id_exercicio FROM exercicio JOIN nota 
 echo "	<tr><td>Aluno</td>";
 $i = 0;
 while ($E = mysql_fetch_array($lista_exs)) {
-	$ex[$i++] = new Exercicio(NULL, $E[0]);
-//	echo "<td>".$ex->getId()."</td>";
+	$ex[$i] = new Exercicio(NULL, $E[0]);
+	echo "<td>".$ex[$i]->getId()."</td>";
+	$i++;
 }
 echo "	</tr>";
 ?>
