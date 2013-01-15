@@ -13,6 +13,7 @@ CREATE TABLE turma (
 CREATE TABLE aluno (
 	id_aluno INT(10) PRIMARY KEY AUTO_INCREMENT,
 	nome_aluno VARCHAR(200) NOT NULL,
+	senha VARCHAR(40) NOT NULL,
 	id_turma INT(10) NOT NULL,
 	INDEX (id_turma),
 	FOREIGN KEY (id_turma) REFERENCES turma (id_turma)
@@ -24,8 +25,7 @@ CREATE TABLE exercicio (
 	numero_exercicio INT(4) NOT NULL,
 	precondicoes VARCHAR(2000), -- NOTA: Usar ; entre cada statement
 	nome VARCHAR(200) NOT NULL,
-	html VARCHAR(4000) NOT NULL,
-	UNIQUE (numero_aula, numero_exercicio)
+	html VARCHAR(4000) NOT NULL
 ) ENGINE=INNODB;
 
 CREATE TABLE prazo (
@@ -43,6 +43,7 @@ CREATE TABLE teste (
 	id_exercicio INT(10) NOT NULL,
 	condicao VARCHAR(200) NOT NULL,
 	ordem INT(4),
+	peso  INT(10) DEFAULT 1,
 	dica VARCHAR(200),
 	INDEX(id_exercicio),
 	FOREIGN KEY (id_exercicio) REFERENCES exercicio (id_exercicio)

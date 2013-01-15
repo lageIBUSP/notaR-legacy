@@ -1,15 +1,14 @@
 window_sizes 1280 672 320 954 598 0
 diagrams
-  active  componentdiagram_ref 128170 // Diagrama
+  componentdiagram_ref 128170 // Diagrama
     763 478 100 4 0 0
-  classdiagram_ref 128298 // Diagrama
+  active  classdiagram_ref 128298 // Diagrama
     763 478 100 4 0 0
 end
 show_stereotypes
 selected attribute_ref 157354 // peso
 open
   class_ref 128170 // Aluno
-  componentview_ref 128042 // Modulos
   class_ref 128554 // Exercicio
   class_ref 135082 // Teste
 end
