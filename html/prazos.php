@@ -12,21 +12,25 @@ if (! $user->admin()) {
 	<select id='turma' name='turma'>
 <?php
 $lista_turmas = mysql_query("SELECT id_turma FROM turma ORDER BY id_turma ASC");
-while ($T = mysql_fetch_array($lista_turmas)) {
-	$turma = new Turma($T[0]);
-	echo "	<option value=".$turma->getId().">".$turma->getNome()."</option>";
-}
-?>
-	</select>
-	<button type='submit'>ok</button>
-<!--/form-->
-<?php
+
 if(isset($_GET['turma']))
 	$turma = mysql_real_escape_string($_GET['turma']);
 else {
 		$T = mysql_fetch_array(mysql_query("SELECT MIN(id_turma) FROM turma"));
 		$turma = $T[0];
 }
+
+while ($T = mysql_fetch_array($lista_turmas)) {
+	$loop_turma = new Turma($T[0]);
+	echo "	<option value=".$loop_turma->getId();
+	if($loop_turma.getId() == $turma) echo " selected";
+	echo ">".$loop_turma->getNome()."</option>";
+}
+?>
+	</select>
+	<button type='submit'>ok</button>
+<!--/form-->
+<?php
 ?>
 <p>Prazos cadastrados:</p>
 <!--form action='prazos.php' method='get' -->
