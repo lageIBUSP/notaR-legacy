@@ -43,10 +43,10 @@ echo "	</tr>";
 
 $lista_alunos = mysql_query("SELECT id_aluno FROM aluno WHERE id_turma=$turma ORDER BY nome_aluno ASC");
 while ($A = mysql_fetch_array($lista_alunos)) {
-		$aluno = new Aluno ($A);
+		$aluno = new Aluno ($A[0]);
 		echo "<tr><td>".$aluno->getNome()."</td>";
 	foreach ($ex as $E) {
-			echo "<td>".$E->getNota($A)."</td>";
+			echo "<td>".$E->getNota($A[0])."</td>";
 	}
 		echo "</tr>";
 }
