@@ -11,12 +11,20 @@ else {
 }
 if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 		$post = mres($_POST);
-		print_r($post);
 		foreach (array_keys($post) AS $key) {
-				echo "key $key";
 				if (strpos($key, "ld_")) {
 						$new = substr($key, 4);
-						if ($post[$key] != $post[$new]) echo "Mudei $new";
+						if ($post[$key] != $post[$new]) {
+								if($post[$key]) =='') { // novo
+echo "novo";
+								}
+								elseif($post[$new] == '') { // removido
+echo "remove";
+								}
+								else { // atualizar
+echo "Atualiza";
+								}
+						}
 				}
 		}
 
