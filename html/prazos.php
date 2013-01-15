@@ -46,6 +46,8 @@ echo "<input type='hidden' id='turma' value='".$turma."' />";
 <?php
 } #fim do if turma
 ######
+#//DEBUG
+print_r($_GET);
 ?>
 </div>
 </body>
