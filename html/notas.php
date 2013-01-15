@@ -30,20 +30,15 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 <table>
 
 <?php
-//<tr><td>Exerc&iacute;cio</td><td>Data</td></tr>
-$lista_exs = mysql_query("SELECT id_exercicio FROM exercicio JOIN nota USING (id_exercicio) JOIN aluno USING (id_aluno) WHERE id_turma=$turma");
+$lista_exs = mysql_query("SELECT DISTINCT id_exercicio FROM exercicio JOIN nota USING (id_exercicio) JOIN aluno USING (id_aluno) WHERE id_turma=$turma");
 
+echo "	<tr><td>Aluno</td>";
 $i = 0;
-
-
 while ($E = mysql_fetch_array($lista_exs)) {
-	echo "	<tr>";
-	$ex = new Exercicio(NULL, $E[0]);
-	echo $ex->getNome();
-//	echo "		<td>".$ex->getNome()."</td>";
-//	echo "		<td><input type='text' name='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'></td>";
-//	echo "	</tr>";
+	$ex[$i++] = new Exercicio(NULL, $E[0]);
+	echo "<td>".$ex->getId()."</td>";
 }
+echo "	</tr>";
 ?>
 </table>
 </div>
