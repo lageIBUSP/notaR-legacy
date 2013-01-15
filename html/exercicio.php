@@ -3,9 +3,9 @@ $id = mysql_real_escape_string($_REQUEST['exerc']);
 $X = new Exercicio($user, $id);
 ?>
 <h2>Exerc&iacute;cios de leitura e manipula&ccedil;&atilde;o de dados</h2>
-<h3><?php echo $X->nome(); ?></h3>
+<h3><?php echo $X->getNome(); ?></h3>
 <?php 
-echo $X->html();
+echo $X->getHtml();
 ?>
 <p>
 <form name="notaR" action="#" method="post" enctype="multipart/form-data">
