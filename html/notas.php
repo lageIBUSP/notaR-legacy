@@ -36,7 +36,7 @@ echo "	<tr><td>Aluno</td>";
 $i = 0;
 while ($E = mysql_fetch_array($lista_exs)) {
 	$ex[$i++] = new Exercicio(NULL, $E[0]);
-	echo "<td>".$ex->getId()."</td>";
+//	echo "<td>".$ex->getId()."</td>";
 }
 echo "	</tr>";
 ?>
