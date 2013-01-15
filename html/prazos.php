@@ -28,12 +28,8 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 }
 ?>
 	</select>
-	<button type='submit'>ok</button>
-<!--/form-->
-<?php
-?>
+	<button type='submit' name='submit' value='turma'>ok</button>
 <p>Prazos cadastrados:</p>
-<!--form action='prazos.php' method='get' -->
 <table>
 <tr><td>Exerc&iacute;cio</td><td>Data</td></tr>
 <?php
@@ -46,10 +42,9 @@ while ($E = mysql_fetch_array($lista_exs)) {
 	echo "		<td><input type='text' id='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'></td>";
 	echo "	</tr>";
 }
-#echo "<input type='hidden' id='turma' name='turma' value='".$turma."' />";
 ?>
 </table>
-<button type='submit'>Atualiza</button>
+<button type='submit' name='submit' value='atualiza'>Atualiza</button>
 </form>
 <?php
 ######
