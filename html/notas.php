@@ -3,37 +3,49 @@ if (! $user->admin()) {
 	echo "Acesso negado";
 	exit;
 }
-###### Codigo aqui
-$post = mres($_REQUEST);
+if(isset($_POST['turma']))
+	$turma = mysql_real_escape_string($_POST['turma']);
+else {
+		$T = mysql_fetch_array(mysql_query("SELECT MIN(id_turma) FROM turma"));
+		$turma = $T[0];
+}
 ?>
 <h2>Relat&oacute;rio de notas</h2>
+<p>Escolha a turma</p>
+<form action='notas.php' method='POST'>
+	<select id='turma' name='turma'>
 <?php
-if (isset($post['delete'])) {
-		$turma = new Turma($post['delete']);
-		if ($turma->remove())	echo "<p>Turma removida</p>"; else echo "<p>Erro ao remover turma! Verifique se a turma tem 0 alunos</p>";
-}
-if(isset($post['submit'])) {
-		$turma = new Turma();
-		if ($turma->create($post['nome'])) echo "<p>Turma criada</p>"; else echo "<p>Erro ao criar turma!</p>";
+$lista_turmas = mysql_query("SELECT id_turma FROM turma ORDER BY id_turma ASC");
+
+while ($T = mysql_fetch_array($lista_turmas)) {
+	$loop_turma = new Turma($T[0]);
+	echo "	<option value=".$loop_turma->getId();
+	if($loop_turma->getId() == $turma) echo " selected";
+	echo ">".$loop_turma->getNome()."</option>";
 }
 ?>
-<p>Turmas cadastradas:</p>
-<table><tr><td></td><td>Nome</td><td>Alunos</td></tr>
+	</select>
+	<button type='submit' name='submit' value='turma'>ok</button>
+</form>
+<table>
+
 <?php
-$lista_turmas = mysql_query("SELECT id_turma FROM turma");
-while ($T = mysql_fetch_array($lista_turmas)) {
-	$turma = new Turma($T[0]);
-	echo "<tr><td><a href='?delete=".$turma->getId()."'><img src='x.png'></a></td><td>".$turma->getNome()."</td><td>".$turma->getAlunos()."</td></tr>";
+//<tr><td>Exerc&iacute;cio</td><td>Data</td></tr>
+$lista_exs = mysql_query("SELECT id_exercicio FROM exercicio JOIN nota USING (id_exercicio) JOIN aluno USING (id_aluno) WHERE id_turma=$turma");
+
+$i = 0;
+
+
+while ($E = mysql_fetch_array($lista_exs)) {
+	echo "	<tr>";
+	$ex = new Exercicio(NULL, $E[0]);
+	echo $ex->getNome();
+//	echo "		<td>".$ex->getNome()."</td>";
+//	echo "		<td><input type='text' name='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'></td>";
+//	echo "	</tr>";
 }
 ?>
 </table>
-
-<form name="cadastro" action="#" method="post">
-<p>Criar nova turma: <input type="text" name="nome" style="width: 300px;">
-<br><button type="submit" name="submit" value="submit">ok</button>
-</p>
-</form>
-
 </div>
 </body>
 </html>

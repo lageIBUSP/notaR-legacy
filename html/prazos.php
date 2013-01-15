@@ -3,7 +3,16 @@ if (! $user->admin()) {
 	echo "Acesso negado";
 	exit;
 }
+if(isset($_POST['turma']))
+	$turma = mysql_real_escape_string($_POST['turma']);
+else {
+		$T = mysql_fetch_array(mysql_query("SELECT MIN(id_turma) FROM turma"));
+		$turma = $T[0];
+}
+if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 ###### Codigo aqui
+
+}
 
 ?>
 <h2>Administra&ccedil;&atilde;o de prazos</h2>
@@ -12,13 +21,6 @@ if (! $user->admin()) {
 	<select id='turma' name='turma'>
 <?php
 $lista_turmas = mysql_query("SELECT id_turma FROM turma ORDER BY id_turma ASC");
-
-if(isset($_POST['turma']))
-	$turma = mysql_real_escape_string($_POST['turma']);
-else {
-		$T = mysql_fetch_array(mysql_query("SELECT MIN(id_turma) FROM turma"));
-		$turma = $T[0];
-}
 
 while ($T = mysql_fetch_array($lista_turmas)) {
 	$loop_turma = new Turma($T[0]);
