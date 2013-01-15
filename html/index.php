@@ -19,8 +19,8 @@ while ($exerc = mysql_fetch_array($res)) {
 		echo "<tr><td>";
 		if ($user->admin()) echo "<a href='cadastra.php?exerc=".$X->getID()."'><img src='pen.png'></a></td><td>";
 		echo "<a href='exercicio.php?exerc=".$X->getID()."'>".
-				$X->nome()."</a></td><td>".$X->nota()."</td><td>".
-				$X->prazo()."</td></tr>";
+				$X->getNome()."</a></td><td>".$X->getNota()."</td><td>".
+				$X->getPrazo()."</td></tr>";
 }
 ?>
 </table>

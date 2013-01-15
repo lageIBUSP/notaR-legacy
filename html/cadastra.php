@@ -54,15 +54,15 @@ echo "<p>Para a descri&ccedil;&atilde;o dos campos e funcionamento do corretor, 
 echo "<br>Nome do exerc&iacute;cio:&nbsp;&nbsp;";
 echo "<input type=\"text\" name=\"nome\"  style='width: 300px;' value=\"";
 if (isset($_POST['nome'])) echo $_POST['nome'];
-elseif (!empty($id)) echo $X->nome();
+elseif (!empty($id)) echo $X->getNome();
 echo "\">";
 echo "<br>Precondi&ccedil;&otilde;es:&nbsp;";
 echo "<br><textarea name=\"precondicoes\" rows=7 cols=80>";
 if (isset($_POST['precondicoes'])) echo $_POST['precondicoes'];
-elseif (!empty($id)) echo $X->precondicoes();
+elseif (!empty($id)) echo $X->getPrecondicoes();
 echo "</textarea><br>HTML:<br><textarea name=\"html\" rows=7 cols=80>";
 if (isset($_POST['html'])) echo $_POST['html'];
-elseif (!empty($id)) echo $X->html();
+elseif (!empty($id)) echo $X->getHtml();
 echo "</textarea><br>N&uacute;mero de testes:&nbsp;&nbsp;";
 echo "<input type=\"text\" name=\"ntestes\" value=\"".$ntestes."\">";
 echo "<button type=\"submit\" name=\"submit\" value=\"alterar\">alterar</button>";
