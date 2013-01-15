@@ -24,7 +24,7 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 if(isset($_GET['turma']))
 	$turma = mysql_real_escape_string($_GET['turma']);
 else {
-		$T = mysql_query("SELECT MIN(id_turma) FROM turma");
+		$T = mysql_fetch_array(mysql_query("SELECT MIN(id_turma) FROM turma"));
 		$turma = $T[0];
 }
 ?>
