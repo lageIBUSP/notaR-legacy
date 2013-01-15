@@ -38,7 +38,7 @@ while ($E = mysql_fetch_array($lista_exs)) {
 	echo "		<td><input type='text' id='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'></td>";
 	echo "	</tr>";
 }
-echo "<input type='hidden' value='".$turma."' />";
+echo "<input type='hidden' id='turma' value='".$turma."' />";
 ?>
 </table>
 <button type='submit'>Atualiza</button>
