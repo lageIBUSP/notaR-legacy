@@ -125,6 +125,10 @@ class Exercicio {
 				$this->user = $user;
 				$this->id = $id;
 		}
+		public function __construct($id) { //overload
+				$this->user = NULL;
+				$this->id = $id;
+		}
 }
 
 class Teste {
