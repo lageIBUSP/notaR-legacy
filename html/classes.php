@@ -121,6 +121,15 @@ class Exercicio {
 						}
 				}
 		}
+		public function getPrazo($turma) { // OVERLOAD
+				$res = mysql_query("SELECT prazo FROM prazo WHERE id_turma = $turma AND id_exercicio=$this->id");
+						if (mysql_num_rows($res))
+						{
+								$res = mysql_fetch_array($res);
+								return $res[0];
+						}
+				}
+		}
 		public function __construct($user, $id) {
 				$this->user = $user;
 				$this->id = $id;
