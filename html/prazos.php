@@ -66,11 +66,6 @@ while ($E = mysql_fetch_array($lista_exs)) {
 </table>
 <button type='submit' name='submit' value='atualiza'>Atualiza</button>
 </form>
-<?php
-######
-#//DEBUG
-print_r($_REQUEST);
-?>
 </div>
 </body>
 </html>
