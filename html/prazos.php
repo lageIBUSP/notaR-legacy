@@ -20,6 +20,7 @@ else {
 		$turma = $T[0];
 }
 
+print $turma;
 while ($T = mysql_fetch_array($lista_turmas)) {
 	$loop_turma = new Turma($T[0]);
 	echo "	<option value=".$loop_turma->getId();
