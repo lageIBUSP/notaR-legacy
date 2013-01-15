@@ -22,6 +22,7 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 </form>
 <?php
 if(isset($_GET['turma'])){
+	$turma = mysql_real_escape_string($_GET['turma']);
 ?>
 <p>Prazos cadastrados:</p>
 <form action='prazos.php' method='get'>
@@ -34,7 +35,7 @@ while ($E = mysql_fetch_array($lista_exs)) {
 	echo "	<tr>";
 	$ex = new Exercicio(NULL, $E[0]);
 	echo "		<td>".$ex->getNome()."</td>";
-	echo "		<td><input type='text' id='ex".$ex->getId()."' value='".$ex->getNome()."'></td>";
+	echo "		<td><input type='text' id='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'></td>";
 	echo "	</tr>";
 }
 ?>
