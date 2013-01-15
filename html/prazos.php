@@ -11,7 +11,7 @@ if (! $user->admin()) {
 <form action='prazos.php' method='get'>
 	<select id='turma' name='turma'>
 <?php
-$lista_turmas = mysql_query("SELECT id_turma FROM turma");
+$lista_turmas = mysql_query("SELECT id_turma FROM turma ORDER BY id_turma ASC");
 while ($T = mysql_fetch_array($lista_turmas)) {
 	$turma = new Turma($T[0]);
 	echo "	<option value=".$turma->getId().">".$turma->getNome()."</option>";
@@ -21,8 +21,12 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 	<button type='submit'>ok</button>
 <!--/form-->
 <?php
-if(isset($_GET['turma'])){
+if(isset($_GET['turma']))
 	$turma = mysql_real_escape_string($_GET['turma']);
+else {
+		$T = mysql_query("SELECT MIN(id_turma) FROM turma");
+		$turma = $T[0];
+}
 ?>
 <p>Prazos cadastrados:</p>
 <!--form action='prazos.php' method='get' -->
@@ -44,7 +48,6 @@ while ($E = mysql_fetch_array($lista_exs)) {
 <button type='submit'>Atualiza</button>
 </form>
 <?php
-} #fim do if turma
 ######
 #//DEBUG
 print_r($_GET);
