@@ -111,18 +111,17 @@ class Exercicio {
 				$res = mysql_fetch_array(mysql_query("SELECT precondicoes FROM exercicio WHERE id_exercicio=$this->id"));
 				return $res[0];
 		}
-		public function getPrazo() {
-				if ($this->user->getLogin()) {
-						$res = mysql_query("SELECT prazo FROM prazo join turma using (id_turma) join aluno using (id_turma) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
+		public function getPrazo($turma=NULL) {
+				if (!is_null($turma)) {
+					$res = mysql_query("SELECT prazo FROM prazo WHERE id_turma = $turma AND id_exercicio=$this->id");
 						if (mysql_num_rows($res))
 						{
 								$res = mysql_fetch_array($res);
 								return $res[0];
 						}
 				}
-		}
-		public function getPrazo($turma) { // OVERLOAD
-				$res = mysql_query("SELECT prazo FROM prazo WHERE id_turma = $turma AND id_exercicio=$this->id");
+				elseif ($this->user->getLogin()) {
+						$res = mysql_query("SELECT prazo FROM prazo join turma using (id_turma) join aluno using (id_turma) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
 						if (mysql_num_rows($res))
 						{
 								$res = mysql_fetch_array($res);
