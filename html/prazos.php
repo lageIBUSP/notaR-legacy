@@ -32,7 +32,7 @@ $lista_exs = mysql_query("SELECT id_exercicio FROM exercicio");
 
 while ($E = mysql_fetch_array($lista_exs)) {
 	echo "	<tr>";
-	$ex = new Exercicio($E[0]);
+	$ex = new Exercicio(NULL, $E[0]);
 	echo "		<td>".$ex->getNome()."</td>";
 	echo "		<td><input type='text' id='ex".$ex->getId()."' value='".$ex->getNome()."'></td>";
 	echo "	</tr>";
