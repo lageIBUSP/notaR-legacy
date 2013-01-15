@@ -64,6 +64,7 @@ while ($E = mysql_fetch_array($lista_exs)) {
 }
 ?>
 </table>
+<p>Para cadastrar novos prazos ou alterar os j&aacute; cadastrados, digite a data e hora na caixa de texto correspondente, no formato "YYYY-MM-DD HH:MM:SS".</p>
 <button type='submit' name='submit' value='atualiza'>Atualiza</button>
 </form>
 </div>
