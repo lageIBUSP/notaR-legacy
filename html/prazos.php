@@ -8,13 +8,13 @@ if (! $user->admin()) {
 ?>
 <h2>Administra&ccedil;&atilde;o de prazos</h2>
 <p>Escolha a turma</p>
-<form action='prazos.php' method='get'>
+<form action='prazos.php' method='POST'>
 	<select id='turma' name='turma'>
 <?php
 $lista_turmas = mysql_query("SELECT id_turma FROM turma ORDER BY id_turma ASC");
 
-if(isset($_GET['turma']))
-	$turma = mysql_real_escape_string($_GET['turma']);
+if(isset($_POST['turma']))
+	$turma = mysql_real_escape_string($_POST['turma']);
 else {
 		$T = mysql_fetch_array(mysql_query("SELECT MIN(id_turma) FROM turma"));
 		$turma = $T[0];
@@ -49,7 +49,7 @@ while ($E = mysql_fetch_array($lista_exs)) {
 <?php
 ######
 #//DEBUG
-print_r($_GET);
+print_r($_REQUEST);
 ?>
 </div>
 </body>
