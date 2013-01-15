@@ -10,7 +10,13 @@ else {
 		$turma = $T[0];
 }
 if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
-###### Codigo aqui
+		$post = mres($_POST);
+		foreach (array_keys($post) AS $key) {
+				if (strpos($key, "old_")) {
+						$new = substr($key, 4);
+						if ($post[$key] != $post[$new]) echo "Mudei $new";
+				}
+		}
 
 }
 
@@ -40,9 +46,10 @@ $lista_exs = mysql_query("SELECT id_exercicio FROM exercicio");
 while ($E = mysql_fetch_array($lista_exs)) {
 	echo "	<tr>";
 	$ex = new Exercicio(NULL, $E[0]);
-	echo "		<td>".$ex->getNome()."</td>";
-	echo "		<td><input type='text' name='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'></td>";
-	echo "	</tr>";
+	echo "		<td>".$ex->getNome()."</td><td>";
+	echo "<input type='text' name='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'>";
+	echo "<input type='hidden' name='old_ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'>";
+	echo "</td></tr>";
 }
 ?>
 </table>
