@@ -38,9 +38,10 @@ while ($E = mysql_fetch_array($lista_exs)) {
 	echo "		<td><input type='text' id='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'></td>";
 	echo "	</tr>";
 }
+echo "<input type='hidden' value='".$turma."' />";
 ?>
 </table>
-<input type='submit'>Atualiza</input>
+<button type='submit'>Atualiza</button>
 </form>
 <?php
 } #fim do if turma
