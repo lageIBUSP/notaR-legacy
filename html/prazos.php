@@ -14,7 +14,7 @@ if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 		print_r($post);
 		foreach (array_keys($post) AS $key) {
 				echo "key $key";
-				if (strpos($key, "old_")) {
+				if (strpos($key, "ld_")) {
 						$new = substr($key, 4);
 						if ($post[$key] != $post[$new]) echo "Mudei $new";
 				}
