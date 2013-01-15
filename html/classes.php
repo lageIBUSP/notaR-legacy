@@ -1,5 +1,16 @@
 <?php
 require_once("config.php");
+class Aluno {
+		private $id;
+		public function getNome() {
+			$res = mysql_fetch_array(mysql_query("SELECT nome_aluno FROM aluno where id_aluno=$this->id"));
+			return $res[0];
+		}
+		public function __construct($id) {
+				$this->id=$id;
+		}
+}
+
 class User {
 		private $login;
 		public function getLogin() {
@@ -89,8 +100,16 @@ class Exercicio {
 		public function getId() {
 			return $this->id;
 		}
-		public function getNota() {
-				if ($this->user->getLogin()) {
+		public function getNota($aluno=NULL) {
+				if(!is_null($aluno)) {
+						$res = mysql_query("SELECT max(nota) FROM nota join aluno using (id_aluno) where id_aluno = $aluno and id_exercicio=$this->id");
+						if (mysql_num_rows($res))
+						{
+								$res = mysql_fetch_array($res);
+								return $res[0];
+						}
+				}
+				elseif ($this->user->getLogin()) {
 						$res = mysql_query("SELECT max(nota) FROM nota join aluno using (id_aluno) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
 						if (mysql_num_rows($res))
 						{
