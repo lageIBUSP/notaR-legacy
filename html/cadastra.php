@@ -45,7 +45,7 @@ if (empty($id)) {
 	}
 	echo "com $c testes.";
 	echo "Pr&oacute;ximos passos: <ul>
-<li><a href='exercicio.php?exerc=$my_id'>Teste</a> se a corre&ccedil;&atilde;o funciona</li><li><a href='cadastra.php?exerc=$my_id'>Edite</a> as defini&ccedil;&otilde;es deste exerc&iacute;cio</li><li>Determine o <a href='prazo.php?exerc=$my_id'>prazo</a> de entrega</li></ul>";
+<li><a href='exercicio.php?exerc=$my_id'>Teste</a> se a corre&ccedil;&atilde;o funciona</li><li><a href='cadastra.php?exerc=$my_id'>Edite</a> as defini&ccedil;&otilde;es deste exerc&iacute;cio</li><li>Determine o <a href='prazos.php'>prazo</a> de entrega</li></ul>";
 } 
 else {
 
