@@ -15,7 +15,11 @@ class Aluno {
 			return $res[0];
 		}
 		public function numNotas() {
-			$res = mysql_fetch_array(mysql_query("SELECT COUNT(DISTINCT id_exercicio) FROM nota where where id_aluno=".$this->id));
+			$res = mysql_fetch_array(mysql_query("SELECT COUNT(DISTINCT id_exercicio) FROM nota where id_aluno=".$this->id));
+			return $res[0];
+		}
+		public function getTurma() {
+			$res = mysql_fetch_array(mysql_query("SELECT id_turma FROM aluno where id_aluno=".$this->id));
 			return $res[0];
 		}
 }

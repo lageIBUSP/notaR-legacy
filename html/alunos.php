@@ -10,8 +10,20 @@ else {
 		$turma = $T[0];
 }
 ###### Codigo aqui
+if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
+	$arr=preg_split("/\r\n|\r|\n/",$_POST['novos']);
+	$arr = mres($arr);
+	$senha = mysql_real_escape_string($_POST['senha']);
+	if (empty($senha)) { echo "<p>Voc&ecirc; deve informar uma senha!</p>";}
+	else {
+		foreach ($arr as $novo) {
+		mysql_query("INSERT INTO aluno (nome_aluno, id_turma, senha) VALUES ('$novo', $turma, SHA('$senha'))"); 
+	}
+		echo "<p>Alunos cadastrados.</p>";
+	}
+}
 ?>
-<h2>Administra&ccedil;&atilde;o de prazos</h2>
+<h2>Cadastro de alunos</h2>
 <p>Escolha a turma</p>
 <form action='alunos.php' method='POST'>
 	<select id='turma' name='turma'>
@@ -41,7 +53,13 @@ while ($A = mysql_fetch_array($lista_alunos)) {
 }
 ?>
 </table>
-<p>Para cadastrar novos alunos nesta turma, preencha os logins na caixa de texto abaixo:</p>
+<p>Para cadastrar novos alunos nesta turma, preencha os logins na caixa de texto abaixo, um por linha:</p>
+<textarea name="novos" rows=5 cols=70>
+</textarea>
+<p>Senha: <input type="text" name="senha">
+<br><button type='submit' name='submit' value='insere'>Inserir</button></p>
+
+</form>
 </div>
 </body>
 </html>
