@@ -9,6 +9,15 @@ class Aluno {
 		public function __construct($id) {
 				$this->id=$id;
 		}
+		public function getId() { return $this->id; } 
+		public function admin() {
+			$res = mysql_fetch_array(mysql_query("SELECT admin FROM aluno where id_aluno=".$this->id));
+			return $res[0];
+		}
+		public function numNotas() {
+			$res = mysql_fetch_array(mysql_query("SELECT COUNT(DISTINCT id_exercicio) FROM nota where where id_aluno=".$this->id));
+			return $res[0];
+		}
 }
 
 class User {
