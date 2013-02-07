@@ -4,7 +4,8 @@ if ($user->admin()) {
 	echo "<div id='Menu'>";
 	echo "Administrar:<br><ul><li><a href='turmas.php'>Turmas</a></li>";
 	echo "<li><a href='alunos.php'>Alunos</a></li><li><a href='prazos.php'>Prazos</a></li></ul>";
-	echo "<br>Relat&oacute;rios:<ul><li><a href='notas.php'>Notas</a></li></ul></div>";
+	echo "<br>Relat&oacute;rios:<ul><li><a href='notas.php'>Notas</a></li>";
+	echo "<li><a href='dificult.php'>Dificuldades</a></li></ul></div>";
 }
 ?>
 <br>&nbsp;

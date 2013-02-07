@@ -13,6 +13,14 @@ else {
 ###### Codigo aqui
 if(isset($_POST['submit']) AND $_POST['submit']=="altera") {
 	$p=mres($_POST);
+	$nome=$p['nome'];
+	$turma=$p['turma'];
+	if(isset($p['admin'])) {$admin=1;} else {$admin=0;}
+	mysql_query("UPDATE aluno set nome_aluno='$nome', admin=$admin, id_turma=$turma WHERE id_aluno=$id");
+	if(!empty($p['senha'])) {
+		$senha=$p['senha'];
+		mysql_query("UPDATE aluno set senha=SHA('$senha') WHERE id_aluno=$id");
+	}
 }
 ?>
 <h2>Cadastro de alunos</h2>
