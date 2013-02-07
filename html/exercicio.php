@@ -39,9 +39,6 @@ if (isset($_POST['exerc'])) {
 			echo 'Erro interno ao conectar no servidor: ',  $e->getMessage(), "<br>";
 		}
 		try {
-			echo 'source("'.$basedir.'/corretor.R");';
-
-			echo 'notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")';
 		$x = $r->evalString('source("'.$basedir.'/corretor.R");');
 		$x = $r->evalString('notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")');   
 		echo $x;

@@ -39,7 +39,10 @@ corretoR <- function (id.exerc, texto) {
 		for (i in 1:notaMax) {
 				# A avaliacao pode retornar TRUE, FALSE ou erro
 				# No momento, erro esta sendo tratado como FALSE
-				notas[i] <- try(eval(parse(text=testes[i,1]), envir=corrEnv)) == TRUE;
+				# Edit fev 2013: 
+				# O [1] no final tem a funcao de evitar condicoes com comprimento 0.
+				# Agora essas condicoes se tornam [1] NA, o que avalia falso
+				notas[i] <- try(eval(parse(text=testes[i,1]), envir=corrEnv))[1] == TRUE;
 		}
 		return(notas);
 }
