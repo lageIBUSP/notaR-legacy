@@ -41,9 +41,10 @@ corretoR <- function (id.exerc, texto) {
 				# No momento, erro esta sendo tratado como FALSE
 				# Edit fev 2013: 
 				# O [1] no final tem a funcao de evitar condicoes com comprimento 0.
-				# Agora essas condicoes se tornam [1] NA, o que avalia falso
+				# Agora essas condicoes se tornam [1] NA, que serao transformados em FALSE abaixo
 				notas[i] <- try(eval(parse(text=testes[i,1]), envir=corrEnv))[1] == TRUE;
 		}
+		notas[is.na(notas)] <- FALSE
 		return(notas);
 }
 
