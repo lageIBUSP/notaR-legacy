@@ -106,6 +106,8 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 								  WHERE id_exercicio = ", id.exerc,
 								  " ORDER BY ordem ASC ", sep=""));
 
+		# Escapa os single quotes do texto
+		texto <- gsub("'", '"', texto)
 		res <- dbSendQuery(con,paste("INSERT INTO nota (id_aluno, id_exercicio, data, nota, texto) 
 									 VALUES (",id.aluno,",",id.exerc,",'",Date,"',",round(100*weighted.mean(nota, t(peso))), ",'",texto,"')",sep=""))
 		melhorNota <- dbGetQuery(con,
