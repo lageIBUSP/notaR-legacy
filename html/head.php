@@ -2,7 +2,8 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css" />
-
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="description" content="Um sistema para notas automatizadas em cursos que utilizam a linguagem R">
 </head>
 <body>
 	<div id="Top">
