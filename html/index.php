@@ -14,7 +14,7 @@ if ($user->admin()) {
 echo "<table><tr>";
 if ($user->admin()) echo "<td></td>";
 echo "<td>Nome</td><td>Nota</td><td>Prazo</td></th>";
-$res = mysql_query("SELECT id_exercicio FROM exercicio ORDER BY 1 ASC");
+$res = mysql_query("SELECT id_exercicio FROM exercicio ORDER BY nome ASC");
 while ($exerc = mysql_fetch_array($res)) {
 		$X = new Exercicio($user, $exerc[0]);
 		echo "<tr><td>";

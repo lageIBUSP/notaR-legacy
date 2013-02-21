@@ -11,7 +11,7 @@ echo $X->getHtml();
 <form name="notaR" action="#" method="post" enctype="multipart/form-data">
 <input type="hidden" name="exerc" value="<?php echo $X->getId(); ?>">
 <input type="hidden" name="MAX_FILE_SIZE" value="30000">
-<input type="file" name="rfile" id="rfile" accept="text/*">
+<input type="file" name="rfile" id="rfile" accept=".R">
 <br><button type="submit" value="Submit">OK</button>
 <a href="http://www.lage.ib.usp.br/notaR/doku.php?id=aluno">ajuda?</a>
 </form>
