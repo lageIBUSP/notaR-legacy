@@ -18,14 +18,14 @@ $new = mres($_POST);
 if (empty($id)) {
 	$res = mysql_query("INSERT INTO exercicio (precondicoes, html, nome)
 		VALUES (REPLACE('".
-		$new['precondicoes']."', CHAR(13), CHAR(10)), '".$new['html']."', '".$new['nome']."')");
+		$new['precondicoes']."', CHAR(13), ''), '".$new['html']."', '".$new['nome']."')");
 	$my_id = mysql_insert_id();
 	echo "Exerc&iacute;cio cadastrado ";	
 
 } else
 {
 	$res = mysql_query("UPDATE exercicio SET precondicoes = REPLACE('".
-		$new['precondicoes']."', CHAR(13), CHAR(10)), html='".$new['html']."', nome='".$new['nome']."'
+		$new['precondicoes']."', CHAR(13), ''), html='".$new['html']."', nome='".$new['nome']."'
 		WHERE id_exercicio=$id");
 	$res = mysql_query("DELETE FROM teste WHERE id_exercicio=$id");
 	echo "Exerc&iacute;cio alterado ";	
