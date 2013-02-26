@@ -1,0 +1,59 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          rserve
+# Required-Start:  
+# Required-Stop:
+# Default-Start:  2 3 4 5
+# Default-Stop:   
+# Short-Description: Executes the rserve in daemon mode
+# Description:
+### END INIT INFO
+
+## Config
+# Default user:
+USR="rserve"
+
+start() {
+su - ${USR} -c "R --vanilla <<EOF
+library(Rserve)
+Rserve(args=\"--no-save\")
+EOF"
+}
+
+status() {
+local GREEN="\033[0;32m"
+local RED="\033[0;31m"
+local NO_COLOUR="\033[0m"
+
+	N=`ps -ef | grep Rserve-bin.so | wc -l`
+	if [ "$N" -lt 2 ]; then
+		echo "Rserve is ${RED}down${NO_COLOUR}.";
+	else
+		echo "Rserve is ${GREEN}up${NO_COLOUR}.";
+	fi
+}
+
+
+case "$1" in
+  start)
+	start
+	$0 status
+	;;
+  restart|reload|force-reload)
+	echo "Error: argument '$1' not supported" >&2
+	exit 3
+	;;
+  stop)
+	pkill -9 Rserve-bin.so
+	$0 status
+	;;
+  status)
+	status
+	;;	
+  *)
+	echo "Usage: $0 start|stop|status" >&2
+	exit 3
+	;;
+esac
+
+:
