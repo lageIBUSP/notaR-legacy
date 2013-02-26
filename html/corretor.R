@@ -69,8 +69,8 @@ relatorioNota <- function (id.exerc, nota, texto) {
 					 "<br>Corrija essa condi&ccedil;&atilde;o para continuar a corre&ccedil;&atilde;o.",	sep="");
 		}
 		if (is.null(nota)) {
-				Rel <- paste(Rel, "<p><font color='#FF0000'>ERRO!</font> Seu exerc&iacute;cio cont&eacute;m algum
-							  erro de sintaxe! Verifique no R se ele est&aacute; executando.</p>", sep="");
+				Rel <- paste(Rel, "<p>Cuidado! Seu exerc&iacute;cio n&atilde;o executou. Ser&aacute; que ele cont&eacute;m algum
+							  erro de sintaxe? Verifique no R se ele est&aacute; executando.</p>", sep="");
 		} else { Rel <- paste(Rel, "<p>Seu aproveitamento: <b>", round(100*weighted.mean(nota, t(peso))),"%</b>.</p>", sep=""); }
 		Rel <- paste(Rel, "<p>Sua resposta:<br>", paste(texto, collapse="<br>"),"</p>", sep="");
 		return(Rel)
