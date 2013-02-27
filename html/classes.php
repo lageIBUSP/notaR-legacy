@@ -66,6 +66,7 @@ class User {
 				if (isset($this->login)) {
 						$T = "Usu&aacute;rio: $this->login";
 						$T .="&nbsp;<a href='?logout=y'>logout</a>";
+						$T .="<br>alterar <a href='senha.php'>senha</a>";
 				} else {
 						$T ="<form name=\"LoginForm\" action=\"index.php\" method=\"post\">";
 						$T.="<input type=\"hidden\" id=\"action\" name=\"action\" value=\"login\">";
