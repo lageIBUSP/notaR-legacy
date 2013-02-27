@@ -2,8 +2,7 @@
 $id = mysql_real_escape_string($_REQUEST['exerc']);
 $X = new Exercicio($user, $id);
 ?>
-<h2>Exerc&iacute;cios de leitura e manipula&ccedil;&atilde;o de dados</h2>
-<h3><?php echo $X->getNome(); ?></h3>
+<h2><?php echo $X->getNome(); ?></h2>
 <?php 
 echo $X->getHtml();
 ?>
