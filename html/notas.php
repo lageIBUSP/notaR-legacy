@@ -30,13 +30,14 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 <table>
 
 <?php
-$lista_exs = mysql_query("SELECT DISTINCT id_exercicio FROM exercicio JOIN nota USING (id_exercicio) JOIN aluno USING (id_aluno) WHERE id_turma=$turma");
+$lista_exs = mysql_query("SELECT DISTINCT id_exercicio FROM exercicio JOIN nota USING (id_exercicio) JOIN aluno USING (id_aluno) WHERE id_turma=$turma ORDER BY nome");
 
 echo "	<tr><td>Aluno</td>";
 $i = 0;
 while ($E = mysql_fetch_array($lista_exs)) {
 	$ex[$i] = new Exercicio(NULL, $E[0]);
-	echo "<td>".$ex[$i]->getId()."</td>";
+	$n = $ex[$i]->getNome();
+	echo "<td>".substr($n,0,strpos($n, " "))."</td>";
 	$i++;
 }
 echo "	</tr>";

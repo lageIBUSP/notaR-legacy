@@ -34,6 +34,9 @@ class User {
 			$res = mysql_fetch_array(mysql_query("SELECT admin FROM aluno where nome_aluno='".$this->login."'"));
 			return $res[0];
 		}
+		public function novaSenha ($senha) {
+			mysql_query("UPDATE aluno SET senha=SHA('$senha') WHERE nome_aluno='".$this->login."'");
+		}
 		public function __construct() {
 				if (!isset($_SESSION)) session_start();
 				// Para fazer logout:
@@ -64,9 +67,9 @@ class User {
 		}
 		public function loginForm() {
 				if (isset($this->login)) {
-						$T = "Usu&aacute;rio: $this->login";
+						$T = "<div style='text-align:right'>Usu&aacute;rio: $this->login";
 						$T .="&nbsp;<a href='?logout=y'>logout</a>";
-						$T .="<br>alterar <a href='senha.php'>senha</a>";
+						$T .="<br>alterar <a href='senha.php'>senha</a></div>";
 				} else {
 						$T ="<form name=\"LoginForm\" action=\"index.php\" method=\"post\">";
 						$T.="<input type=\"hidden\" id=\"action\" name=\"action\" value=\"login\">";
