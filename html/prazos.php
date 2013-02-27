@@ -52,7 +52,7 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 <table>
 <tr><td>Exerc&iacute;cio</td><td>Data</td></tr>
 <?php
-$lista_exs = mysql_query("SELECT id_exercicio FROM exercicio");
+$lista_exs = mysql_query("SELECT id_exercicio FROM exercicio ORDER by nome");
 
 while ($E = mysql_fetch_array($lista_exs)) {
 	echo "	<tr>";
