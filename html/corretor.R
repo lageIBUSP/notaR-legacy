@@ -122,8 +122,13 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 
 # Recebe o exercicio, corrige, grava a nota e gera um output formatado em HTML
 notaR <- function (nome.aluno, id.exerc, arquivo) {
-		texto <- readLines(arquivo);
+		texto <- readLines(arquivo, encoding="utf8");
 		nota <- corretoR (id.exerc, texto);
+		# Tenta de novo com charset latin1:
+		if (is.null(nota)) {
+			texto <- readLines(arquivo, encoding="latin1");
+			nota <- corretoR (id.exerc, texto);
+		}
 		# Grava a nota no banco:
 		notaGravada <- gravarNota(nome.aluno, id.exerc, texto, nota)
 		# Gera o relatorio de notas:

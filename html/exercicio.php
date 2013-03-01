@@ -30,6 +30,9 @@ if (isset($_POST['exerc'])) {
 		$uploadfile = $basedir ."/tmp/".  basename($_FILES['rfile']['tmp_name']);
 		move_uploaded_file($_FILES['rfile']['tmp_name'], $uploadfile);
 
+		### Correcao de bug! O R trava se o editor de texto não encerrou
+		#   a ultima linha
+		system ("echo ' ' >> $uploadfile");
 
 
 		try{

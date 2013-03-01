@@ -38,7 +38,11 @@ class User {
 			mysql_query("UPDATE aluno SET senha=SHA('$senha') WHERE nome_aluno='".$this->login."'");
 		}
 		public function __construct() {
-				if (!isset($_SESSION)) session_start();
+			if (!isset($_SESSION)) 
+			{
+				ini_set("session.cookie_lifetime", 3600);
+				session_start();
+			}
 				// Para fazer logout:
 				if (isset($_GET['logout'])) {
 						unset($_SESSION['user']);
