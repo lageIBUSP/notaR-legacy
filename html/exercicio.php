@@ -38,14 +38,14 @@ if (isset($_POST['exerc'])) {
 		try{
 			$r = new Rserve_Connection(RSERVE_HOST);
 		} catch (Exception $e) {
-			echo 'Erro interno ao conectar no servidor: ',  $e->getMessage(), "<br>";
+			echo 'Erro interno ao conectar no servidor. Notifique os administradores do sistema!<br>';
 		}
 		try {
 		$x = $r->evalString('source("'.$basedir.'/corretor.R");');
 		$x = $r->evalString('notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")');   
 		echo $x;
 		} catch (Exception $e) {
-			echo 'Erro interno ao executar o corretor: ', $e->getMessage(), "<br>";
+			echo 'Erro interno ao executar o corretor. Verifique se as pre-condi&ccedil;&otilde;es executam.';
 		}
 	}
 }

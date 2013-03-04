@@ -18,3 +18,6 @@
 		</div>
 	</div>
 	<div id="MainDiv">
+<?php
+if(isset($loginerror))  echo $loginerror; 
+?>

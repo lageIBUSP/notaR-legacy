@@ -62,6 +62,9 @@ class User {
 										exit;
 								}
 						}
+						# Se chegou aqui e nao caiu no exit, eh porque algo deu errado no login
+						global $loginerror;
+						$loginerror = "<div id='Erro'><h2>Erro!</h2><p>Verifique se seu nome de usu&aacute;rio e senha est&atilde;o corretos.</p></div>";
 				}
 				// Se o usuario jah estah logado
 				if (isset($_SESSION['user'])) {

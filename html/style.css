@@ -8,6 +8,13 @@ td {
 	float: right;
 	border: 2px dashed #fcc;
 }
+#Erro {
+	font-size: 13px;
+	color: #d66;
+	border: 2px dashed #d66;
+	width: 50%;
+	padding: 15px;
+}
 #Cadastra td { border: none;}
 #Top {
 	position:relative; 
