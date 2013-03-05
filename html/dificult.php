@@ -29,7 +29,7 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 </form>
 <p>M&eacute;dia de tentativas por aluno que entregou cada exerc&iacute;cio:</p>
 <table>
-<tr><td>Exerc&iacute;cio</td><td>Tentativas</td>
+<tr><td>Exerc&iacute;cio</td><td>Tentativas</td></tr>
 
 <?php
 $lista_exs = mysql_query("select id_exercicio, round(count(id_aluno)/count(distinct id_aluno)) from nota join aluno using(id_aluno) where id_turma=$turma group by id_exercicio order by 2 desc");
