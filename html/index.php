@@ -7,6 +7,7 @@ if ($user->admin()) {
 	echo "<br>Relat&oacute;rios:<ul><li><a href='notas.php'>Notas</a></li>";
 	echo "<li><a href='dificult.php'>Dificuldades</a></li>";
 	echo "<li><a href='complecao.php'>Realiza&ccedil;&atilde;o</a></li>";
+	echo "<li><a href='texto.php'>Busca de texto</a></li>";
 	echo"</ul></div>";
 }
 ?>
