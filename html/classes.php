@@ -24,6 +24,27 @@ class Aluno {
 		}
 }
 
+class Nota {
+	private $id;
+	public function getNomeAluno() {
+		$res = mysql_fetch_array(mysql_query("SELECT nome_aluno FROM aluno JOIN nota using (id_aluno) where id_nota=$this->id"));
+		return $res[0];
+	}
+	public function getNota() {
+		$res = mysql_fetch_array(mysql_query("SELECT nota FROM nota where id_nota=$this->id"));
+		return $res[0];
+	}
+	public function getData() {
+		$res = mysql_fetch_array(mysql_query("SELECT data FROM nota where id_nota=$this->id"));
+		return $res[0];
+	}
+	public function getTexto() {
+		$res = mysql_fetch_array(mysql_query("SELECT texto FROM nota where id_nota=$this->id"));
+		return nl2br($res[0]);
+	}
+	public function __construct($id) { $this->id=$id;}
+}
+
 class User {
 		private $login;
 		public function getLogin() {
