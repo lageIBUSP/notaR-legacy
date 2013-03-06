@@ -70,6 +70,9 @@ button {
 .small {
 		font-size: 9.5px;
 }
+.long {
+		width: 360px;
+}
 body {
 	height: auto;
 	font-family: Sans-Serif;

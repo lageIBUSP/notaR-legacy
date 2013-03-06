@@ -77,10 +77,10 @@ for ($i = 0; $i < $ntestes; $i ++) {
 		if (isset($_POST['peso'][$i])) {echo $_POST['peso'][$i];} 
 		elseif (!empty($id) AND $T->peso()) echo $T->peso();
 		else {echo 1;}
-		echo "'></td><td><input type='text' name='condicao[]' value='";
+		echo "'></td><td><input class='long' type='text' name='condicao[]' value='";
 		if (isset($_POST['condicao'][$i])) {echo $_POST['condicao'][$i];}
 		elseif (!empty($id)) echo $T->condicao();
-		echo "'></td><td><input type='text' name='dica[]' value='";
+		echo "'></td><td><input class='long' type='text' name='dica[]' value='";
 		if (isset($_POST['dica'][$i])) {echo $_POST['dica'][$i];}
 		elseif (!empty($id)) echo $T->dica();
 		echo "'></td></tr>";
