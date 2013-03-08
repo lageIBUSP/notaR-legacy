@@ -73,6 +73,11 @@ button {
 .long {
 		width: 360px;
 }
+.code {
+	background: #def;
+	padding: 7px;
+	font-family: Courier;
+}
 body {
 	height: auto;
 	font-family: Sans-Serif;
