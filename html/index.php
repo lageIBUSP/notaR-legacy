@@ -8,6 +8,7 @@ if ($user->admin()) {
 	echo "<li><a href='dificult.php'>Dificuldades</a></li>";
 	echo "<li><a href='complecao.php'>Realiza&ccedil;&atilde;o</a></li>";
 	echo "<li><a href='texto.php'>Busca de texto</a></li>";
+	echo "<li><a href='plagio.php'>Detec&ccedil;&atilde;o de pl&aacute;gio</a></li>";
 	echo"</ul></div>";
 }
 ?>
