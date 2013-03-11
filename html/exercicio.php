@@ -34,19 +34,24 @@ if (isset($_POST['exerc'])) {
 		#   a ultima linha
 		system ("echo ' ' >> $uploadfile");
 
-
-		try{
-			$r = new Rserve_Connection(RSERVE_HOST);
-		} catch (Exception $e) {
-			echo 'Erro interno ao conectar no servidor. Notifique os administradores do sistema!<br>';
+		$conts = file_get_contents($uploadfile);
+		$probs = new Proibidos($X->getId());
+		$teste = $probs->pass($conts);
+		if ($teste === FALSE) { # Verifica se existe alguma palavra proibida na resposta
+			try{
+				$r = new Rserve_Connection(RSERVE_HOST);
+			} catch (Exception $e) {
+				echo 'Erro interno ao conectar no servidor. Notifique os administradores do sistema!<br>';
+			}
+			try {
+				$x = $r->evalString('source("'.$basedir.'/corretor.R");');
+				$x = $r->evalString('notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")');   
+				echo $x;
+			} catch (Exception $e) {
+				echo 'Erro interno ao executar o corretor. Verifique se as pre-condi&ccedil;&otilde;es executam.';
+			}
 		}
-		try {
-		$x = $r->evalString('source("'.$basedir.'/corretor.R");');
-		$x = $r->evalString('notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")');   
-		echo $x;
-		} catch (Exception $e) {
-			echo 'Erro interno ao executar o corretor. Verifique se as pre-condi&ccedil;&otilde;es executam.';
-		}
+		else {echo "<font color='#8c2618'>AVISO! O arquivo enviado n&atilde;o pode conter a(s) palavra(s) \"$teste\". Corrija essa condi&ccedil;&atilde;o e tente novamente.</font>";}
 	}
 }
 else 

@@ -83,37 +83,42 @@ relatorioNota <- function (id.exerc, nota, texto) {
 # texto: resposta dada pelo aluno
 # Valor de retorno: char, especificando mensagem de sucesso ou erro 
 # na insercao da nota
-gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, texto)) {
+gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, texto), ignore=F) {
 		# Definicoes iniciais
-		id.aluno <- dbGetQuery(con, 
-							   paste("SELECT id_aluno FROM aluno 
-									 WHERE nome_aluno ='", nome.aluno,"'", sep=""));
-
-		if (sum(dim(id.aluno)) == 0) return ("<p><font color='#8c2618'>Voc&ecirc; n&atilde;o est&aacute; logado.</font> A nota n&atilde;o foi gravada.</p>")
-
-		prazo <- dbGetQuery(con,
-			paste("SELECT prazo FROM prazo
-			JOIN turma USING (id_turma) JOIN aluno USING (id_turma)
-			WHERE id_exercicio=", id.exerc, " AND id_aluno=", id.aluno));
+		id.aluno <- dbGetQuery(con, paste("SELECT id_aluno FROM aluno 
+						   WHERE nome_aluno ='", nome.aluno,"'", sep=""));
 		Date <- format(Sys.time(), "%F %R");
 
-		# Condicoes para gravar a nota
-		if (sum(dim(prazo)) > 0) if (Date > prazo) return ("<p><font color='#8c2618'>O prazo para entrega j&aacute; expirou!</font> A nota n&atilde;o foi gravada.</p>")
-		if (is.null(nota)) return (NULL);
+		if (sum(dim(id.aluno)) == 0) { 
+			id.aluno <- "NULL";
+		}
+		else {
+			prazo <- dbGetQuery(con,
+				paste("SELECT prazo FROM prazo
+				JOIN turma USING (id_turma) JOIN aluno USING (id_turma)
+				WHERE id_exercicio=", id.exerc, " AND id_aluno=", id.aluno));
+
+			# Condicoes para gravar a nota
+			if (sum(dim(prazo)) > 0) if (Date > prazo & ! ignore) return ("<p><font color='#8c2618'>O prazo para entrega j&aacute; expirou!</font> A nota n&atilde;o foi gravada.</p>")
+		}
 
 		peso <- dbGetQuery (con,
-							paste("SELECT peso FROM teste
-								  WHERE id_exercicio = ", id.exerc,
-								  " ORDER BY ordem ASC ", sep=""));
+				paste("SELECT peso FROM teste
+				WHERE id_exercicio = ", id.exerc,
+				" ORDER BY ordem ASC ", sep=""));
 
 		# Escapa os single quotes do texto
 		texto <- gsub("'", '"', texto)
+		if (is.null(nota)) nota <-rep(0, length(t(peso)));
 		res <- dbSendQuery(con,paste("INSERT INTO nota (id_aluno, id_exercicio, data, nota, texto) 
-									 VALUES (",id.aluno,",",id.exerc,",'",Date,"',",round(100*weighted.mean(nota, t(peso))), ",'",paste(texto, collapse="\n"),"')",sep=""))
+					VALUES (",id.aluno,",",id.exerc,",'",Date,"',",
+					round(100*weighted.mean(nota, t(peso))), ",'",paste(texto, collapse="\n"),"')",sep=""))
 		melhorNota <- dbGetQuery(con,
-								 paste("SELECT max(nota) FROM nota
-									   WHERE id_aluno = ",id.aluno, " AND id_exercicio=",
-									   id.exerc, sep=""));
+					 paste("SELECT max(nota) FROM nota
+					 WHERE id_aluno = ",id.aluno, " AND id_exercicio=",
+					 id.exerc, sep=""));
+
+		if (id.aluno =="NULL") return ("<p><font color='#8c2618'>Voc&ecirc; n&atilde;o est&aacute; logado.</font> A nota n&atilde;o foi gravada.</p>")
 		Rel <- paste("<p>Nota cadastrada! Sua melhor nota nesse exerc&iacute;cio &eacute; <b>", melhorNota, 
 					  "%</b>.", sep="")
 		if (sum(dim(prazo)) > 0) Rel <- paste (Rel, "<br>O prazo para enviar novas tentativas &eacute; ", prazo, ".", sep="");
@@ -121,7 +126,7 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 }
 
 # Recebe o exercicio, corrige, grava a nota e gera um output formatado em HTML
-notaR <- function (nome.aluno, id.exerc, arquivo) {
+notaR <- function (nome.aluno, id.exerc, arquivo, ignore=F) {
 		texto <- readLines(arquivo, encoding="utf8");
 		nota <- corretoR (id.exerc, texto);
 		# Tenta de novo com charset latin1:
@@ -130,7 +135,7 @@ notaR <- function (nome.aluno, id.exerc, arquivo) {
 			nota <- corretoR (id.exerc, texto);
 		}
 		# Grava a nota no banco:
-		notaGravada <- gravarNota(nome.aluno, id.exerc, texto, nota)
+		notaGravada <- gravarNota(nome.aluno, id.exerc, texto, nota, ignore)
 		# Gera o relatorio de notas:
 		Rel <- relatorioNota(id.exerc, nota, texto);
 		return(paste(Rel, notaGravada,sep=""))

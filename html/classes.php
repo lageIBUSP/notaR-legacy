@@ -199,6 +199,21 @@ class Exercicio {
 		}
 }
 
+class Proibidos {
+	private $id_exercicio;
+	public function __construct($id) { 
+		$this->id_exercicio = $id; 
+	}
+	public function pass($string) {
+		$res = mysql_query("SELECT palavra FROM proibido WHERE id_exercicio =".$this->id_exercicio." OR id_exercicio IS NULL");
+		while ($palavra = mysql_fetch_array($res)) {
+			if (strpos($string, $palavra[0])   !== FALSE ) return $palavra[0];
+		}
+		# Se chegou aqui, nada proibido
+		return FALSE;
+	}
+}
+
 class Teste {
 	private $id_exercicio;
 	private $ordem;
