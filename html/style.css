@@ -1,3 +1,9 @@
+th { 
+		border: 2px solid #fcc; 
+		font-style: bold;
+}
+
+
 td {
 		border: 2px solid #fcc;
 }

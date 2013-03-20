@@ -15,9 +15,9 @@ if ($user->admin()) {
 <br>&nbsp;
 <p>Exerc&iacute;cios cadastrados:
 <?php
-echo "<table><tr>";
-if ($user->admin()) echo "<td></td>";
-echo "<td>Nome</td><td>Nota</td><td>Prazo</td></th>";
+echo "<table><thead><tr>";
+if ($user->admin()) echo "<th></th>";
+echo "<th>Nome</th><th>Nota</th><th>Prazo</th></tr></thead><tbody>";
 $res = mysql_query("SELECT id_exercicio FROM exercicio ORDER BY nome ASC");
 while ($exerc = mysql_fetch_array($res)) {
 		$X = new Exercicio($user, $exerc[0]);
@@ -28,6 +28,7 @@ while ($exerc = mysql_fetch_array($res)) {
 				$X->getPrazo()."</td></tr>";
 }
 ?>
+</tbody>
 </table>
 </p>
 <?php if ($user->admin()) echo "<p><a href=\"cadastra.php\">Cadastrar novo exerc&iacute;cio</a></p>"; ?>
