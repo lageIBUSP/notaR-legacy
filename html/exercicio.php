@@ -1,20 +1,19 @@
 <?php require('head.php');
 $id = mysql_real_escape_string($_REQUEST['exerc']);
+if(empty($id)) {echo "Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador"; exit;}
 $X = new Exercicio($user, $id);
 ?>
 <h2><?php echo $X->getNome(); ?></h2>
 <?php 
 echo $X->getHtml();
 ?>
-<p>
 <form name="notaR" action="#" method="post" enctype="multipart/form-data">
 <input type="hidden" name="exerc" value="<?php echo $X->getId(); ?>">
 <input type="hidden" name="MAX_FILE_SIZE" value="30000">
 <input type="file" name="rfile" id="rfile" accept=".R">
-<br><button type="submit" value="Submit">OK</button>
+<br><button type="submit" value="Submit">Submeter!</button>
 <a href="http://www.lage.ib.usp.br/notaR/doku.php?id=aluno">ajuda?</a>
 </form>
-</p>
 <div id="corretoR" >
 <?php 
 if (isset($_POST['exerc'])) {
@@ -47,6 +46,7 @@ if (isset($_POST['exerc'])) {
 				$x = $r->evalString('source("'.$basedir.'/corretor.R");');
 				$x = $r->evalString('notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")');   
 				echo $x;
+				echo "<p>Seu c&oacute;digo:</p><p class='fixed'>".nl2br($conts)."</p>";
 			} catch (Exception $e) {
 				echo 'Erro interno ao executar o corretor. Verifique se as pre-condi&ccedil;&otilde;es executam.';
 			}
