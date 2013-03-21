@@ -27,17 +27,17 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 	</select>
 	<button type='submit' name='submit' value='turma'>ok</button>
 </form>
-<table>
 
+
+<table>
+<tr><th>Aluno</th>
 <?php
 $lista_exs = mysql_query("SELECT DISTINCT id_exercicio FROM exercicio JOIN nota USING (id_exercicio) JOIN aluno USING (id_aluno) WHERE id_turma=$turma ORDER BY nome");
-
-echo "	<tr><td>Aluno</td>";
 $i = 0;
 while ($E = mysql_fetch_array($lista_exs)) {
 	$ex[$i] = new Exercicio(NULL, $E[0]);
 	$n = $ex[$i]->getNome();
-	echo "<td>".substr($n,0,strpos($n, " "))."</td>";
+	echo "<th>".substr($n,0,strpos($n, " "))."</th>";
 	$i++;
 }
 echo "	</tr>";

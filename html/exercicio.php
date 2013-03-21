@@ -46,7 +46,7 @@ if (isset($_POST['exerc'])) {
 				$x = $r->evalString('source("'.$basedir.'/corretor.R");');
 				$x = $r->evalString('notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")');   
 				echo $x;
-				echo "<p>Seu c&oacute;digo:</p><p class='fixed'>".nl2br($conts)."</p>";
+				echo "<p>Seu c&oacute;digo:</p><p class='code'>".nl2br($conts)."</p>";
 			} catch (Exception $e) {
 				echo 'Erro interno ao executar o corretor. Verifique se as pre-condi&ccedil;&otilde;es executam.';
 			}
@@ -59,7 +59,7 @@ else
 }
 ?>
 </div>
-<a href="index.php">In&iacute;cio</a>
+<div id="etc" onclick="fullch(); return null;">...</div>
 
 </div>
 </body>

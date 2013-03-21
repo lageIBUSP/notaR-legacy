@@ -1,13 +1,28 @@
-th { 
-		border: 2px solid #fcc; 
-		font-style: bold;
-		border-radius: 2px;
+div#etc { 
+	margin-left: auto; 
+	margin-right: auto;
+	margin-top:-30px;
+	width: 30px;
+	height: 20px;
+	border: 2px solid #078;
+	background-color: #cef;
+	text-align: center;
+	font-family: Arial;
+	font-weight: 900;
+	border-radius: 5px;
+	display: none;
+	cursor:pointer; 
 }
-
-
+th { 
+	border: 2px solid #fcc; 
+	font-weight: bold;
+	border-radius: 2px;
+	font-size: 17px;
+}
 td {
 	border-radius: 2px;
-		border: 2px solid #fcc;
+	border: 2px solid #fcc;
+	font-size: 16px;
 }
 
 #Menu {
@@ -27,18 +42,19 @@ td {
 #Top {
 	position:relative; 
 	width: 70%;
-	margin-left: 155px;
-	top: 50px;
+	margin-left: 115px;
+	top: 20px;
 	padding: 10px;
 	height: 140px; 
 }
 #Top a {text-decoration: none;}
 #MainDiv {
-	margin-left: 155px;
+	position: relative;
+	margin-left: 115px;
 	height: auto;
-	width: 70%;
+	width: 80%;
 	padding: 10px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 	color: #555;
 	overflow: auto;
 	font-style: normal;
@@ -85,7 +101,6 @@ button {
 		width: 360px;
 }
 .code {
-	background: #def;
 	padding: 7px;
 	font-family: Courier;
 }
@@ -108,4 +123,5 @@ p {
 		border-radius: 5px;
 		background: #def;
 		padding: 7px;
+		overflow: hidden;
 }

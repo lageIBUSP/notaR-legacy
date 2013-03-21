@@ -50,7 +50,7 @@ while ($T = mysql_fetch_array($lista_turmas)) {
 	<button type='submit' name='submit' value='turma'>ok</button>
 <p>Prazos cadastrados:</p>
 <table>
-<tr><td>Exerc&iacute;cio</td><td>Data</td></tr>
+<tr><th>Exerc&iacute;cio</th><th>Data</th></tr>
 <?php
 $lista_exs = mysql_query("SELECT id_exercicio FROM exercicio ORDER by nome");
 
@@ -58,7 +58,7 @@ while ($E = mysql_fetch_array($lista_exs)) {
 	echo "	<tr>";
 	$ex = new Exercicio(NULL, $E[0]);
 	echo "		<td>".$ex->getNome()."</td><td>";
-	echo "<input type='text' name='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'>";
+	echo "<input type='text' name='ex".$ex->getId()."' value='".$ex->getPrazo($turma)."' style='width: 150px'>";
 	echo "<input type='hidden' name='old_ex".$ex->getId()."' value='".$ex->getPrazo($turma)."'>";
 	echo "</td></tr>";
 }

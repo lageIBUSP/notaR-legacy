@@ -8,7 +8,7 @@
 				<meta name="description" content="Um sistema para notas automatizadas em cursos que utilizam a linguagem R" />
 				<title>notaR</title>
 		</head>
-<body>
+<body onload="defch()">
 	<div id="Top">
 		<div style="float:left">
 			<h1><a href="index.php">notaR</a></h1>
@@ -19,8 +19,8 @@
 			<br>&nbsp;
 			<?php echo $user->loginForm(); ?>
 		</div>
+<div style=" width: 100%; height: 1px; clear:both"></div>
 	</div>
-<div style="clear:both"></div>
 	<div id="MainDiv">
 <?php
 if(isset($loginerror))  echo $loginerror; 

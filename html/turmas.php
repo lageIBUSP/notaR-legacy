@@ -18,7 +18,7 @@ if(isset($post['submit'])) {
 }
 ?>
 <p>Turmas cadastradas:</p>
-<table><tr><td></td><td>Nome</td><td>Alunos</td></tr>
+<table><tr><th colspan=2>Nome</th><th>Alunos</th></tr>
 <?php
 $lista_turmas = mysql_query("SELECT id_turma FROM turma");
 while ($T = mysql_fetch_array($lista_turmas)) {
