@@ -47,9 +47,9 @@ $lista_alunos = mysql_query("SELECT id_aluno FROM aluno WHERE id_turma=$turma");
 while ($A = mysql_fetch_array($lista_alunos)) {
 	$aluno = new Aluno($A[0]);
 	echo "<tr><td>";
-	if ($aluno->admin()) echo "<img src='check.png'>";
+	if ($aluno->admin()) echo "<img src='img/check.png'>";
 	echo "</td><td>".$aluno->getNome()."</td><td>".$aluno->numNotas()."</td><td>";
-	echo "<a href='aluno.php?id=".$aluno->getId()."'><img src='pen.png'></a></td></tr>";
+	echo "<a href='aluno.php?id=".$aluno->getId()."'><img src='img/pen.png'></a></td></tr>";
 }
 ?>
 </table>

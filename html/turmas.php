@@ -23,7 +23,7 @@ if(isset($post['submit'])) {
 $lista_turmas = mysql_query("SELECT id_turma FROM turma");
 while ($T = mysql_fetch_array($lista_turmas)) {
 	$turma = new Turma($T[0]);
-	echo "<tr><td><a href='?delete=".$turma->getId()."'><img src='x.png'></a></td><td>".$turma->getNome()."</td><td>".$turma->getAlunos()."</td></tr>";
+	echo "<tr><td><a href='?delete=".$turma->getId()."'><img src='img/x.png'></a></td><td>".$turma->getNome()."</td><td>".$turma->getAlunos()."</td></tr>";
 }
 ?>
 </table>

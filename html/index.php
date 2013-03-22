@@ -9,6 +9,7 @@ if ($user->admin()) {
 	echo "<li><a href='complecao.php'>Realiza&ccedil;&atilde;o</a></li>";
 	echo "<li><a href='texto.php'>Busca de texto</a></li>";
 	echo "<li><a href='plagio.php'>Detec&ccedil;&atilde;o de pl&aacute;gio</a></li>";
+	echo "<li><a href='graficos.php'>Gr&aacute;ficos (BETA!)</a></li>";
 	echo"</ul></div>";
 }
 ?>
@@ -22,7 +23,7 @@ $res = mysql_query("SELECT id_exercicio FROM exercicio ORDER BY nome ASC");
 while ($exerc = mysql_fetch_array($res)) {
 		$X = new Exercicio($user, $exerc[0]);
 		echo "<tr><td>";
-		if ($user->admin()) echo "<a href='cadastra.php?exerc=".$X->getID()."'><img src='pen.png'></a></td><td>";
+		if ($user->admin()) echo "<a href='cadastra.php?exerc=".$X->getID()."'><img src='img/pen.png'></a></td><td>";
 		echo "<a href='exercicio.php?exerc=".$X->getID()."'>".
 				$X->getNome()."</a></td><td>".$X->getNota()."</td><td>".
 				$X->getPrazo()."</td></tr>";
