@@ -101,8 +101,8 @@ class User {
 				} else {
 						$T ="<form name=\"LoginForm\" action=\"index.php\" method=\"post\">";
 						$T.="<input type=\"hidden\" id=\"action\" name=\"action\" value=\"login\">";
-						$T.="<input type=\"text\" id=\"login\" name=\"login\" value=\"login\"><br>";
-						$T.="<input type=\"password\" id=\"senha\" name=\"senha\" value=\"senha\"><br>";
+						$T.="<input type=\"text\" id=\"login\" name=\"login\" placeholder=\"login\"><br>";
+						$T.="<input type=\"password\" id=\"senha\" name=\"senha\" placeholder=\"senha\"><br>";
 						$T.="	<input type=\"hidden\" id=\"uri\" name=\"uri\" value=\"";
 						$T.= $_SERVER['REQUEST_URI']; 
 						$T.="\"><button type=\"submit\" id=\"LoginButton\" value=\"Submit\">login</button>";

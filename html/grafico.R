@@ -39,6 +39,7 @@ porExercicio <- function() {
 	y <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) where id_turma=",turma," and nota=100 group by nome"))
 	x <- merge(x, y, by="nome", all=TRUE)
 	x[,2:3] <- x[,2:3] / as.numeric(n_turma)
+	Encoding(x[,1]) <- "latin1"
 	#extrai o numero do exercicio
 	f <- function(s) strsplit(s, " ")[[1]][1]
 	x[,1] <- sapply(x[,1], f)

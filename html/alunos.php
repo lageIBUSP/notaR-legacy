@@ -16,10 +16,17 @@ if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 	$senha = mysql_real_escape_string($_POST['senha']);
 	if (empty($senha)) { echo "<p>Voc&ecirc; deve informar uma senha!</p>";}
 	else {
+		$erros ="";
 		foreach ($arr as $novo) {
-		mysql_query("INSERT INTO aluno (nome_aluno, id_turma, senha) VALUES ('$novo', $turma, SHA('$senha'))"); 
-	}
-		echo "<p>Alunos cadastrados.</p>";
+			if (strlen($novo) < 4) {
+				$erros .="<br>'$novo' &eacute; muito curto, crie usu&aacute;rios com no m&iacute;nimo 4 caracteres";
+			}
+			else {
+				mysql_query("INSERT INTO aluno (nome_aluno, id_turma, senha) VALUES ('$novo', $turma, SHA('$senha'))"); 
+			}
+		}
+			echo "<p>Alunos cadastrados.</p>";
+			if ($erros) echo "<p>Erros:$erros</p>";
 	}
 }
 ?>
