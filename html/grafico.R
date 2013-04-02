@@ -44,9 +44,9 @@ porExercicio <- function() {
 	f <- function(s) strsplit(s, " ")[[1]][1]
 	x[,1] <- sapply(x[,1], f)
 	x[is.na(x)] <- 0
-	par(fg='#FF6666', family='Verdana')
-	plot(spline(x[,2]), type='l', bty='n', xaxt='n', yaxt='n', xlab='Exercicio', ylab='% incompleto/completo', col='#007788', lwd=3, ylim=c(0,1))
-	points(spline(x[,3]), type='l', col='#770088', lwd=3)
+	par(fg='#FF6666', family='Verdana', cex.axis=0.8)
+	plot(x[,2], type='l', bty='n', xaxt='n', yaxt='n', xlab='Exercicio', ylab='% incompleto/completo', col='#007788', lwd=3, ylim=c(0,1))
+	points(x[,3], type='l', col='#770088', lwd=3)
 	axis(1, at=1:dim(x)[1], labels=x[,1], lwd=3)
 	axis(2, at=c(0,0.5, 1), lwd=3)
 	dev.off()
