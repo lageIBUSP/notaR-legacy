@@ -3,26 +3,28 @@ if (! $user->admin()) {
 	echo "Acesso negado";
 	exit;
 }
-###### Codigo aqui
-$post = mres($_REQUEST);
 ?>
 <h2>Administra&ccedil;&atilde;o de turmas</h2>
 <?php
-if (isset($post['delete'])) {
-		$turma = new Turma($post['delete']);
-		if ($turma->remove())	echo "<p>Turma removida</p>"; else echo "<p>Erro ao remover turma! Verifique se a turma tem 0 alunos</p>";
+if (isset($_REQUEST['delete'])) {
+		$turma = new Turma($_REQUEST['delete']);
+		if ($turma->remove())
+			echo "<p>Turma removida</p>";
+		else 
+			echo "<p>Erro ao remover turma! Verifique se a turma tem 0 alunos</p>";
 }
-if(isset($post['submit'])) {
+if(isset($_REQUEST['submit'])) {
 		$turma = new Turma();
-		if ($turma->create($post['nome'])) echo "<p>Turma criada</p>"; else echo "<p>Erro ao criar turma!</p>";
+		if ($turma->create($_REQUEST['nome'])) 
+			echo "<p>Turma criada</p>"; 
+		else 
+			echo "<p>Erro ao criar turma!</p>";
 }
 ?>
 <p>Turmas cadastradas:</p>
 <table><tr><th colspan=2>Nome</th><th>Alunos</th></tr>
 <?php
-$lista_turmas = mysql_query("SELECT id_turma FROM turma");
-while ($T = mysql_fetch_array($lista_turmas)) {
-	$turma = new Turma($T[0]);
+foreach (ListTurmas() as $turma) {
 	echo "<tr><td><a href='?delete=".$turma->getId()."'><img src='img/x.png'></a></td><td>".$turma->getNome()."</td><td>".$turma->getAlunos()."</td></tr>";
 }
 ?>

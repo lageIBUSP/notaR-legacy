@@ -114,30 +114,7 @@ class User {
  // Toda pagina precisa de um objeto de usuario:
 $user = new User();
 
-class Turma {
-		private $id;
-		public function getId() {
-				return $this->id;
-		}
-		public function getNome() {
-				$res = mysql_fetch_array(mysql_query("SELECT nome_turma FROM turma WHERE id_turma=$this->id"));
-				return $res[0];
-		}
-		public function getAlunos() {
-				$res = mysql_fetch_array(mysql_query("SELECT count(1) FROM turma JOIN aluno USING (id_turma) WHERE id_turma=$this->id"));
-				return $res[0];
-		}
-		public function create($nome) {
-				$n = mysql_real_escape_string($nome);
-				return mysql_query("INSERT INTO turma (nome_turma) VALUES ('$n');");
-		}
-		public function remove() {
-				return mysql_query("DELETE FROM turma WHERE id_turma=$this->id");
-		}
-		public function __construct($id) {
-				$this->id = $id;
-		}
-}
+require_once("class/turma.php");
 
 class Exercicio {
 		private $id;
