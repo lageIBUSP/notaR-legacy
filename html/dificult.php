@@ -3,30 +3,9 @@ if (! $user->admin()) {
 	echo "Acesso negado";
 	exit;
 }
-if(isset($_POST['turma']))
-	$turma = mysql_real_escape_string($_POST['turma']);
-else {
-		$T = mysql_fetch_array(mysql_query("SELECT MIN(id_turma) FROM turma"));
-		$turma = $T[0];
-}
 ?>
 <h2>Relat&oacute;rio de dificuldades</h2>
-<p>Escolha a turma</p>
-<form action='dificult.php' method='POST'>
-	<select id='turma' name='turma'>
-<?php
-$lista_turmas = mysql_query("SELECT id_turma FROM turma ORDER BY id_turma ASC");
-
-while ($T = mysql_fetch_array($lista_turmas)) {
-	$loop_turma = new Turma($T[0]);
-	echo "	<option value=".$loop_turma->getId();
-	if($loop_turma->getId() == $turma) echo " selected";
-	echo ">".$loop_turma->getNome()."</option>";
-}
-?>
-	</select>
-	<button type='submit' name='submit' value='turma'>ok</button>
-</form>
+<p>Escolha a turma: <?php echo SelectTurma(); ?></p>
 <p>M&eacute;dia de tentativas por aluno que entregou cada exerc&iacute;cio:</p>
 <table>
 <tr><td>Exerc&iacute;cio</td><td>Tentativas</td></tr>

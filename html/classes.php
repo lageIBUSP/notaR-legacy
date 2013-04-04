@@ -1,27 +1,7 @@
 <?php
 require_once("config.php");
 require_once("class/aluno.php");
-
-class Nota {
-	private $id;
-	public function getNomeAluno() {
-		$res = mysql_fetch_array(mysql_query("SELECT nome_aluno FROM aluno JOIN nota using (id_aluno) where id_nota=$this->id"));
-		return $res[0];
-	}
-	public function getNota() {
-		$res = mysql_fetch_array(mysql_query("SELECT nota FROM nota where id_nota=$this->id"));
-		return $res[0];
-	}
-	public function getData() {
-		$res = mysql_fetch_array(mysql_query("SELECT data FROM nota where id_nota=$this->id"));
-		return $res[0];
-	}
-	public function getTexto() {
-		$res = mysql_fetch_array(mysql_query("SELECT texto FROM nota where id_nota=$this->id"));
-		return nl2br($res[0]);
-	}
-	public function __construct($id) { $this->id=$id;}
-}
+require_once("class/nota.php");
 
 class User {
 		private $login;
@@ -39,7 +19,7 @@ class User {
 		public function __construct() {
 			if (!isset($_SESSION)) 
 			{
-				ini_set("session.cookie_lifetime", 3600);
+				ini_set("session.cookie_lifetime", 360000);
 				session_start();
 			}
 				// Para fazer logout:

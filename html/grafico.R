@@ -32,7 +32,7 @@ porHora <- function() {
 	dev.off()
 }
 porExercicio <- function() {
-	turma = 5
+	turma = 8
 	startpng("exercicio.png")
 	n_turma <- dbGetQuery(con, paste("select count(distinct id_aluno) from aluno join nota using(id_aluno) where id_turma=",turma))
 	x <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) where id_turma=",turma,"group by nome"))
