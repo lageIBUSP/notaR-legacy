@@ -1,28 +1,6 @@
 <?php
 require_once("config.php");
-class Aluno {
-		private $id;
-		public function getNome() {
-			$res = mysql_fetch_array(mysql_query("SELECT nome_aluno FROM aluno where id_aluno=$this->id"));
-			return $res[0];
-		}
-		public function __construct($id) {
-				$this->id=$id;
-		}
-		public function getId() { return $this->id; } 
-		public function admin() {
-			$res = mysql_fetch_array(mysql_query("SELECT admin FROM aluno where id_aluno=".$this->id));
-			return $res[0];
-		}
-		public function numNotas() {
-			$res = mysql_fetch_array(mysql_query("SELECT COUNT(DISTINCT id_exercicio) FROM nota where id_aluno=".$this->id));
-			return $res[0];
-		}
-		public function getTurma() {
-			$res = mysql_fetch_array(mysql_query("SELECT id_turma FROM aluno where id_aluno=".$this->id));
-			return $res[0];
-		}
-}
+require_once("class/aluno.php");
 
 class Nota {
 	private $id;

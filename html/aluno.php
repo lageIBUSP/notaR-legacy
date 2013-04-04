@@ -10,6 +10,7 @@ else {
 	exit;
 }
 	$aluno = new Aluno($id);
+	$turma = $aluno->getTurma(); // override o padrao
 ?>
 <h2>Cadastro de alunos</h2>
 <p>Para alterar detalhes do aluno, edite o formul&aacute;rio abaixo.</p>
@@ -18,7 +19,7 @@ else {
 <input type='hidden' name='id' value='<?php echo $aluno->getId(); ?>'>
 <p>Login: <input type='text' name='nome' value='<?php echo $aluno->getNome(); ?>'>
 <br>Senha: <input type='text' name='senha' value=''>
-<br>Turma: <?php echo SelectTurma($turma); ?>
+<br>Turma: <?php echo SelectTurma(false); ?>
 <br><label><input type="checkbox" name="admin" value="1" 
 <?php if ($aluno->admin()) echo "checked"; ?>
 /> Admin</label>

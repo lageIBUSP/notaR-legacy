@@ -50,19 +50,22 @@ function ListTurmas() {
 	return $a;
 }
 
-function SelectTurma($turma) {
-	$T = "<select id='turma' name='turma'>";
+function SelectTurma($reload = true) { // change the elem id to prevent auto reload
+	global $turma;
+	$T = "<select id='turma' name='turma' ";
+	if ($reload) $T.= "onchange=\"window.location='?turma='+this.value;\"";
+	$T .=">";
 	$turmas = ListTurmas();
 	foreach($turmas as $esta) {
 		$T.= "<option value=".$esta->getId();
 	if($esta == $turma) $T .= " selected";
 	$T .= ">".$esta->getNome()."</option>";
 	}
-	$T .="</select><button type='submit' name='submit' value='turma'>ok</button> <p>Todo: esse botao sera removido em breve!!</p>";
+	$T .="</select>";
 	return $T;
 }
 
-if(isset($_POST['turma'])) $turma = new Turma($_POST['turma']);
+if(isset($_REQUEST['turma'])) $turma = new Turma($_REQUEST['turma']);
 else $turma = new Turma(MAX_TURMA);
 ?>
 
