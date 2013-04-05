@@ -2,9 +2,9 @@
 define('RSERVE_HOST','localhost');
 $basedir = '/var/www/rserve';
 
-error_reporting(E_NONE);
-ini_set('display_errors', 'On');
-error_reporting(E_ALL);
+error_reporting(0);
+//ini_set('display_errors', 'On');
+//error_reporting(E_ALL);
 
 
 $CONFIG['dbserver'] = 'localhost';

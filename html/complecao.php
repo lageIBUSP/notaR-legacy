@@ -8,14 +8,13 @@ if (! $USER->admin()) {
 <p>Escolha a turma: <?php echo SelectTurma(); ?></p>
 <p>Exerc&iacute;cios por porcentagem de realiza&ccedil;&atilde;o:</p>
 <table>
-<tr><td>Exerc&iacute;cio</td><td>Tentativa</td></td><td>100%</td></tr>
+<tr><td>Exerc&iacute;cio</td><td>Tentativa</td></td><td>100%</td><td>Tentativas</td></tr>
 
 <?php
 $n_turma = $TURMA->getAlunos();
 foreach(ListExercicio($TURMA) as $ex) {
-$tentativa = mysql_fetch_array(mysql_query("select count(distinct id_aluno) from nota join aluno using(id_aluno) where id_turma=".$TURMA->getId()." and id_exercicio = ".$ex->getId()));
-$cem = mysql_fetch_array(mysql_query("select count(distinct id_aluno) from nota join aluno using(id_aluno) where id_turma=".$TURMA->getId()." and id_exercicio = ".$ex->getId()." and nota=100"));
-	echo "<tr><td>".$ex->getNome()."</td><td>".round(100*$tentativa[0]/$n_turma)."%</td><td>".round(100*$cem[0]/$n_turma)."%</td></tr>";
+	$rel = $ex->complecao($TURMA);
+	echo "<tr><td>".$ex->getNome()."</td><td>".$rel[0]."%</td><td>".$rel[1]."%</td><td>".$rel[2]."</td></tr>";
 }
 
 ?>

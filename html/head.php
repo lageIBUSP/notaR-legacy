@@ -1,4 +1,13 @@
-<?php require_once('classes.php') ?>
+<?php
+require_once("config.php");
+require_once("class/aluno.php");
+require_once("class/nota.php");
+require_once("class/user.php");
+require_once("class/turma.php");
+require_once("class/exercicio.php");
+require_once("class/proibido.php");
+require_once("class/teste.php");
+?>
 <!DOCTYPE html>
 <html>
 		<head>
@@ -17,7 +26,7 @@
 		</div>
 		<div style="float:right">
 			<br>&nbsp;
-			<?php echo $user->loginForm(); ?>
+			<?php echo $USER->loginForm(); ?>
 		</div>
 <div style=" width: 100%; height: 1px; clear:both"></div>
 	</div>

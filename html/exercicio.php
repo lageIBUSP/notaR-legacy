@@ -43,7 +43,7 @@ if (isset($_POST['exerc'])) {
 			}
 			try {
 				$x = $r->evalString('source("'.$basedir.'/corretor.R");');
-				$x = $r->evalString('notaR("'.$user->getNome().'", '.$X->getId().', "'.$uploadfile.'")');   
+				$x = $r->evalString('notaR("'.$USER->getNome().'", '.$X->getId().', "'.$uploadfile.'")');   
 				echo $x;
 				echo "<p>Seu c&oacute;digo:</p><p class='code'>".nl2br($conts)."</p>";
 			} catch (Exception $e) {

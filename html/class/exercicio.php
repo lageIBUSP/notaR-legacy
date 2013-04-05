@@ -81,6 +81,30 @@ class Exercicio {
 			return $nota;
 		}
 	}
+	public function complecao($turma) {
+		global $mysqli;
+		$res = $mysqli->prepare("select count(distinct id_aluno) from nota join aluno using(id_aluno) where id_turma=? and id_exercicio = ?");
+		$res->bind_param('ii', $turma->getId(), $this->getId());
+		$res->execute();
+		$res->bind_result($tentativa);
+		$res->fetch();
+		$res->close();
+
+		$res = $mysqli->prepare("select count(distinct id_aluno) from nota join aluno using(id_aluno) where id_turma=? and id_exercicio = ? and nota=100");
+		$res->bind_param('ii', $turma->getId(), $this->getId());
+		$res->execute();
+		$res->bind_result($cem);
+		$res->fetch();
+		$res->close();
+
+		$res = $mysqli->prepare("select round(count(id_aluno)/count(distinct id_aluno)) from nota join aluno using(id_aluno) where id_turma=? and id_exercicio=?");
+		$res->bind_param('ii', $turma->getId(), $this->getId());
+		$res->execute();
+		$res->bind_result($diff);
+		$res->fetch();
+		$lista_exs = mysql_query("");
+		return array(round(100*$tentativa/$turma->getAlunos()), round(100*$cem/$turma->getAlunos()), $diff);
+	}
 	public function getPrazo($turma=null) {
 		global $USER;
 		global $mysqli;

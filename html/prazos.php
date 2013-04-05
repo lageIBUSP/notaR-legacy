@@ -4,7 +4,7 @@ if (! $user->admin()) {
 	exit;
 }
 if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
-		$post = mres($_POST);
+		$post = $_POST;
 		foreach (array_keys($post) AS $key) {
 				if (strpos($key, "ld_")) {
 						$new = substr($key, 4);
