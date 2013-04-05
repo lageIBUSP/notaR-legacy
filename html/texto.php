@@ -74,65 +74,7 @@ $user = new User();
 
 require_once("class/turma.php");
 
-class Exercicio {
-		private $id;
-		private $user;
-		public function getId() {
-			return $this->id;
-		}
-		public function getNota($aluno=NULL) {
-				if(!is_null($aluno)) {
-						$res = mysql_query("SELECT max(nota) FROM nota join aluno using (id_aluno) where id_aluno = $aluno and id_exercicio=$this->id");
-						if (mysql_num_rows($res))
-						{
-								$res = mysql_fetch_array($res);
-								return $res[0];
-						}
-				}
-				elseif ($this->user->getLogin()) {
-						$res = mysql_query("SELECT max(nota) FROM nota join aluno using (id_aluno) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
-						if (mysql_num_rows($res))
-						{
-								$res = mysql_fetch_array($res);
-								return $res[0];
-						}
-				}
-		}
-		public function getNome() {
-				$res = mysql_fetch_array(mysql_query("SELECT nome FROM exercicio WHERE id_exercicio=$this->id"));
-				return $res[0];
-		}
-		public function getHtml() {
-				$res = mysql_fetch_array(mysql_query("SELECT html FROM exercicio WHERE id_exercicio=$this->id"));
-				return $res[0];
-		}
-		public function getPrecondicoes() {
-				$res = mysql_fetch_array(mysql_query("SELECT precondicoes FROM exercicio WHERE id_exercicio=$this->id"));
-				return $res[0];
-		}
-		public function getPrazo($turma=NULL) {
-				if (!is_null($turma)) {
-					$res = mysql_query("SELECT prazo FROM prazo WHERE id_turma = $turma AND id_exercicio=$this->id");
-						if (mysql_num_rows($res))
-						{
-								$res = mysql_fetch_array($res);
-								return $res[0];
-						}
-				}
-				elseif ($this->user->getLogin()) {
-						$res = mysql_query("SELECT prazo FROM prazo join turma using (id_turma) join aluno using (id_turma) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
-						if (mysql_num_rows($res))
-						{
-								$res = mysql_fetch_array($res);
-								return $res[0];
-						}
-				}
-		}
-		public function __construct($user, $id) {
-				$this->user = $user;
-				$this->id = $id;
-		}
-}
+require_once("class/exercicio.php");
 
 class Proibidos {
 	private $id_exercicio;
@@ -149,27 +91,7 @@ class Proibidos {
 	}
 }
 
-class Teste {
-	private $id_exercicio;
-	private $ordem;
-	public function __construct($id, $i) {
-		$this->id_exercicio = $id;
-		$this->ordem = $i;
-	}
-	public function condicao() {
-		$res = mysql_fetch_array(mysql_query("SELECT condicao FROM teste WHERE id_exercicio=$this->id_exercicio AND ordem = $this->ordem"));
-		return $res[0];
-		}
-	public function peso() {
-		$res = mysql_fetch_array(mysql_query("SELECT peso FROM teste WHERE id_exercicio=$this->id_exercicio AND ordem = $this->ordem"));
-		return $res[0];
-		}
-	public function dica() {
-		$res = mysql_fetch_array(mysql_query("SELECT dica FROM teste WHERE id_exercicio=$this->id_exercicio AND ordem = $this->ordem"));
-		return $res[0];
-		}
-
-}
+require_once("class/teste.php");
 function mres($q) {
 	if(is_array($q)) 
 		foreach($q as $k => $v) 
@@ -215,6 +137,7 @@ if (isset($_POST['aluno']))
 else {
 		$A = mysql_fetch_array(mysql_query("SELECT id_aluno FROM aluno where nome_aluno = (SELECT MIN(nome_aluno) FROM aluno WHERE id_turma=".$turma->getId(),")"));
 		$aluno = $A[0];
+		$selected = new Aluno($aluno);
 }
 if (isset($_POST['exercicio'])) 
 	$exercicio = mysql_real_escape_string($_POST['exercicio']);
@@ -244,22 +167,11 @@ while ($T = mysql_fetch_array($lista_exercicio)) {
 
 ?>
 </select></p>
-<ul><li>Escolha um aluno para ver todas as tentativas OU</li>
-<li>Digite um texto para procurar nas respostas</li></ul>
-	<select id='aluno' name='aluno'>
-<?php
-$lista_alunos = mysql_query("SELECT id_aluno FROM aluno WHERE id_turma=".$turma->getId()." ORDER BY nome_aluno ASC");
-
-while ($T = mysql_fetch_array($lista_alunos)) {
-	$loop_aluno = new Aluno($T[0]);
-	echo "	<option value=".$loop_aluno->getId();
-	if($loop_aluno->getId() == $aluno) echo " selected";
-	echo ">".$loop_aluno->getNome()."</option>";
-}
-
-?>
-</select> OU
-<input type="text" name="texto" value="<?php echo $texto; ?>">
+<ul><li>Escolha um aluno para ver todas as tentativas aqui:
+<?php echo SelectAluno($selected); ?></li>
+<li>OU digite um texto para procurar nas respostas
+<input type="text" name="texto" value="<?php echo $texto; ?>"></li>
+</ul>
 <button type="submit" name="submit" value="busca">Busca</button>
 </form>
 <table>
@@ -270,7 +182,7 @@ while ($T = mysql_fetch_array($lista_alunos)) {
 if ($texto == "") 
 	$lista_exs = mysql_query("SELECT id_nota FROM nota WHERE id_exercicio=$exercicio AND id_aluno=$aluno ORDER BY data ASC");
 else 
-	$lista_exs = mysql_query("SELECT id_nota FROM nota WHERE id_exercicio=$exercicio AND texto LIKE '%$texto%' ORDER BY data ASC");
+	$lista_exs = mysql_query("SELECT id_nota FROM nota JOIN aluno USING (id_aluno) WHERE id_exercicio=$exercicio AND texto LIKE '%$texto%' AND  id_turma=".$turma->getId()." ORDER BY data ASC");
 
 while ($N = mysql_fetch_array($lista_exs)) {
 	$ex = new Nota($N[0]);
