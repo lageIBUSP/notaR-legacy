@@ -54,10 +54,10 @@ class Aluno {
 function ListAlunos($turma = null) {
 	global $mysqli;
 	if ($turma) {
-		$res = $mysqli->prepare("SELECT id_aluno FROM aluno WHERE id_turma=?");
+		$res = $mysqli->prepare("SELECT id_aluno FROM aluno WHERE id_turma=? ORDER BY nome_aluno");
 		$res->bind_param('i', $turma->getId());
 	} else
-		$res = $mysqli->prepare("SELECT id_aluno FROM aluno");
+		$res = $mysqli->prepare("SELECT id_aluno FROM aluno ORDER BY nome_aluno");
 	$res->execute();
 	$res->bind_result($id);
 	$ids = array();

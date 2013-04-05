@@ -20,41 +20,51 @@ class Exercicio {
 	public function getNota($aluno=null) {
 		global $USER;
 		global $mysqli;
-		if($aluno) {
+		if ($aluno OR $USER->getId()) {
 			$res = $mysqli->prepare("SELECT max(nota) FROM nota join aluno using (id_aluno) where id_aluno = ? and id_exercicio=?");
-			$res->bind_param('ii', $aluno->getId(), $this->id);
+			if($aluno) {
+				$res->bind_param('ii', $aluno->getId(), $this->id);
+			} else {
+				$res->bind_param('ii', $USER->getId(), $this->id);
+			}
 			$res->execute();
 			$res->bind_result($nota);
 			$res->fetch();
 			return $nota;
 		}
-		elseif ($this->user->getLogin()) {
-			$res = mysql_query("SELECT max(nota) FROM nota join aluno using (id_aluno) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
-			if (mysql_num_rows($res))
-			{
-				$res = mysql_fetch_array($res);
-				return $res[0];
-			}
-		}
 	}
-	public function getPrazo($turma=NULL) {
+	public function getPrazo($turma=null) {
 		global $USER;
-		if (!is_null($turma)) {
-			$res = mysql_query("SELECT prazo FROM prazo WHERE id_turma = $turma AND id_exercicio=$this->id");
-			if (mysql_num_rows($res))
-			{
-				$res = mysql_fetch_array($res);
-				return $res[0];
+		global $mysqli;
+		if ($USER->getId() OR $turma) {
+			$res = $mysqli->prepare("SELECT prazo FROM prazo WHERE id_turma = ? AND id_exercicio=?");
+			if ($turma) {
+				$res->bind_param('ii', $turma->getId(), $this->id);
+			} else {
+				$res->bind_param('ii', $USER->getTurma(), $this-id);
 			}
-		}
-		elseif ($this->user->getLogin()) {
-			$res = mysql_query("SELECT prazo FROM prazo join turma using (id_turma) join aluno using (id_turma) where nome_aluno = '".$this->user->getLogin()."' and id_exercicio=$this->id");
-			if (mysql_num_rows($res))
-			{
-				$res = mysql_fetch_array($res);
-				return $res[0];
-			}
+			$res->execute();
+			$res->bind_result($prazo);
+			$res->fetch();
+			return $prazo;
 		}
 	}
 }
+
+function ListExercicio($turma = null) {
+	global $mysqli;
+	if ($turma) {
+		$res = $mysqli->prepare("SELECT DISTINCT id_exercicio FROM exercicio JOIN prazo USING (id_exercicio) WHERE id_turma= ? ORDER BY nome");
+		$res->bind_param('i',$turma->getId());
+	} else
+		$res = $mysqli->prepare("SELECT id_exercicio FROM exercicio ORDER BY nome");
+	$res->execute();
+	$res->bind_result($id);
+	$ids = array();
+	$a = array();
+	while ($res->fetch()) array_push($ids, $id);
+	foreach ($ids as $id) array_push($a, new Exercicio($id));
+	return $a;
+}
+
 ?>

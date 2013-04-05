@@ -1,6 +1,6 @@
 <?php
 require_once("config.php");
-define ("MAX_TURMA", 999);
+define ("MAX_TURMA", -1);
 class Turma {
 	private $id, $nome, $total;
 	public function getId() {return $this->id;}
@@ -51,15 +51,15 @@ function ListTurmas() {
 }
 
 function SelectTurma($reload = true) { // change the elem id to prevent auto reload
-	global $turma;
+	global $TURMA;
 	$T = "<select id='turma' name='turma' ";
 	if ($reload) $T.= "onchange=\"window.location='?turma='+this.value;\"";
 	$T .=">";
 	$turmas = ListTurmas();
 	foreach($turmas as $esta) {
 		$T.= "<option value=".$esta->getId();
-	if($esta == $turma) $T .= " selected";
-	$T .= ">".$esta->getNome()."</option>";
+		if($esta == $TURMA) $T .= " selected";
+		$T .= ">".$esta->getNome()."</option>";
 	}
 	$T .="</select>";
 	return $T;

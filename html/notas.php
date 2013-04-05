@@ -138,13 +138,9 @@ if (! $user->admin()) {
 <table>
 <tr><th>Aluno</th>
 <?php
-$lista_exs = mysql_query("SELECT DISTINCT id_exercicio FROM exercicio JOIN nota USING (id_exercicio) JOIN aluno USING (id_aluno) WHERE id_turma=".$TURMA->getId()." ORDER BY nome");
-$i = 0;
-while ($E = mysql_fetch_array($lista_exs)) {
-	$ex[$i] = new Exercicio($E[0]);
-	$n = $ex[$i]->getNome();
-	echo "<th>".substr($n,0,strpos($n, " "))."</th>";
-	$i++;
+$ex = ListExercicio($TURMA);
+foreach ($ex as $exercicio) {
+	echo "<th>".substr($exercicio->getNome(),0,strpos($exercicio->getNome(), " "))."</th>";
 }
 echo "	</tr>";
 

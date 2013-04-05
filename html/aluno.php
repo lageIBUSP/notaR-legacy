@@ -3,14 +3,12 @@ if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
-if(isset($_REQUEST['id']))
-	$id = mysql_real_escape_string($_REQUEST['id']);
-else {
+if(! isset($_REQUEST['id'])) {
 	echo "<p>Erro interno!</p></div></body></html>";
 	exit;
 }
-	$aluno = new Aluno($id);
-	$TURMA = $aluno->getTurma(); // override o padrao
+	$aluno = new Aluno($_REQUEST['id']);
+	$TURMA = new Turma($aluno->getTurma()); // override o padrao
 ?>
 <h2>Cadastro de alunos</h2>
 <p>Para alterar detalhes do aluno, edite o formul&aacute;rio abaixo.</p>
