@@ -2,7 +2,10 @@
 if(empty($_REQUEST['exerc'])) {echo "Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador"; exit;}
 $X = new Exercicio($_REQUEST['exerc']);
 ?>
-<h2><?php echo $X->getNome(); ?></h2>
+<h2><?php 
+echo $X->getNome(); 
+if ($USER->admin()) echo "&nbsp;<a href='cadastra.php?exerc=".$X->getId()."'><img src='img/pen.png'></a>";
+?></h2>
 <?php 
 echo $X->getHtml();
 ?>

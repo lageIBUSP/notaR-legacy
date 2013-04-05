@@ -9,7 +9,7 @@ if (! $USER->admin()) {
 if(isset($_POST['submit']) AND $_POST['submit']=="altera") {
 	$aluno = new Aluno($_POST['id']);
 	if(isset($_POST['admin'])) $admin=1; else $admin=0;
-	echo $aluno->altera($_POST['nome'], $admin, $turma, $_POST['senha']);
+	echo $aluno->altera($_POST['nome'], $admin, $TURMA, $_POST['senha']);
 }
 if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 	$arr=preg_split("/\r\n|\r|\n/",$_POST['novos']);

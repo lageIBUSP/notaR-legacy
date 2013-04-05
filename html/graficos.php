@@ -10,7 +10,9 @@ if (! $USER->admin()) {
 <br><img src="img/porhora.png">
 <br><img src="img/dow.png">
 <p>Para a turma de Manaus 2013</p>
-<br><img src="img/exercicio.png">
+<br><img src="img/exercicio8.png">
+<p>Para a turma de S&atilde;o Paulo 2013</p>
+<br><img src="img/exercicio5.png">
 
 </table>
 </div>

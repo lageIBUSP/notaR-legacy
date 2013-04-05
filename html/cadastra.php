@@ -14,7 +14,7 @@ $id = $X->getId();
 
 if (isset($_POST['ntestes'])) {
 	$ntestes = $_POST['ntestes'];
-} elseif (!empty($id)) {
+} elseif (!empty($id) && $X->maxTeste()) {
 	$ntestes = $X->maxTeste();
 }else {
 	$ntestes = 10;
@@ -51,22 +51,22 @@ echo "<input type=\"text\" name=\"ntestes\" value=\"".$ntestes."\">";
 echo "<button type=\"submit\" name=\"submit\" value=\"alterar\">alterar</button>";
 
 echo "<h3>Testes</h3>";
-echo "<table id='Cadastra'><tr><td><center><b>Ordem</b></center></td><td><center><b>Peso</b></center></td><td><center><b>Condi&ccedil;&atilde;o<center><b></td><td><center><b>Dica</b></center></td></tr>";
+echo "<table id='Cadastra'><tr><td><center><b>Ordem</b></center></td><td><center><b>Peso</b></center></td><td><center><b>Condi&ccedil;&atilde;o</b></center></td><td><center><b>Dica</b></center></td></tr>\n";
 for ($i = 0; $i < $ntestes; $i ++) {
 	if (!empty($id)) {$T = new Teste($id, $i+1);}
 		echo "<tr>";
 		echo "<td><center>".($i+1)."</center></td>";
-		echo "</td><td><input type='text' name='peso[]' value='";
+		echo "<td><input type='text' name='peso[]' value='";
 		if (isset($_POST['peso'][$i])) {echo $_POST['peso'][$i];} 
 		elseif (!empty($id) AND $T->peso()) echo $T->peso();
 		else {echo 1;}
-		echo "'></td><td><input class='long' type='text' name='condicao[]' value='";
+		echo "'></td><td><input class='long' type='text' name='condicao[]' value=\"";
 		if (isset($_POST['condicao'][$i])) {echo $_POST['condicao'][$i];}
-		elseif (!empty($id)) echo $T->condicao();
-		echo "'></td><td><input class='long' type='text' name='dica[]' value='";
+		elseif (!empty($id)) echo htmlspecialchars($T->condicao());
+		echo "\"></td><td><input class='long' type='text' name='dica[]' value=\"";
 		if (isset($_POST['dica'][$i])) {echo $_POST['dica'][$i];}
-		elseif (!empty($id)) echo $T->dica();
-		echo "'></td></tr>";
+		elseif (!empty($id)) echo htmlspecialchars($T->dica());
+		echo "\"></td></tr>";
 }
 		echo "</table>";
 

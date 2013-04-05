@@ -123,9 +123,13 @@ class Exercicio {
 	}
 }
 
-function ListExercicio($turma = null) {
+function ListExercicio($turma = null, $reverse = false) {
 	global $mysqli;
-	if ($turma) {
+	if ($reverse) {
+		$res = $mysqli->prepare("SELECT DISTINCT id_exercicio FROM exercicio WHERE id_exercicio NOT IN ( SELECT id_exercicio FROM exercicio JOIN prazo USING (id_exercicio) WHERE id_turma = ? ) ORDER BY nome");
+		$res->bind_param('i',$turma->getId());
+	}
+	elseif ($turma) {
 		$res = $mysqli->prepare("SELECT DISTINCT id_exercicio FROM exercicio JOIN prazo USING (id_exercicio) WHERE id_turma= ? ORDER BY nome");
 		$res->bind_param('i',$turma->getId());
 	} else

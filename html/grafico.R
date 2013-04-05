@@ -31,9 +31,8 @@ porHora <- function() {
 	axis(2, at=c(0,0.05, 0.1, 0.15), lwd=3)
 	dev.off()
 }
-porExercicio <- function() {
-	turma = 8
-	startpng("exercicio.png")
+porExercicio <- function(turma) {
+	startpng(paste("exercicio",turma,".png",sep=""))
 	n_turma <- dbGetQuery(con, paste("select count(distinct id_aluno) from aluno join nota using(id_aluno) where id_turma=",turma))
 	x <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) where id_turma=",turma,"group by nome"))
 	y <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) where id_turma=",turma," and nota=100 group by nome"))
@@ -45,7 +44,7 @@ porExercicio <- function() {
 	x[,1] <- sapply(x[,1], f)
 	x[is.na(x)] <- 0
 	par(fg='#FF6666', family='Verdana', cex.axis=0.8)
-	plot(x[,2], type='l', bty='n', xaxt='n', yaxt='n', xlab='Exercicio', ylab='% incompleto/completo', col='#007788', lwd=3, ylim=c(0,1))
+	plot(x[,2], type='l', bty='n', xaxt='n', yaxt='n', xlab='Exercicio', ylab='% incompleto/completo', col='#007788', lwd=3, ylim=c(0,1), yaxs='i')
 	points(x[,3], type='l', col='#770088', lwd=3)
 	axis(1, at=1:dim(x)[1], labels=x[,1], lwd=3)
 	axis(2, at=c(0,0.5, 1), lwd=3)
@@ -54,4 +53,5 @@ porExercicio <- function() {
 
 porHora()
 porDow()
-porExercicio()
+porExercicio(8)
+porExercicio(5)
