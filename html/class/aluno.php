@@ -2,7 +2,7 @@
 require_once("config.php");
 
 class Aluno {
-	private $id, $nome, $admin, $turma;
+	protected $id, $nome, $admin, $turma;
 	public function __construct($id=null) {
 		global $mysqli;
 		if($id) {

@@ -1,7 +1,6 @@
 <?php
 require("head.php");
-### comeca aqui!
-if (! $user->admin()) {
+if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
@@ -20,7 +19,7 @@ if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 		$erros ="";
 		foreach ($arr as $novo) {
 			$aluno = new Aluno();
-			echo $aluno->create($novo, $turma, $senha);
+			echo $aluno->create($novo, $TURMA, $senha);
 		}
 	}
 }
@@ -33,7 +32,7 @@ if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 <p>Alunos cadastrados:</p>
 <table><tr><td>Admin</td><td>Login</td><td>Notas</td><td>Editar</td>
 <?php
-foreach (ListAlunos($turma) as $aluno) {
+foreach (ListAlunos($TURMA) as $aluno) {
 	echo "<tr><td>";
 	if ($aluno->admin()) echo "<img src='img/check.png'>"; else echo "&nbsp;";
 	echo "</td><td>".$aluno->getNome()."</td><td>".$aluno->numNotas()."</td><td>";

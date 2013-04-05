@@ -65,7 +65,7 @@ function SelectTurma($reload = true) { // change the elem id to prevent auto rel
 	return $T;
 }
 
-if(isset($_REQUEST['turma'])) $turma = new Turma($_REQUEST['turma']);
-else $turma = new Turma(MAX_TURMA);
+if(isset($_REQUEST['turma'])) $TURMA = new Turma($_REQUEST['turma']);
+else $TURMA = new Turma(MAX_TURMA);
 ?>
 

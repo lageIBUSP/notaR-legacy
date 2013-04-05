@@ -1,5 +1,5 @@
 <?php require('head.php');
-if (! $user->admin()) {
+if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
@@ -10,7 +10,7 @@ else {
 	exit;
 }
 	$aluno = new Aluno($id);
-	$turma = $aluno->getTurma(); // override o padrao
+	$TURMA = $aluno->getTurma(); // override o padrao
 ?>
 <h2>Cadastro de alunos</h2>
 <p>Para alterar detalhes do aluno, edite o formul&aacute;rio abaixo.</p>

@@ -11,7 +11,7 @@ if (! $user->admin()) {
 <tr><td>Exerc&iacute;cio</td><td>Tentativas</td></tr>
 
 <?php
-$lista_exs = mysql_query("select id_exercicio, round(count(id_aluno)/count(distinct id_aluno)) from nota join aluno using(id_aluno) where id_turma=$turma group by id_exercicio order by 2 desc");
+$lista_exs = mysql_query("select id_exercicio, round(count(id_aluno)/count(distinct id_aluno)) from nota join aluno using(id_aluno) where id_turma=".$TURMA->getId()." group by id_exercicio order by 2 desc");
 
 while ($E = mysql_fetch_array($lista_exs)) {
 	$ex = new Exercicio(NULL, $E[0]);

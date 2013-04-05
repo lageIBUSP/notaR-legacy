@@ -3,15 +3,11 @@ require_once("config.php");
 require_once("class/aluno.php");
 require_once("class/nota.php");
 
-class User {
+class User extends Aluno {
 		private $login;
 		public function getLogin() {
 			if (isset($this->login)) return $this->login;
 			return "";
-		}
-		public function admin () {
-			$res = mysql_fetch_array(mysql_query("SELECT admin FROM aluno where nome_aluno='".$this->login."'"));
-			return $res[0];
 		}
 		public function novaSenha ($senha) {
 			mysql_query("UPDATE aluno SET senha=SHA('$senha') WHERE nome_aluno='".$this->login."'");
@@ -47,13 +43,19 @@ class User {
 				}
 				// Se o usuario jah estah logado
 				if (isset($_SESSION['user'])) {
-						$this->login = $_SESSION['user'];
+					global $mysqli;
+					$res = $mysqli->prepare("SELECT id_aluno, admin, id_turma FROM aluno WHERE nome_aluno=?");
+					$res->bind_param('s',$_SESSION['user']);
+					$res->execute();
+					$res->bind_result($this->id, $this->admin, $this->turma);
+					$res->fetch();
+					$this->nome=$_SESSION['user'];
+					$this->login=$_SESSION['user'];
 				} 		
-				// Valida o acesso a esta pagina
 		}
 		public function loginForm() {
-				if (isset($this->login)) {
-						$T = "<div style='text-align:right'>Usu&aacute;rio: $this->login";
+				if (isset($this->nome)) {
+						$T = "<div style='text-align:right'>Usu&aacute;rio: $this->nome";
 						$T .="&nbsp;<a href='?logout=y'>logout</a>";
 						$T .="<br>alterar <a href='senha.php'>senha</a></div>";
 				} else {
@@ -71,6 +73,7 @@ class User {
 }
  // Toda pagina precisa de um objeto de usuario:
 $user = new User();
+$USER = $user; //migrando para novo padrao....
 
 require_once("class/turma.php");
 
