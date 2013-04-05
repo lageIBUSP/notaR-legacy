@@ -1,7 +1,6 @@
 <?php require('head.php');
-$id = mysql_real_escape_string($_REQUEST['exerc']);
-if(empty($id)) {echo "Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador"; exit;}
-$X = new Exercicio($user, $id);
+if(empty($_REQUEST['exerc'])) {echo "Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador"; exit;}
+$X = new Exercicio($_REQUEST['exerc']);
 ?>
 <h2><?php echo $X->getNome(); ?></h2>
 <?php 
@@ -44,7 +43,7 @@ if (isset($_POST['exerc'])) {
 			}
 			try {
 				$x = $r->evalString('source("'.$basedir.'/corretor.R");');
-				$x = $r->evalString('notaR("'.$user->getLogin().'", '.$X->getId().', "'.$uploadfile.'")');   
+				$x = $r->evalString('notaR("'.$user->getNome().'", '.$X->getId().', "'.$uploadfile.'")');   
 				echo $x;
 				echo "<p>Seu c&oacute;digo:</p><p class='code'>".nl2br($conts)."</p>";
 			} catch (Exception $e) {

@@ -21,10 +21,10 @@ if ($user->admin()) echo "colspan=2";
 echo ">Nome</th><th>Nota</th><th>Prazo</th></tr></thead><tbody>";
 $res = mysql_query("SELECT id_exercicio FROM exercicio ORDER BY nome ASC");
 while ($exerc = mysql_fetch_array($res)) {
-		$X = new Exercicio($user, $exerc[0]);
+		$X = new Exercicio($exerc[0]);
 		echo "<tr><td>";
-		if ($user->admin()) echo "<a href='cadastra.php?exerc=".$X->getID()."'><img src='img/pen.png'></a></td><td>";
-		echo "<a href='exercicio.php?exerc=".$X->getID()."'>".
+		if ($user->admin()) echo "<a href='cadastra.php?exerc=".$X->getId()."'><img src='img/pen.png'></a></td><td>";
+		echo "<a href='exercicio.php?exerc=".$X->getId()."'>".
 				$X->getNome()."</a></td><td>".$X->getNota()."</td><td>".
 				$X->getPrazo()."</td></tr>";
 }

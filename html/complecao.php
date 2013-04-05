@@ -1,5 +1,5 @@
 <?php require('head.php');
-if (! $user->admin()) {
+if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
@@ -12,12 +12,9 @@ if (! $user->admin()) {
 
 <?php
 $n_turma = $TURMA->getAlunos();
-$lista_exs = mysql_query("select id_exercicio from exercicio order by nome asc");
-
-while ($E = mysql_fetch_array($lista_exs)) {
-	$ex = new Exercicio(NULL, $E[0]);
-$tentativa = mysql_fetch_array(mysql_query("select count(distinct id_aluno) from nota join aluno using(id_aluno) where id_turma=".$TURMA->getId()." and id_exercicio = $E[0]"));
-$cem = mysql_fetch_array(mysql_query("select count(distinct id_aluno) from nota join aluno using(id_aluno) where id_turma=".$TURMA->getId()." and id_exercicio = $E[0] and nota=100"));
+foreach(ListExercicio($TURMA) as $ex) {
+$tentativa = mysql_fetch_array(mysql_query("select count(distinct id_aluno) from nota join aluno using(id_aluno) where id_turma=".$TURMA->getId()." and id_exercicio = ".$ex->getId()));
+$cem = mysql_fetch_array(mysql_query("select count(distinct id_aluno) from nota join aluno using(id_aluno) where id_turma=".$TURMA->getId()." and id_exercicio = ".$ex->getId()." and nota=100"));
 	echo "<tr><td>".$ex->getNome()."</td><td>".round(100*$tentativa[0]/$n_turma)."%</td><td>".round(100*$cem[0]/$n_turma)."%</td></tr>";
 }
 

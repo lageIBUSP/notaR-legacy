@@ -5,49 +5,32 @@ if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
-$id = mysql_real_escape_string($_REQUEST['exerc']);
-$X = new Exercicio($user, $id);
+if (isset($_REQUEST['exerc']))
+	$X = new Exercicio($_REQUEST['exerc']);
+else 
+	$X = new Exercicio();
 
-if (isset($_POST['ntestes'])) {$ntestes = $_POST['ntestes'];} elseif (!empty($id)) {
-	$res = mysql_fetch_array(mysql_query("SELECT max(ordem) FROM teste WHERE id_exercicio=$id"));
-	$ntestes = $res[0];}else {$ntestes = 10;}
+$id = $X->getId();
+
+if (isset($_POST['ntestes'])) {
+	$ntestes = $_POST['ntestes'];
+} elseif (!empty($id)) {
+	$ntestes = $X->maxTeste();
+}else {
+	$ntestes = 10;
+}
 
 ?>
 <h2>Cadastro de exerc&iacute;cios</h2>
 <?php 
 if (isset($_POST['submit']) AND $_POST['submit'] == "submit") {
-$new = mres($_POST);
-if (empty($id)) {
-	$res = mysql_query("INSERT INTO exercicio (precondicoes, html, nome)
-		VALUES (REPLACE('".
-		$new['precondicoes']."', CHAR(13), ''), '".$new['html']."', '".$new['nome']."')");
-	$my_id = mysql_insert_id();
-	echo "Exerc&iacute;cio cadastrado ";	
-
-} else
-{
-	$res = mysql_query("UPDATE exercicio SET precondicoes = REPLACE('".
-		$new['precondicoes']."', CHAR(13), ''), html='".$new['html']."', nome='".$new['nome']."'
-		WHERE id_exercicio=$id");
-	$res = mysql_query("DELETE FROM teste WHERE id_exercicio=$id");
-	echo "Exerc&iacute;cio alterado ";	
-	$my_id = $id;
-}
-	$ok = true;
-	for ($i=0, $c=0; $i < $ntestes; $i++) {
-		$j = $i +1;
-		if (! empty($new['condicao'][$i])) {
-			$c ++;
-			$T = new Teste();
-			$ok = $ok AND $T->create($my_id, $j, $new['peso'][$i], $new['condicao'][$i],$new['dica'][$i]);
-		}
-	}
-	echo "com $c testes.";
-	if (! $ok) echo "<p>Falha ao cadastrar os testes!</p>";
-	echo "Pr&oacute;ximos passos: <ul>
-<li><a href='exercicio.php?exerc=$my_id'>Teste</a> se a corre&ccedil;&atilde;o funciona</li><li><a href='cadastra.php?exerc=$my_id'>Edite</a> as defini&ccedil;&otilde;es deste exerc&iacute;cio</li><li>Determine o <a href='prazos.php'>prazo</a> de entrega</li></ul>";
-} 
-else {
+if (empty($id)) 
+	echo $X->create($_POST['precondicoes'], $_POST['html'], $_POST['nome'], 
+	array($_POST['peso'], $_POST['condicao'], $_POST['dica']));
+else
+	echo $X->altera($_POST['precondicoes'], $_POST['html'], $_POST['nome'], 
+	array($_POST['peso'], $_POST['condicao'], $_POST['dica']));
+} else {
 
 echo "<form name=\"cadastro\" action=\"#\" method=\"post\" enctype=\"multipart/form-data\">";
 echo "<p>Para a descri&ccedil;&atilde;o dos campos e funcionamento do corretor, leia a <a href='http://www.lage.ib.usp.br/notaR/doku.php?id=cadastro'>ajuda</a>.";

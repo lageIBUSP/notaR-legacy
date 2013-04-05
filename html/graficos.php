@@ -1,5 +1,5 @@
 <?php require('head.php');
-if (! $user->admin()) {
+if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
