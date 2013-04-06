@@ -36,8 +36,8 @@ if (isset($_POST['exerc'])) {
 		system ("echo ' ' >> $uploadfile");
 
 		$conts = file_get_contents($uploadfile);
-		$probs = new Proibidos($X->getId());
-		$teste = $probs->pass($conts);
+		$probs = new Proibidos();
+		$teste = $probs->pass($conts, $X->getId());
 		if ($teste === FALSE) { # Verifica se existe alguma palavra proibida na resposta
 			try{
 				$r = new Rserve_Connection(RSERVE_HOST);

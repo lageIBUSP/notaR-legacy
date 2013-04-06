@@ -13,6 +13,18 @@ class Exercicio {
 		}
 		$this->id = $id;
 	}
+	public function getProibidos () {
+		global $mysqli;
+		$res = $mysqli->prepare("SELECT id_proibido FROM proibido WHERE id_exercicio=?");
+		$res->bind_param('i', $this->id);
+		$res->execute();
+		$res->bind_result($new);
+		$a = array();
+		$ids = array();
+		while ($res->fetch()) array_push($ids, $new);
+		foreach ($ids as $id) array_push($a, new Proibidos($id));
+		return $a;
+	}
 	public function create($precondicoes, $html, $nome, $testes) {
 		global $mysqli;
 		$res =$mysqli->prepare("INSERT INTO exercicio (precondicoes, html, nome) 
@@ -23,7 +35,7 @@ class Exercicio {
 		$this->id = $mysqli->insert_id; 
 		return $this->cadastraTestes($testes, "Exerc&iacute;cio criado");
 	}
-	public function cadastraTestes($testes, $msg) {
+	public function cadastraTestes($testes, $msg) { // E impedimentos, por preguiça do programador
 		global $mysqli;
 		$res = $mysqli->prepare("DELETE FROM teste WHERE id_exercicio=?");
 		$res->bind_param('i', $this->id);
@@ -37,8 +49,22 @@ class Exercicio {
 				$ok = $ok AND $T->create($this->id, $j, $testes[0][$i], $testes[1][$i],$testes[2][$i]);
 			}
 		}
-		$msg .= " com $c testes.";
 		if (! $ok) $msg .= "<p>Falha ao cadastrar os testes!</p>";
+		else $msg .= " com $c testes. ";
+
+		$res = $mysqli->prepare("DELETE FROM proibido WHERE id_exercicio=?");
+		$res->bind_param('i', $this->id);
+		$res->execute();
+
+		$ok = true;
+		for ($i=0; $i < sizeof($testes[3]); $i++) {
+			if ($testes[3][$i]) {
+				$T = new Proibidos();
+				$ok = $ok AND $T->create($testes[3][$i], $this->id);
+			}
+		}
+		if (! $ok) $msg .= "<p>Falha ao cadastrar os impedimentos!</p>";
+
 		$msg .= "Pr&oacute;ximos passos: <ul>
 			<li><a href='exercicio.php?exerc=$this->id'>Teste</a> se a corre&ccedil;&atilde;o funciona</li><li><a href='cadastra.php?exerc=$this->id'>Edite</a> as defini&ccedil;&otilde;es deste exerc&iacute;cio</li><li>Determine o <a href='prazos.php'>prazo</a> de entrega</li></ul>";
 		return $msg;

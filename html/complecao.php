@@ -19,6 +19,8 @@ foreach(ListExercicio($TURMA) as $ex) {
 
 ?>
 </table>
+
+<img src="img/exercicio<?php echo $TURMA->getId(); ?>.png">
 </div>
 </body>
 </html>

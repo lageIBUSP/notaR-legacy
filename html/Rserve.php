@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 'Off');
+error_reporting(0);
+
 /**
  * Rserve client for PHP
  * Supports Rserve protocol 0103 only (used by Rserve 0.5 and higher)
