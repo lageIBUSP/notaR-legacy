@@ -68,9 +68,9 @@ function ListAlunos($turma = null) {
 }
 
 function SelectAluno($selected) {
-	global $turma;
+	global $TURMA;
 	$T = "<select id='aluno' name='aluno'>";
-	foreach (ListAlunos($turma) as $aluno) {
+	foreach (ListAlunos($TURMA) as $aluno) {
 		$T.= "	<option value=".$aluno->getId();
 		if($selected == $aluno) $T.=" selected";
 		$T .=">".$aluno->getNome()."</option>";

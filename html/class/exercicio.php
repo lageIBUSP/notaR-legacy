@@ -1,9 +1,22 @@
 <?php
 require_once("config.php");
+define("MIN_EX", -2);
+
 class Exercicio {
 	private $id, $nome, $html, $precondicoes;
 	public function __construct($id=null) {
 		global $mysqli;
+		global $TURMA;
+		if ($id == MIN_EX) {
+			$id = null;
+			$res = $mysqli->prepare("SELECT DISTINCT id_exercicio FROM exercicio JOIN prazo USING (id_exercicio) WHERE id_turma= ? ORDER BY nome");
+			$res->bind_param('i', $TURMA->getId());
+			$res->execute();
+			if ($res->num_rows) {
+				$res->bind_result($id);
+				$res->fetch();
+			}
+		}
 		if ($id) {
 			$res = $mysqli->prepare("SELECT nome, html, precondicoes FROM exercicio WHERE id_exercicio=?");
 			$res->bind_param('i',$id);
@@ -169,4 +182,23 @@ function ListExercicio($turma = null, $reverse = false) {
 	return $a;
 }
 
+function SelectExercicio () {
+	global $EXERCICIO;
+	global $TURMA;
+	$T = "<select id='exercicio' name='exercicio'>";
+	$T .= "<option value='".MIN_EX."'>---- Exerc&iacute;cios obrigat&oacute;rios ----</option>";
+	foreach (ListExercicio($TURMA) as $exercicio) {
+		$T .="<option value='".$exercicio->getId()."'";
+		if ($EXERCICIO == $exercicio) $T .=" selected ";
+		$T .= ">".$exercicio->getNome()."</option>";
+	}
+	$T .= "<option value='".MIN_EX."'>---- Exerc&iacute;cios opcionais ----</option>";
+	foreach (ListExercicio($TURMA, true) as $exercicio) {
+		$T .="<option value='".$exercicio->getId()."'";
+		if ($EXERCICIO == $exercicio) $T .=" selected ";
+		$T .= ">".$exercicio->getNome()."</option>";
+	}
+	$T .= "</select>";
+	return $T;
+}
 ?>

@@ -18,4 +18,23 @@ class Nota {
 	public function getTexto() {return nl2br($this->texto);}
 }
 
+function listNota($exercicio, $aluno, $texto) { // deve ser invocado com aluno OU com texto
+	global $mysqli;
+	global $TURMA;
+	if ($texto == "") {
+		$res = $mysqli->prepare("SELECT id_nota FROM nota WHERE id_exercicio=? AND id_aluno = ? ORDER BY data ASC");
+		$res->bind_param('ii', $exercicio->getId(), $aluno->getId());
+	} else {
+		$texto = '%'.$texto.'%';
+		$res = $mysql->prepare("SELECT id_nota FROM nota JOIN aluno USING (id_aluno) WHERE id_exercicio=? AND texto LIKE ? AND  id_turma=? ORDER BY data ASC");
+		$res->bind_param('isi', $exercicio->getId(), $texto, $TURMA->getId());
+	}
+	$res->execute();
+	$res->bind_result($id);
+	$ids = array();
+	$a = array();
+	while ($res->fetch()) array_push($ids, $id);
+	foreach ($ids as $id) array_push($a, new Nota($id));
+	return $a;
+}
 ?>
