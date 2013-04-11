@@ -6,6 +6,15 @@ class Turma {
 	public function getId() {return $this->id;}
 	public function getNome() {return $this->nome;}
 	public function getAlunos() {return $this->total;}
+	public function getNEx() {
+		global $mysqli;
+		$res = $mysqli->prepare("SELECT count(1) total FROM prazo WHERE id_turma= ?");
+		$res->bind_param('i', $this->id);
+		$res->execute();
+		$res->bind_result($n_ex);
+		$res->fetch();
+		return $n_ex;
+	}
 	public function create($nome) {
 		global $mysqli;
 		$res = $mysqli->prepare("INSERT INTO turma (nome_turma) VALUES (?);");
