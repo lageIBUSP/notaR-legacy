@@ -39,9 +39,9 @@ e completar os exerc&iacute;cios abaixo.</p>
 	foreach (ListExercicio($t) as $X) {
 		echo "<tr><td>";
 		if ($USER->admin()) echo "<a href='cadastra.php?exerc=".$X->getId()."'><img src='img/pen.png'></a></td><td>";
-		echo "<a href='exercicio.php?exerc=".$X->getId()."'>".
-			$X->getNome()."</a></td><td>".$X->getNota()."</td><td>".
-			$X->getPrazo()."</td></tr>";
+		if ($X->getNota() == 100) echo "<img src='img/check.png'>";
+		echo "<a href='exercicio.php?exerc=".$X->getId()."'>".$X->getNome()."</a>";
+		echo "</td><td>".$X->getNota()."</td><td>".$X->getPrazo()."</td></tr>";
 	}
 	echo "</tbody></table>";
 	echo "<p>Exerc&iacute;cios opcionais:</p>";
