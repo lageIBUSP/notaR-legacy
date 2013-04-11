@@ -12,13 +12,18 @@ require_once("class/teste.php");
 <html>
 		<head>
 				<link rel="stylesheet" type="text/css" href="style.css" />
+				<link rel="stylesheet" type="text/css" href="jquery-ui-1.10.2.custom.css" />
 				<script language="javascript" src="java.js"></script>
 				<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 				<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 				<script src="jquery-ui-timepicker-addon.js"></script>
 <script>
 $(document).ready(function() {
-	$('.timepick').datetimepicker();
+	$('.timepick').datetimepicker({
+		dateFormat: "dd/mm/yy",
+		timeFormat: "hh:mm",
+		stepMinute: 10
+	});
 });
 </script>
 

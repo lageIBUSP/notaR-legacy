@@ -148,7 +148,7 @@ class Exercicio {
 		global $USER;
 		global $mysqli;
 		if ($USER->getId() OR $turma) {
-			$res = $mysqli->prepare("SELECT prazo FROM prazo WHERE id_turma = ? AND id_exercicio=?");
+			$res = $mysqli->prepare("SELECT date_format(prazo, '%d/%m/%Y %k:%i') FROM prazo WHERE id_turma = ? AND id_exercicio=?");
 			if ($turma) {
 				$res->bind_param('ii', $turma->getId(), $this->id);
 			} else {

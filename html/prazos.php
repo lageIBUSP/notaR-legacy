@@ -4,25 +4,34 @@ if (! $USER->admin()) {
 	exit;
 }
 if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
+	// TODO: Transformar isso em algo mais OO
 	$post = $_POST;
+	$ok = true;
 	foreach (array_keys($post) AS $key) {
 		if (strpos($key, "ld_")) {
 			$new = substr($key, 4);
 			$ex = substr($key, 6);
 			if ($post[$key] != $post[$new]) {
 				if($post[$key] =='') { // novo
-					mysql_query("INSERT INTO prazo (id_exercicio, id_turma, prazo) VALUES ($ex, ".$TURMA->getId().", '".$post[$new]."')");
+					$res = $mysqli->prepare("INSERT INTO prazo (id_exercicio, id_turma, prazo) VALUES (?, ?, STR_TO_DATE(?, '%d/%m/%Y %k:%i'))");
+					$res->bind_param('iis',$ex, $TURMA->getId(), $post[$new]);
+					$ok = $ok AND $res->execute();
 				}
 				elseif($post[$new] == '') { // removido
-					mysql_query("DELETE FROM prazo WHERE id_exercicio=$ex AND id_turma=".$TURMA->getId());
+					$res = $mysqli->prepare("DELETE FROM prazo WHERE id_exercicio=? AND id_turma=?");
+					$res->bind_param('ii',$ex, $TURMA->getId());
+					$ok = $ok AND $res->execute();
 				}
 				else { // atualizar
-					mysql_query("UPDATE prazo SET prazo='".$post[$new]."' WHERE id_exercicio=$ex AND id_turma=".$TURMA->getId());
+					$res = $mysqli->prepare("UPDATE prazo SET prazo=STR_TO_DATE(?,'%d/%m/%Y %k:%i') WHERE id_exercicio=? AND id_turma=?");
+					$res->bind_param('sii', $post[$new],$ex, $TURMA->getId());
+					$ok = $ok AND $res->execute();
 				}
 			}
 		}
 	}
-
+	if ($ok) echo "Prazos alterados!";
+	else echo "Houveram erros ao alterar os prazos! Confira os valores abaixo!!";
 }
 
 ?>
@@ -35,8 +44,9 @@ if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 <?php
 foreach(ListExercicio() as $ex) {
 	echo "<tr><td>".$ex->getNome()."</td><td>";
-	echo "<input type='text' name='ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."' class='timepick'>";
+	echo "<input type='text' id='ex".$ex->getId()."' name='ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."' class='timepick'>";
 	echo "<input type='hidden' name='old_ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."'>";
+	echo "<a href='#' onclick='delprazo(".$ex->getId()."); return false;'><img src='img/x.png'></a>";
 	echo "</td></tr>";
 }
 ?>

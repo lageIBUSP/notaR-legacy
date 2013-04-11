@@ -1,4 +1,4 @@
-div#etc { 
+#etc { 
 	margin-left: auto; 
 	margin-right: auto;
 	margin-top:-30px;
@@ -72,6 +72,11 @@ input {
 	outline: none;
 	font-size: 12px;
 }
+td img { 
+	vertical-align:middle;
+	padding: 3px;
+	margin: 0;
+}
 #corrInput {
 	width: 580px;
 }
@@ -131,8 +136,7 @@ p {
 }
 
 /* css for timepicker */
-.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; background: #ffffff}
-.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl { text-align: left; font-size: 12px;}
 .ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
 .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
 .ui-timepicker-div td { font-size: 90%; }
@@ -141,3 +145,8 @@ p {
 .ui-timepicker-rtl{ direction: rtl; }
 .ui-timepicker-rtl dl { text-align: right; }
 .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
+
+.ui-datepicker .ui-datepicker-buttonpane button {font-size: 11px;}
+
+.ui-datepicker-calendar th, .ui-datepicker td {font-size: 12px;}
+#ui-datepicker-div .ui-datepicker-header {font-size: 13px; background: #def; border: none; color: #000}
