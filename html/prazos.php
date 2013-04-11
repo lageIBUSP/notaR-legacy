@@ -35,7 +35,7 @@ if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 <?php
 foreach(ListExercicio() as $ex) {
 	echo "<tr><td>".$ex->getNome()."</td><td>";
-	echo "<input type='text' name='ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."' style='width: 150px'>";
+	echo "<input type='text' name='ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."' class='timepick'>";
 	echo "<input type='hidden' name='old_ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."'>";
 	echo "</td></tr>";
 }

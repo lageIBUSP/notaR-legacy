@@ -6,8 +6,9 @@ licence
 http://creativecommons.org/licenses/by/3.0/br/deed.en_US
 
 This work uses code from:
-rserve-php - php interface to R
-Copyright (C) 2010  Clément Turbelin, Simon Urbanek
+
+rserve-php - php interface to R by  Clément Turbelin, Simon Urbanek
+jQuery datepicker extension by Trent Richardson
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
