@@ -13,6 +13,9 @@ require_once("class/teste.php");
 		<head>
 				<link rel="stylesheet" type="text/css" href="style.css" />
 				<script language="javascript" src="java.js"></script>
+				<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+				<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+				<script src="jquery-ui-timepicker-addon.js"></script>
 				<meta charset="iso-8859-1" />
 				<meta name="description" content="Um sistema para notas automatizadas em cursos que utilizam a linguagem R" />
 				<title>notaR</title>
