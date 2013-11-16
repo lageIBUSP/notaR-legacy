@@ -16,7 +16,6 @@ if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 	$senha = $_POST['senha'];
 	if (empty($senha)) { echo "<p>Voc&ecirc; deve informar uma senha!</p>";}
 	else {
-		$erros ="";
 		foreach ($arr as $novo) {
 			$aluno = new Aluno();
 			echo $aluno->create($novo, $TURMA, $senha);

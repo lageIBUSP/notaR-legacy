@@ -11,13 +11,15 @@ class Aluno {
 			$res->execute();
 			$res->bind_result($this->nome, $this->admin, $this->turma);
 			$res->fetch();
+			$res->close();
 		}
 		$this->id=$id;
 	}
 	public function create($nome, $turma, $senha) {
+		global $mysqli;
 		if (strlen($nome) < 4) 
 			return "O nome $nome &eacute; muito curto. Crie usu&aacute;rios com no m&iacute;nimo 4 caracteres";
-		$res = $mysqli->prepare("INSERT INTO aluno (nome_aluno, id_turma, senha) VALUES (?, ?, SHA1(?)");
+		$res = $mysqli->prepare("INSERT INTO aluno (nome_aluno, id_turma, senha) VALUES (?, ?, SHA1(?))");
 		$res->bind_param('sis', $nome, $turma->getId(), $senha);
 		$res->execute();
 		if ($mysqli->error) return "Houve um erro ao inserir o aluno $nome!";
