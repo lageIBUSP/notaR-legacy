@@ -25,7 +25,7 @@ ap&oacute;s o primeiro login!</p>
 e completar os exerc&iacute;cios abaixo.</p>
 <?php
 	echo "<table><thead><tr><th>Nome</th></tr></thead><tbody>\n";
-	foreach (ListExercicio($t) as $X) {
+	foreach (ListExercicio() as $X) {
 		echo "<tr><td>";
 		echo "<a href='exercicio.php?exerc=".$X->getId()."'>".$X->getNome()."</a></td> </tr>\n";
 	}
