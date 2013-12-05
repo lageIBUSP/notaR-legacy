@@ -25,7 +25,7 @@ local GREEN="\033[0;32m"
 local RED="\033[0;31m"
 local NO_COLOUR="\033[0m"
 
-	N=`ps -ef | grep Rserve-bin.so | wc -l`
+	N=`ps -ef | grep Rserve | wc -l`
 	if [ "$N" -lt 2 ]; then
 		echo "Rserve is ${RED}down${NO_COLOUR}.";
 	else
