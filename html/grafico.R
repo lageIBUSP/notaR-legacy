@@ -2,7 +2,7 @@
 # Usa uma conexao "global" con
 require(RMySQL)
 # Conexao com o banco de dados
-con<- dbConnect(MySQL(), user="notaR", password="notaRpw", dbname="notaR")
+con<- dbConnect(MySQL(), user="notaR", password="V3n4bl3s", dbname="notaR")
 
 basedir <- "/var/www/rserve/img/"
 startpng <-function(name) png(width=800, height=550, filename=paste(basedir,name,sep=""))
@@ -55,3 +55,4 @@ porHora()
 porDow()
 porExercicio(8)
 porExercicio(5)
+porExercicio(10)

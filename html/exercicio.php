@@ -33,7 +33,7 @@ if (isset($_POST['exerc'])) {
 
 		### Correcao de bug! O R trava se o editor de texto não encerrou
 		#   a ultima linha
-		system ("echo ' ' >> $uploadfile");
+		# system ("echo ' ' >> $uploadfile");
 
 		$conts = file_get_contents($uploadfile);
 		$probs = new Proibidos();
