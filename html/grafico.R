@@ -34,8 +34,8 @@ porHora <- function() {
 porExercicio <- function(turma) {
 	startpng(paste("exercicio",turma,".png",sep=""))
 	n_turma <- dbGetQuery(con, paste("select count(distinct id_aluno) from aluno join nota using(id_aluno) where id_turma=",turma))
-	x <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) where id_turma=",turma,"group by nome"))
-	y <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) where id_turma=",turma," and nota=100 group by nome"))
+	x <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) join prazo using (id_exercicio, id_turma) where id_turma=",turma,"group by nome"))
+	y <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) join prazo using (id_exercicio, id_turma) where id_turma=",turma," and nota=100 group by nome"))
 	x <- merge(x, y, by="nome", all=TRUE)
 	x[,2:3] <- x[,2:3] / as.numeric(n_turma)
 	Encoding(x[,1]) <- "latin1"
