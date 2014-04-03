@@ -33,7 +33,7 @@ if (isset($_POST['exerc'])) {
 
 		### Correcao de bug! O R trava se o editor de texto não encerrou
 		#   a ultima linha
-		# system ("echo ' ' >> $uploadfile");
+		system ("echo ' ' >> $uploadfile");
 
 		$conts = file_get_contents($uploadfile);
 		$probs = new Proibidos();
@@ -47,6 +47,9 @@ if (isset($_POST['exerc'])) {
 			try {
 				$x = $r->evalString('source("'.$basedir.'/corretor.R");');
 				$x = $r->evalString('notaR("'.$USER->getNome().'", '.$X->getId().', "'.$uploadfile.'")');   
+				if(is_null($x)) echo "<font color='#8c2618'>Aviso: seu c&oacute;digo cont&eacute;m alguma ".
+					"funcionalidade do R n&atilde;o suportada pelo notaR. Remova as fun&ccedil;&otilde;es ".
+					"gr&aacute;ficas (como <i>plot</i> ou <i>hist</i>) do seu c&oacute;digo e tente novamente.</font>";
 				echo $x;
 				echo "<p>Seu c&oacute;digo:</p><p class='code'>".nl2br($conts)."</p>";
 			} catch (Exception $e) {

@@ -48,3 +48,9 @@ $(document).ready(function() {
 <?php
 if(isset($loginerror))  echo $loginerror; 
 ?>
+			<!--div id='Erro'><h2>Aviso!</h2>
+			<p>O notaR est&aacute; passando por uma manuten&ccedil;&atilde;o no momento. 
+			Talvez ocorram coisas inesperadas.<br>
+			Sugerimos aproveitar o tempo pra tomar uma gelada, ligar prx namoradx, e outras 
+			coisas que o cuRso noRmalmente pRo&iacute;be!
+			</p></div-->

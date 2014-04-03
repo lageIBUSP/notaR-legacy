@@ -83,14 +83,24 @@ function SelectAluno($selected) {
 
 function RelPlagio () {
 	global $mysqli;
-	$plagio = $mysqli->query("select x.i1, x.i2, count(*) from (select distinct n1.id_aluno i1, n2.id_aluno i2, n1.id_exercicio from nota n1 join nota n2 on (n1.texto=n2.texto and n1.id_aluno != n2.id_aluno and n1.id_nota != n2.id_nota and n1.id_exercicio = n2.id_exercicio)) x group by x.i1, x.i2 having count(*) >= 4 order by 1");
-	$N = $plagio->_num_rows / 2;
-	$T = "<table><tr><td>Aluno 1</td><td>Aluno 2</td></td><td>Exerc&iacute;cios iguais</td></tr>";
-	for ($i = 0; $i < $N; $i++) {
-		$E = $plagio->fetch_assoc();
-		$a1 = new Aluno($E[0]);
-		$a2 = new Aluno($E[1]);
-		$T .= "<tr><td>".$a1->getNome()."</td><td>".$a2->getNome()."</td><td>".$E[2]."</td></tr>";
+	$plagio = $mysqli->prepare("select x.i1, x.i2, count(*) from (select distinct n1.id_aluno i1, n2.id_aluno i2, n1.id_exercicio from nota n1 join nota n2 on (n1.texto=n2.texto and n1.id_aluno != n2.id_aluno and n1.id_nota != n2.id_nota and n1.id_exercicio = n2.id_exercicio)) x group by x.i1, x.i2 having count(*) >= 4 order by 1");
+	$plagio->execute();
+	$plagio->bind_result($id1, $id2, $count);
+	while ($plagio->fetch()) { 
+		array_push($ids1, $id1);
+		array_push($ids2, $id2);
+		array_push($counts, $count);
+	}
+	echo sizeof($ids2);
+
+#	$N = $plagio->num_rows / 2;
+#	echo $N;
+	$T = "<table><tr><td>Aluno 1</td><td>Aluno 2</td><td>Exerc&iacute;cios iguais</td></tr>";
+	for ($i =0; $i < sizeof($ids2)/2 ; $i++) {
+#		$plagio->fetch();
+		$a1 = new Aluno($ids1[$i]);
+		$a2 = new Aluno($ids2[$i]);
+		$T .= "<tr><td>".$a1->getNome()."</td><td>".$a2->getNome()."</td><td>".$counts[$i]."</td></tr>";
 	}
 	$T .="</table>";
 	return $T;

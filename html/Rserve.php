@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 'Off');
-error_reporting(0);
-
 /**
  * Rserve client for PHP
  * Supports Rserve protocol 0103 only (used by Rserve 0.5 and higher)
@@ -441,6 +438,7 @@ class Rserve_Parser {
             break;
             
             case self::XT_CLOS: // do nothing
+				$a = NULL;
             break;
 
             /*
