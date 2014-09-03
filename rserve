@@ -14,7 +14,7 @@
 USR="rserve"
 
 start() {
-	echo -ne "Starting Rserve... "
+	echo -n "Starting Rserve... "
 
 	su - ${USR} -c "R --vanilla <<EOF
 	library(Rserve)
@@ -38,7 +38,7 @@ local NO_COLOUR="\033[0m"
 }
 
 stop() {
-	echo -ne "Shutting down Rserve... "
+	echo -n "Shutting down Rserve... "
 
 	killall -9 Rserve
 
