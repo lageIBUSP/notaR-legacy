@@ -44,7 +44,7 @@ case "$1" in
 	exit 3
 	;;
   stop)
-	pkill -9 Rserve-bin.so
+	killall -9 Rserve
 	$0 status
 	;;
   status)
