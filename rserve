@@ -16,10 +16,10 @@ USR="rserve"
 start() {
 	echo -n "Starting Rserve... "
 
-	su - ${USR} -c "R --vanilla <<EOF
-	library(Rserve)
-	Rserve(args=\"--no-save\")
-	EOF" > /dev/null
+su - ${USR} -c "R --vanilla <<EOF
+library(Rserve)
+Rserve(args=\"--no-save\")
+EOF" > /dev/null
 
 	$0 status
 }
