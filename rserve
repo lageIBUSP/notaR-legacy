@@ -14,10 +14,14 @@
 USR="rserve"
 
 start() {
-su - ${USR} -c "R --vanilla <<EOF
-library(Rserve)
-Rserve(args=\"--no-save\")
-EOF"
+	echo -ne "Starting Rserve... "
+
+	su - ${USR} -c "R --vanilla <<EOF
+	library(Rserve)
+	Rserve(args=\"--no-save\")
+	EOF" > /dev/null
+
+	$0 status
 }
 
 status() {
@@ -33,25 +37,30 @@ local NO_COLOUR="\033[0m"
 	fi
 }
 
+stop() {
+	echo -ne "Shutting down Rserve... "
+
+	killall -9 Rserve
+
+	$0 status
+}
 
 case "$1" in
   start)
 	start
-	$0 status
-	;;
-  restart|reload|force-reload)
-	echo "Error: argument '$1' not supported" >&2
-	exit 3
 	;;
   stop)
-	killall -9 Rserve
-	$0 status
+	stop
 	;;
   status)
 	status
 	;;	
+  restart|reload|force-reload)
+	stop
+	start
+	;;
   *)
-	echo "Usage: $0 start|stop|status" >&2
+	echo "Usage: $0 start|stop|status|restart" >&2
 	exit 3
 	;;
 esac
