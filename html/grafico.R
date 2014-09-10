@@ -10,8 +10,8 @@ startpng <-function(name) png(width=800, height=550, filename=paste(basedir,name
 ### Por Hora
 porDow <- function() {
 	startpng("dow.png")
-	x <- dbGetQuery(con, "select count(*), date_format(data, '%w') 
-	from nota group by date_format(data, '%w')")
+	x <- dbGetQuery(con, "select count(*), date_format(data - INTERVAL 3 HOUR, '%w') 
+	from nota group by date_format(data - INTERVAL 3 HOUR, '%w')")
 	x[,1] <- x[,1]/sum(x[,1])
 	par(fg='#FF6666', family='Verdana')
 	plot(x[,1]~x[,2], type='l', bty='n', xaxt='n', yaxt='n', xlab='Dia', ylab='% entregas', col='#007788', lwd=3, ylim=c(0,0.35))
@@ -48,6 +48,7 @@ porExercicio <- function(turma) {
 	points(x[,3], type='l', col='#770088', lwd=3)
 	axis(1, at=1:dim(x)[1], labels=x[,1], lwd=3)
 	axis(2, at=c(0,0.5, 1), lwd=3)
+	grid(ny=NA, lty=1, lwd=2, col="gray")
 	dev.off()
 }
 
@@ -56,3 +57,4 @@ porDow()
 porExercicio(8)
 porExercicio(5)
 porExercicio(10)
+porExercicio(11)
