@@ -17,6 +17,7 @@ require_once("class/teste.php");
 				<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 				<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 				<script src="jquery-ui-timepicker-addon.js"></script>
+				<script src="jquery-jslatex.js"></script>
 <script>
 $(document).ready(function() {
 	$('.timepick').datetimepicker({
@@ -24,6 +25,8 @@ $(document).ready(function() {
 		timeFormat: "hh:mm",
 		stepMinute: 10
 	});
+
+    $(".latex").latex();
 });
 </script>
 

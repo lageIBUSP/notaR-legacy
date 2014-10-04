@@ -54,7 +54,9 @@ porExercicio <- function(turma) {
 
 porHora()
 porDow()
-porExercicio(8)
-porExercicio(5)
-porExercicio(10)
-porExercicio(11)
+#porExercicio(8)
+#porExercicio(5)
+#porExercicio(10)
+#porExercicio(11)
+porExercicio(1)
+porExercicio(12)
