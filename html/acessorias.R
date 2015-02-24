@@ -1,8 +1,3 @@
-### get.files copia os arquivos necessarios
-get.files <- function(files) {
-	file.copy(paste(.PATH, "files", files, sep="/"), ".")
-}
-
 ### eq testa se dois objetos sao identicos
 ### a menos de erros numericos e nomes
 
@@ -82,6 +77,9 @@ assign("list.dat.names",datnam,envir=meuenv)
 assign("list.func",funcs,envir=meuenv)
 assign("list.mle",mles,envir=meuenv)
 assign("list.mle.gaus",mlegaus,envir=meuenv)
+
+if(length(mlegaus)==0){return(0)}
+
 for(i in 1:length(mlegaus))
    {for(j in 1:length(funcs))
        {if(sum(deparse(mlegaus[[i]]@minuslogl)==deparse(funcs[[j]]))==length(deparse(mlegaus[[i]]@minuslogl)))
@@ -264,4 +262,99 @@ eval(parse(text=y))
 
 }
 
+
+select.stuff2<-function(mle.fim,data){
+listvar<-list()
+k<-0
+for(i in 1:length(mle.fim))
+{
+
+var1<-0
+var2<-0
+
+
+x<-deparse(mle.fim[[i]]@minuslogl)
+
+
+y<-x
+while(sum(grep("norm[[:space:]]*\\([^\\)]*\\(",x))>0)
+{
+s<-x
+m <- gregexpr("\\([^\\)\\(]*\\)", x)
+for(j in 1:length(s))
+{
+    s[j]<-sub("\\([^\\)\\(]*\\)",paste(rep(1,max(attributes(m[[j]])[[1]][1],0)),collapse=""),s[j])
+}
+x<-s
+}
+
+if(sum(grep("norm[[:space:]]*\\([^\\)]*sd(log)*[[:space:]]*=",x))>0)
+  {
+   m<-regexpr("(norm[[:space:]]*\\([^\\)]*sd(log)*[[:space:]]*=)",x)
+   m2<-regexpr("(norm[[:space:]]*\\([^\\)]*sd(log)*[[:space:]]*=)([^,\\)]*)([,\\)])",x)
+   substring1<-substring(y[which(m>0)],m[which(m>0)]+attributes(m)[[1]][which(m>0)],m2[which(m2>0)]+attributes(m2)[[1]][which(m2>0)]-2)
+  }
+if(sum(grep("norm[[:space:]]*\\([^\\)]*sd(log)*[[:space:]]*=",x))<=0)
+  {
+  n<-sum(c(grepl("norm[[:space:]]*\\([^\\)]*mean(log)*[[:space:]]*=",x),grepl("norm[[:space:]]*\\([^\\)]*x[[:space:]]*=",x)))
+  m<-regexpr(paste(collapse="",sep="","norm[[:space:]]*\\(([^,=]*=[^,]*,)*",paste(collapse="",sep="",rep("([^,=]*=[^,]*,)*[^,=]*,",2-n))),x)
+  m2<-regexpr(paste(collapse="",sep="","norm[[:space:]]*\\(([^,=]*=[^,]*,)*",paste(collapse="",sep="",rep("([^,=]*=[^,]*,)*[^,=]*,",2-n)),"[^,\\)]*[,\\)]"),x)
+  substring1<-substring(y[which(m>0)],m[which(m>0)]+attributes(m)[[1]][which(m>0)],m2[which(m2>0)]+attributes(m2)[[1]][which(m2>0)]-2)
+  }
+
+if(sum(grep("\\{",y))>0)
+{
+y[length(y)]<-substring1
+y[length(y)+1]<-"}"
+y<-eval(parse(text=y))
+}
+else
+{y[3]<-y[2]
+y[2]<-"{"
+y[4]<-substring1
+y[5]<-"}"
+y<-eval(parse(text=y))
+}
+for(z in 1:length(list.dat))
+    {x<-deparse(list.dat[[z]])
+     for (j in 1:length(unique(unlist(data))))
+         {
+          x<-gsub(paste("([[:space:]\\(])",deparse(unique(unlist(data))[j]),"([,\\)])",sep=""),"\\1mean(data)*0.9\\2",x)
+         }
+     x<-eval(parse(text=x))
+     assign(list.dat.names[[z]],x,envir=meuenv)
+     }
+
+coefs<-coef(mle.fim[[i]])
+names(coefs)<-NULL
+var1[i]<-eval(parse(text=paste("y(",gsub("[c\\)\\(]","",paste(deparse(coefs),collapse="")),")[1]",collapse="")))  
+
+
+for(z in 1:length(list.dat))
+    {x<-deparse(list.dat[[z]])
+     for (j in 1:length(unique(unlist(data))))
+         {
+          x<-gsub(paste("([[:space:]\\(])",deparse(unique(unlist(data))[j]),"([,\\)])",sep=""),"\\1mean(data)\\2",x)
+         }
+     x<-eval(parse(text=x))
+     assign(list.dat.names[[z]],x,envir=meuenv)
+     }
+
+var2[i]<-eval(parse(text=paste("y(",gsub("[c\\)\\(]","",paste(deparse(coefs),collapse="")),")[1]",collapse="")))  
+
+for(z in 1:length(list.dat))
+    {
+     assign(list.dat.names[[z]],list.dat[[z]],envir=meuenv)
+     }
+
+    if((round(var2[i],2)==round(var1[i],2)))
+       {}
+    else
+       {k<-k+1
+       listvar[[k]]<-mle.fim[[i]]
+       }
+
+}
+listvar
+}
 

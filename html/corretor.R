@@ -12,6 +12,9 @@ con <- connect()
 # variavel global contendo o path absoluto dos arquivos
 .PATH = "/var/www/rserve"
 
+# copia todos os arquivos de dados para que possam ser usados pelo corretor
+file.copy(dir(path=paste(.PATH, "files", sep="/"), full.names=T), ".")
+
 # corretoR recebe: 
 # texto 
 # E devolve um um vector logico com o resultado dos testes

@@ -40,6 +40,8 @@ class Aluno {
 	}
 	public function altera($nome, $admin, $turma, $senha) {
 		global $mysqli;
+		if (strlen($nome) < 4) 
+			return "O nome $nome &eacute; muito curto. Crie usu&aacute;rios com no m&iacute;nimo 4 caracteres";
 		if ($senha) {
 			$res = $mysqli->prepare("UPDATE aluno set nome_aluno=?, admin=?, id_turma=?, senha=SHA1(?) WHERE id_aluno=?");
 			$res->bind_param('siisi', $nome, $admin, $turma->getId(), $senha, $this->id);
