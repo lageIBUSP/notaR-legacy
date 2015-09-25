@@ -5,7 +5,7 @@ connect <- function () {
 		require(RMySQL)
 		# Conexao com o banco de dados
 		try(dbDisconnect(con), silent=TRUE)
-		con<- dbConnect(MySQL(), user="notaR", password="V3n4bl3s", dbname="notaR")
+		con<- dbConnect(MySQL(), user="notaR", password="password", dbname="notaR")
 		return (con);
 }
 con <- connect()
