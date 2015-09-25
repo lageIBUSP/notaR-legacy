@@ -107,9 +107,10 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 				paste("SELECT prazo FROM prazo
 				JOIN turma USING (id_turma) JOIN aluno USING (id_turma)
 				WHERE id_exercicio=", id.exerc, " AND id_aluno=", id.aluno));
-
+			if(length(prazo[,1]) == 0) 
+			  prazo = "Inf"
 			# Condicoes para gravar a nota
-			if (sum(dim(prazo)) > 0) if (Date > prazo & ! ignore) return ("<p><font color='#8c2618'>O prazo para entrega j&aacute; expirou!</font> A nota n&atilde;o foi gravada.</p>")
+			if (prazo != "Inf" & Date > prazo & ! ignore) return ("<p><font color='#8c2618'>O prazo para entrega j&aacute; expirou!</font> A nota n&atilde;o foi gravada.</p>")
 		}
 
 		peso <- dbGetQuery (con,
@@ -131,7 +132,7 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 		if (id.aluno =="NULL") return ("<p><font color='#8c2618'>Voc&ecirc; n&atilde;o est&aacute; logado.</font> A nota n&atilde;o foi gravada.</p>")
 		Rel <- paste("<p>Nota cadastrada! Sua melhor nota nesse exerc&iacute;cio &eacute; <b>", melhorNota, 
 					  "%</b>.", sep="")
-		if (sum(dim(prazo)) > 0) Rel <- paste (Rel, "<br>O prazo para enviar novas tentativas &eacute; ", prazo, ".", sep="");
+		if (prazo != "Inf") Rel <- paste (Rel, "<br>O prazo para enviar novas tentativas &eacute; ", prazo, ".", sep="");
 		return (paste(Rel, "</p>"));
 }
 
