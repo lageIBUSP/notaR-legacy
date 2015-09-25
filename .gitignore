@@ -1,0 +1,11 @@
+
+# /html/files/
+/html/files/*
+
+# /html/img/
+/html/img/dow.png
+/html/img/porhora.png
+/html/img/exercicio*.png
+
+# /html/tmp/
+/html/tmp/*
