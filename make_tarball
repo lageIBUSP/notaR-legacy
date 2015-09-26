@@ -1,6 +1,0 @@
-#!/bin/sh
-rev=`svn update | cut -c 13- | cut -f 1 -d '.'`
-svn export . ../notaR-$rev
-# removes this script from the tarball
-rm ../notaR-$rev/make_tarball
-tar cvf ../notaR-$rev.tar.gz ../notaR-$rev/
