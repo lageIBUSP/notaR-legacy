@@ -141,7 +141,6 @@ class Exercicio {
 		$res->execute();
 		$res->bind_result($diff);
 		$res->fetch();
-		$lista_exs = mysql_query("");
 		return array(round(100*$tentativa/$turma->getAlunos()), round(100*$cem/$turma->getAlunos()), $diff);
 	}
 	public function getPrazo($turma=null) {
