@@ -5,12 +5,12 @@ connect <- function () {
 		require(RMySQL)
 		# Conexao com o banco de dados
 		try(dbDisconnect(con), silent=TRUE)
-		con<- dbConnect(MySQL(), user="notaR", password="password", dbname="notaR")
+		con<- dbConnect(MySQL(), user="notaR", password="notarPw", dbname="notaR")
 		return (con);
 }
 con <- connect()
 # variavel global contendo o path absoluto dos arquivos
-.PATH = "/var/www/rserve"
+.PATH = "/var/www/html/notaR"
 
 # copia todos os arquivos de dados para que possam ser usados pelo corretor
 file.copy(dir(path=paste(.PATH, "files", sep="/"), full.names=T), ".")

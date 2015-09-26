@@ -19,7 +19,7 @@ echo $X->getHtml();
 <div id="corretoR" >
 <?php 
 if (isset($_POST['exerc'])) {
-	require_once 'Rserve.php';
+	require_once 'Rserve-php/Connection.php';
 
 	if (empty($_FILES['rfile']["tmp_name"])) { 
 		echo "Nenhum arquivo recebido. Verifique se houve algum problema no upload.";
