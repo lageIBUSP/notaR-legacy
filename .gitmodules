@@ -1,0 +1,3 @@
+[submodule "html/Rserve-php"]
+	path = html/Rserve-php
+	url = https://github.com/cturbelin/rserve-php
