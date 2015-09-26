@@ -15,7 +15,7 @@ Para acessar a plataforma online usada por estes cursos, clique [aqui] (http://w
 
 ## Documentação
 
-A documentação do sistema notaR está disponível em um sistema wiki. Clique [aqui] (http://www.lage.ib.usp.br/notaR/doku.php).
+A documentação do sistema notaR está disponível em um sistema wiki. Clique [aqui] (https://github.com/lageIBUSP/notaR/wiki).
 
 ## Instalando o notaR
 

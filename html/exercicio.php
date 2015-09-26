@@ -14,7 +14,7 @@ echo $X->getHtml();
 <input type="hidden" name="MAX_FILE_SIZE" value="30000">
 <input type="file" name="rfile" id="rfile" accept=".R">
 <br><button type="submit" value="Submit">Submeter!</button>
-<a href="http://www.lage.ib.usp.br/notaR/doku.php?id=aluno">ajuda?</a>
+<a href="https://github.com/lageIBUSP/notaR/wiki/Submetendo-respostas">ajuda?</a>
 </form>
 <div id="corretoR" >
 <?php 

@@ -46,7 +46,7 @@ else
 } else {
 
 echo "<form name=\"cadastro\" action=\"#\" method=\"post\" enctype=\"multipart/form-data\">";
-echo "<p>Para a descri&ccedil;&atilde;o dos campos e funcionamento do corretor, leia a <a href='http://www.lage.ib.usp.br/notaR/doku.php?id=cadastro'>ajuda</a>.";
+echo "<p>Para a descri&ccedil;&atilde;o dos campos e funcionamento do corretor, leia a <a href='https://github.com/lageIBUSP/notaR/wiki/Cadastro'>ajuda</a>.";
 echo "<br>Nome do exerc&iacute;cio:&nbsp;&nbsp;";
 echo "<input type=\"text\" name=\"nome\"  style='width: 300px;' value=\"";
 if (isset($_POST['nome'])) echo $_POST['nome'];
