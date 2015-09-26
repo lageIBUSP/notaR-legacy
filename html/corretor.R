@@ -23,7 +23,7 @@ corretoR <- function (id.exerc, texto) {
 		# Definicoes iniciais
 		corrEnv <- new.env()
 		# Funcoes dsiponiveis dentro do ambiente de correcao
-		eval(parse(file="/var/www/rserve/acessorias.R"), envir=corrEnv)
+		eval(parse(file=paste0(.PATH,"/acessorias.R")), envir=corrEnv)
 		# TO DO: mover eq para acessorias
 		assign("eq", function(a, b) isTRUE(all.equal(a,b, tol=1e-7, check.attributes=FALSE)), envir=corrEnv)
 
