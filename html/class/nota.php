@@ -26,7 +26,7 @@ function listNota($exercicio, $aluno, $texto) { // deve ser invocado com aluno O
 		$res->bind_param('ii', $exercicio->getId(), $aluno->getId());
 	} else {
 		$texto = '%'.$texto.'%';
-		$res = $mysql->prepare("SELECT id_nota FROM nota JOIN aluno USING (id_aluno) WHERE id_exercicio=? AND texto LIKE ? AND  id_turma=? ORDER BY data ASC");
+		$res = $mysqli->prepare("SELECT id_nota FROM nota JOIN aluno USING (id_aluno) WHERE id_exercicio=? AND texto LIKE ? AND  id_turma=? ORDER BY data ASC");
 		$res->bind_param('isi', $exercicio->getId(), $texto, $TURMA->getId());
 	}
 	$res->execute();
