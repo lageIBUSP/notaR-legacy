@@ -15,6 +15,11 @@ con <- connect()
 # copia todos os arquivos de dados para que possam ser usados pelo corretor
 file.copy(dir(path=paste(.PATH, "files", sep="/"), full.names=T), ".")
 
+# Funcao acessoria para testar se um objeto MySQL nao tem resultados
+no.results <- function(object) {
+  length(object[,1]) == 0
+}
+
 # corretoR recebe: 
 # texto 
 # E devolve um um vector logico com o resultado dos testes
@@ -36,7 +41,7 @@ corretoR <- function (id.exerc, texto) {
 									 WHERE id_exercicio=", id.exerc, sep=""));
 
 		# Executa as precondicoes
-		if(sum(dim(precondi)) > 0) eval(parse(text=precondi), envir=corrEnv);
+		if(!no.results(precondi)) eval(parse(text=precondi), envir=corrEnv);
 
 		# Executa o texto da resposta
 		# try pega erros de sintaxe
@@ -99,7 +104,7 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 						   WHERE nome_aluno ='", nome.aluno,"'", sep=""));
 		Date <- format(Sys.time(), "%F %R");
 
-		if (sum(dim(id.aluno)) == 0) { 
+		if (no.results(id.aluno)) { 
 			id.aluno <- "NULL";
 		}
 		else {
@@ -107,7 +112,7 @@ gravarNota <- function (nome.aluno, id.exerc, texto, nota = corretoR(id.exerc, t
 				paste("SELECT prazo FROM prazo
 				JOIN turma USING (id_turma) JOIN aluno USING (id_turma)
 				WHERE id_exercicio=", id.exerc, " AND id_aluno=", id.aluno));
-			if(length(prazo[,1]) == 0) 
+			if(no.results(prazo)) 
 			  prazo = "Inf"
 			# Condicoes para gravar a nota
 			if (prazo != "Inf" & Date > prazo & ! ignore) return ("<p><font color='#8c2618'>O prazo para entrega j&aacute; expirou!</font> A nota n&atilde;o foi gravada.</p>")

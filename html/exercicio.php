@@ -43,6 +43,7 @@ if (isset($_POST['exerc'])) {
 				$r = new Rserve_Connection(RSERVE_HOST);
 			} catch (Exception $e) {
 				echo 'Erro interno ao conectar no servidor. Notifique os administradores do sistema!<br>';
+        echo $e;
 			}
 			try {
 				$x = $r->evalString('source("'.$basedir.'/corretor.R");');
@@ -54,6 +55,7 @@ if (isset($_POST['exerc'])) {
 				echo "<p>Seu c&oacute;digo:</p><p class='code'>".nl2br($conts)."</p>";
 			} catch (Exception $e) {
 				echo 'Erro interno ao executar o corretor. Verifique se as pre-condi&ccedil;&otilde;es executam.';
+        echo $e;
 			}
 		}
 		else {echo "<font color='#8c2618'>AVISO! O arquivo enviado n&atilde;o pode conter a(s) palavra(s) \"$teste\". Corrija essa condi&ccedil;&atilde;o e tente novamente.</font>";}
