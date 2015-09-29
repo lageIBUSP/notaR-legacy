@@ -1,18 +1,15 @@
 ## ## ## Corretor automatico
-source("config.inc")
-
 # Usa uma conexao "global" con
-connect <- function () {
+connect <- function (dbuser, dbpass, dbname) {
 		require(RMySQL)
 		# Conexao com o banco de dados
 		try(dbDisconnect(con), silent=TRUE)
 		con<- dbConnect(MySQL(), user=dbuser, password=dbpass, dbname=dbname)
 		return (con);
 }
-con <- connect()
+# Construida na chamada PHP como 
+# con <- connect($DBUSER, $DBPASS, $DBNAME)
 
-# copia todos os arquivos de dados para que possam ser usados pelo corretor
-file.copy(dir(path=paste(PATH, "files", sep="/"), full.names=T), ".")
 
 # Funcao acessoria para testar se um objeto MySQL nao tem resultados
 no.results <- function(object) {
@@ -23,9 +20,12 @@ no.results <- function(object) {
 # texto 
 # E devolve um um vector logico com o resultado dos testes
 # Caso o codigo tenha erros de sintaxe, retorna NULL
+# Usa variavel global PATH (definida no PHP?)  
 corretoR <- function (id.exerc, texto) {
 		# Definicoes iniciais
 		corrEnv <- new.env()
+    # copia todos os arquivos de dados para que possam ser usados pelo corretor
+    file.copy(dir(path=paste0(PATH, "/files"), full.names=T), ".")
 		# Funcoes dsiponiveis dentro do ambiente de correcao
 		eval(parse(file=paste0(PATH,"/acessorias.R")), envir=corrEnv)
 		# TO DO: mover eq para acessorias
@@ -156,4 +156,6 @@ notaR <- function (nome.aluno, id.exerc, arquivo, ignore=F) {
 		return(paste(Rel, notaGravada,sep=""))
 }
 # Exemplos: 
+# con <- connect('notaR', 'notaRPW', 'notaR')
+# PATH <- '/var/www/notaR/'
 # notaR('chalom', 2,"xpto.R")

@@ -28,7 +28,7 @@ if (isset($_POST['exerc'])) {
 		echo "<li>Voc&ecirc; salvou o arquivo usando algum processador de texto, como o Word?</li>";
 		echo "</ul>";
 	} else {
-		$uploadfile = $basedir ."/tmp/".  basename($_FILES['rfile']['tmp_name']);
+		$uploadfile = $BASEDIR ."/tmp/".  basename($_FILES['rfile']['tmp_name']);
 		move_uploaded_file($_FILES['rfile']['tmp_name'], $uploadfile);
 
 		### Correcao de bug! O R trava se o editor de texto não encerrou
@@ -47,8 +47,10 @@ if (isset($_POST['exerc'])) {
           echo $e;
 			}
 			try {
-        $text = 'source("'.$basedir.'/corretor.R"); notaR("'.$USER->getNome().'", '.
-          $X->getId().', "'.$uploadfile.'")';   
+        $text  = 'source("'.$BASEDIR.'/corretor.R");';
+        $text .= 'con <- connect("'.$DBUSER.'","'.$DBPASS.'","'.$DBNAME.'");';
+        $text .= 'PATH <- "'.$BASEDIR.'";';
+        $text .= 'notaR("'.$USER->getNome().'", '.$X->getId().', "'.$uploadfile.'")';   
         $x = $r->evalString($text);   
 				if(is_null($x)) echo "<font color='#8c2618'>Aviso: seu c&oacute;digo cont&eacute;m alguma ".
 					"funcionalidade do R n&atilde;o suportada pelo notaR. Remova as fun&ccedil;&otilde;es ".
