@@ -28,7 +28,7 @@ if (isset($_POST['exerc'])) {
 		echo "<li>Voc&ecirc; salvou o arquivo usando algum processador de texto, como o Word?</li>";
 		echo "</ul>";
 	} else {
-		$uploadfile = $basedir ."/tmp/".  basename($_FILES['rfile']['tmp_name']);
+		$uploadfile = $BASEDIR ."/tmp/".  basename($_FILES['rfile']['tmp_name']);
 		move_uploaded_file($_FILES['rfile']['tmp_name'], $uploadfile);
 
 		### Correcao de bug! O R trava se o editor de texto não encerrou
@@ -43,11 +43,15 @@ if (isset($_POST['exerc'])) {
 				$r = new Rserve_Connection(RSERVE_HOST);
 			} catch (Exception $e) {
 				echo 'Erro interno ao conectar no servidor. Notifique os administradores do sistema!<br>';
-        echo $e;
+        if (error_reporting() & E_ERROR)
+          echo $e;
 			}
 			try {
-				$x = $r->evalString('source("'.$basedir.'/corretor.R");');
-				$x = $r->evalString('notaR("'.$USER->getNome().'", '.$X->getId().', "'.$uploadfile.'")');   
+        $text  = 'source("'.$BASEDIR.'/corretor.R");';
+        $text .= 'con <- connect("'.$DBUSER.'","'.$DBPASS.'","'.$DBNAME.'");';
+        $text .= 'PATH <- "'.$BASEDIR.'";';
+        $text .= 'notaR("'.$USER->getNome().'", '.$X->getId().', "'.$uploadfile.'")';   
+        $x = $r->evalString($text);   
 				if(is_null($x)) echo "<font color='#8c2618'>Aviso: seu c&oacute;digo cont&eacute;m alguma ".
 					"funcionalidade do R n&atilde;o suportada pelo notaR. Remova as fun&ccedil;&otilde;es ".
 					"gr&aacute;ficas (como <i>plot</i> ou <i>hist</i>) do seu c&oacute;digo e tente novamente.</font>";
@@ -55,7 +59,8 @@ if (isset($_POST['exerc'])) {
 				echo "<p>Seu c&oacute;digo:</p><p class='code'>".nl2br($conts)."</p>";
 			} catch (Exception $e) {
 				echo 'Erro interno ao executar o corretor. Verifique se as pre-condi&ccedil;&otilde;es executam.';
-        echo $e;
+        if (error_reporting() & E_ERROR)
+          echo $e;
 			}
 		}
 		else {echo "<font color='#8c2618'>AVISO! O arquivo enviado n&atilde;o pode conter a(s) palavra(s) \"$teste\". Corrija essa condi&ccedil;&atilde;o e tente novamente.</font>";}

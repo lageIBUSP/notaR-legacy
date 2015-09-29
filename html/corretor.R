@@ -1,19 +1,14 @@
 ## ## ## Corretor automatico
-
 # Usa uma conexao "global" con
-connect <- function () {
+connect <- function (dbuser, dbpass, dbname) {
 		require(RMySQL)
 		# Conexao com o banco de dados
 		try(dbDisconnect(con), silent=TRUE)
-		con<- dbConnect(MySQL(), user="notaR", password="notarPw", dbname="notaR")
+		con<- dbConnect(MySQL(), user=dbuser, password=dbpass, dbname=dbname)
 		return (con);
 }
-con <- connect()
-# variavel global contendo o path absoluto dos arquivos
-.PATH = "/var/www/html/notaR"
-
-# copia todos os arquivos de dados para que possam ser usados pelo corretor
-file.copy(dir(path=paste(.PATH, "files", sep="/"), full.names=T), ".")
+# Construida na chamada PHP como 
+# con <- connect($DBUSER, $DBPASS, $DBNAME)
 
 # Funcao acessoria para testar se um objeto MySQL nao tem resultados
 no.results <- function(object) {
@@ -24,11 +19,14 @@ no.results <- function(object) {
 # texto 
 # E devolve um um vector logico com o resultado dos testes
 # Caso o codigo tenha erros de sintaxe, retorna NULL
+# Usa variavel global PATH (definida no PHP?)  
 corretoR <- function (id.exerc, texto) {
 		# Definicoes iniciais
 		corrEnv <- new.env()
+    # copia todos os arquivos de dados para que possam ser usados pelo corretor
+    file.copy(dir(path=paste0(PATH, "/files"), full.names=T), ".")
 		# Funcoes dsiponiveis dentro do ambiente de correcao
-		eval(parse(file=paste0(.PATH,"/acessorias.R")), envir=corrEnv)
+		eval(parse(file=paste0(PATH,"/acessorias.R")), envir=corrEnv)
 		# TO DO: mover eq para acessorias
 		assign("eq", function(a, b) isTRUE(all.equal(a,b, tol=1e-7, check.attributes=FALSE)), envir=corrEnv)
 
@@ -157,4 +155,62 @@ notaR <- function (nome.aluno, id.exerc, arquivo, ignore=F) {
 		return(paste(Rel, notaGravada,sep=""))
 }
 # Exemplos: 
+# con <- connect('notaR', 'notaRPW', 'notaR')
+# PATH <- '/var/www/notaR/'
 # notaR('chalom', 2,"xpto.R")
+
+
+#########################################################################
+#########################################################################
+#########################################################################
+#########################################################################
+
+## Graficos
+
+startpng <-function(name) png(width=800, height=550, filename=paste(PATH,"img",name,sep="/"))
+
+### Por Hora
+porDow <- function() {
+	startpng("dow.png")
+	x <- dbGetQuery(con, "select count(*), date_format(data - INTERVAL 3 HOUR, '%w') 
+	from nota group by date_format(data - INTERVAL 3 HOUR, '%w')")
+	x[,1] <- x[,1]/sum(x[,1])
+	par(fg='#FF6666', family='Verdana')
+	plot(x[,1]~x[,2], type='l', bty='n', xaxt='n', yaxt='n', xlab='Dia', ylab='% entregas', col='#007788', lwd=3)
+	axis(1, at=0:6, labels=c("dom", "seg", "ter", "qua", "qui", "sex", "sab"), lwd=3)
+	axis(2, lwd=3)
+	dev.off()
+}
+
+porHora <- function() {
+	startpng("porhora.png")
+	x <- dbGetQuery(con, "select count(*), date_format(data, '%H') 
+	from nota group by date_format(data, '%H')")
+	x[,1] <- x[,1]/sum(x[,1])
+	par(fg='#FF6666', family='Verdana')
+	plot(spline(x[,2],x[,1]), type='l', bty='n', xaxt='n', yaxt='n', xlab='Hora', ylab='% entregas', col='#007788', lwd=3)
+	axis(1, at=2*0:11, lwd=3)
+	axis(2, wd=3)
+	dev.off()
+}
+porExercicio <- function(turma) {
+	startpng(paste("exercicio",turma,".png",sep=""))
+	n_turma <- dbGetQuery(con, paste("select count(distinct id_aluno) from aluno join nota using(id_aluno) where id_turma=",turma))
+	x <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) join prazo using (id_exercicio, id_turma) where id_turma=",turma,"group by nome"))
+	y <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) join prazo using (id_exercicio, id_turma) where id_turma=",turma," and nota=100 group by nome"))
+	x <- merge(x, y, by="nome", all=TRUE)
+	x[,2:3] <- x[,2:3] / as.numeric(n_turma)
+	Encoding(x[,1]) <- "latin1"
+	#extrai o numero do exercicio
+	f <- function(s) strsplit(s, " ")[[1]][1]
+	x[,1] <- sapply(x[,1], f)
+	x[is.na(x)] <- 0
+	par(fg='#FF6666', family='Verdana', cex.axis=0.8)
+	plot(x[,2], type='l', bty='n', xaxt='n', yaxt='n', xlab='Exercicio', ylab='% incompleto/completo', col='#007788', lwd=3, ylim=c(0,1), yaxs='i')
+	points(x[,3], type='l', col='#770088', lwd=3)
+	axis(1, at=1:dim(x)[1], labels=x[,1], lwd=3)
+	axis(2, at=c(0,0.5, 1), lwd=3)
+	grid(ny=NA, lty=1, lwd=2, col="gray")
+	dev.off()
+}
+
