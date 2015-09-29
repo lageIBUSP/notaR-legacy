@@ -3,6 +3,7 @@ if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
+
 if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 	// TODO: Transformar isso em algo mais OO
 	$post = $_POST;
@@ -51,7 +52,7 @@ foreach(ListExercicio() as $ex) {
 }
 ?>
 </table>
-<p>Para cadastrar novos prazos ou alterar os j&aacute; cadastrados, digite a data e hora na caixa de texto correspondente, no formato "YYYY-MM-DD HH:MM:SS".</p>
+<p>Para cadastrar novos prazos ou alterar os j&aacute; cadastrados, digite a data e hora na caixa de texto correspondente, no formato "DD/MM/YYYY HH:MM".</p>
 <p>Os exerc&iacute;cios sem prazo ser&atilde;o considerados OPCIONAIS, e n&atilde;o ser&atilde;o considerados nos relat&oacute;rios</p>
 <button type='submit' name='submit' value='atualiza'>Atualiza</button>
 </form>
