@@ -20,3 +20,6 @@ A documentação do sistema notaR está disponível em um sistema wiki. Clique [
 ## Instalando o notaR
 
 Para instalar uma nova plataforma notaR, siga os passos descritos na wiki acima.
+*NOTE* que a versão atual no Github é uma versão de desenvolvimento (ou seja, warnings e erros são 
+mostrados sem filtros ao usuário), enquanto versões na página 
+de [Releases] (https://github.com/lageIBUSP/notaR/releases) são adequadas para produção.
