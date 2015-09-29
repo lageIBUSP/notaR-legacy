@@ -1,5 +1,6 @@
 <?php
 require_once("config.php");
+require_once("cron.php");
 require_once("class/aluno.php");
 require_once("class/nota.php");
 require_once("class/user.php");

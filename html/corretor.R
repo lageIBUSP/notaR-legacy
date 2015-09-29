@@ -176,9 +176,9 @@ porDow <- function() {
 	from nota group by date_format(data - INTERVAL 3 HOUR, '%w')")
 	x[,1] <- x[,1]/sum(x[,1])
 	par(fg='#FF6666', family='Verdana')
-	plot(x[,1]~x[,2], type='l', bty='n', xaxt='n', yaxt='n', xlab='Dia', ylab='% entregas', col='#007788', lwd=3, ylim=c(0,0.35))
+	plot(x[,1]~x[,2], type='l', bty='n', xaxt='n', yaxt='n', xlab='Dia', ylab='% entregas', col='#007788', lwd=3)
 	axis(1, at=0:6, labels=c("dom", "seg", "ter", "qua", "qui", "sex", "sab"), lwd=3)
-	axis(2, at=c(0,0.1, 0.2, 0.3), lwd=3)
+	axis(2, lwd=3)
 	dev.off()
 }
 
@@ -188,9 +188,9 @@ porHora <- function() {
 	from nota group by date_format(data, '%H')")
 	x[,1] <- x[,1]/sum(x[,1])
 	par(fg='#FF6666', family='Verdana')
-	plot(spline(x[,2],x[,1]), type='l', bty='n', xaxt='n', yaxt='n', xlab='Hora', ylab='% entregas', col='#007788', lwd=3, ylim=c(0,0.15))
+	plot(spline(x[,2],x[,1]), type='l', bty='n', xaxt='n', yaxt='n', xlab='Hora', ylab='% entregas', col='#007788', lwd=3)
 	axis(1, at=2*0:11, lwd=3)
-	axis(2, at=c(0,0.05, 0.1, 0.15), lwd=3)
+	axis(2, wd=3)
 	dev.off()
 }
 porExercicio <- function(turma) {
