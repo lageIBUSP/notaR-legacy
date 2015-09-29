@@ -1,19 +1,18 @@
 ## ## ## Corretor automatico
+source("config.inc")
 
 # Usa uma conexao "global" con
 connect <- function () {
 		require(RMySQL)
 		# Conexao com o banco de dados
 		try(dbDisconnect(con), silent=TRUE)
-		con<- dbConnect(MySQL(), user="notaR", password="notarPw", dbname="notaR")
+		con<- dbConnect(MySQL(), user=dbuser, password=dbpass, dbname=dbname)
 		return (con);
 }
 con <- connect()
-# variavel global contendo o path absoluto dos arquivos
-.PATH = "/var/www/html/notaR"
 
 # copia todos os arquivos de dados para que possam ser usados pelo corretor
-file.copy(dir(path=paste(.PATH, "files", sep="/"), full.names=T), ".")
+file.copy(dir(path=paste(PATH, "files", sep="/"), full.names=T), ".")
 
 # Funcao acessoria para testar se um objeto MySQL nao tem resultados
 no.results <- function(object) {
@@ -28,7 +27,7 @@ corretoR <- function (id.exerc, texto) {
 		# Definicoes iniciais
 		corrEnv <- new.env()
 		# Funcoes dsiponiveis dentro do ambiente de correcao
-		eval(parse(file=paste0(.PATH,"/acessorias.R")), envir=corrEnv)
+		eval(parse(file=paste0(PATH,"/acessorias.R")), envir=corrEnv)
 		# TO DO: mover eq para acessorias
 		assign("eq", function(a, b) isTRUE(all.equal(a,b, tol=1e-7, check.attributes=FALSE)), envir=corrEnv)
 
