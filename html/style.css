@@ -1,40 +1,28 @@
-#etc { 
-	margin-left: auto; 
-	margin-right: auto;
-	margin-top:-30px;
-	width: 30px;
-	height: 20px;
-	border: 2px solid #078;
-	background-color: #cef;
-	text-align: center;
-	font-family: Arial;
-	font-weight: 900;
-	border-radius: 5px;
-	display: none;
-	cursor:pointer; 
-}
 th { 
-	border: 2px solid #fcc; 
+	border: 1px solid #555; 
 	font-weight: bold;
 	border-radius: 2px;
 	font-size: 17px;
+  padding: 5px;
 }
 td {
 	border-radius: 2px;
-	border: 2px solid #fcc;
+	border: 1px solid #555;
 	font-size: 16px;
+  padding: 5px;
 }
 
 #Menu {
+  padding: 3px;
 	position: relative;
 	width: 190px;
 	float: right;
-	border: 2px dashed #fcc;
+	border: 0.5px dashed #555;
 }
 #Erro {
 	font-size: 13px;
 	color: #d66;
-	border: 2px dashed #d66;
+	border: 2px solid #d66;
 	width: 50%;
 	padding: 15px;
 }
@@ -63,7 +51,7 @@ input {
 	margin: 4px 0px 4px 0px;
        	background-color: #eee;
        	color: #555; 
-	border: 1px dashed #555;
+	border: 1px solid #555;
 	border-radius: 2px;
 	width: 120px;
 	height: 20px;
@@ -99,6 +87,9 @@ button {
 	border-radius: 6px;
 	cursor:pointer; 
 }
+button:hover {
+  color: #078;
+}
 .small {
 		font-size: 10px;
 }
@@ -129,9 +120,9 @@ p {
 	line-height: 160%;
 }
 #corretoR {
-		border: 2px dashed black;
+		border: 1px solid #555;
 		border-radius: 5px;
-		background: #def;
+		background: #eef;
 		padding: 7px;
 		overflow-x: hidden;
     overflow-y: auto;

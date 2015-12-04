@@ -11,7 +11,7 @@ if (isset($_REQUEST['delete'])) {
 		if ($turma->remove())
 			echo "<p>Turma removida</p>";
 		else 
-			echo "<p>Erro ao remover turma! Verifique se a turma tem 0 alunos</p>";
+			echo "<p>Erro ao remover turma! S&oacute; &eacute; poss&iacute;vel remover turmas vazias!</p>";
 }
 if(isset($_REQUEST['submit'])) {
 		$turma = new Turma();
@@ -31,9 +31,9 @@ foreach (ListTurmas() as $turma) {
 </table>
 
 <form name="cadastro" action="#" method="post">
-<p>Criar nova turma: <input type="text" name="nome" style="width: 300px;">
-<br><button type="submit" name="submit" value="submit">ok</button>
-</p>
+<p>&nbsp;</p>
+<p>Criar nova turma: <input type="text" name="nome" style="width: 300px;"></p>
+<p><button type="submit" name="submit" value="submit">ok</button></p>
 </form>
 
 </div>

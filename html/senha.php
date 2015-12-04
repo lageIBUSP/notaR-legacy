@@ -13,11 +13,12 @@ if(isset($_POST['submit']) AND $_POST['submit']=="altera") {
 		if ($_POST['senha'] === $_POST['senha2']) {
 			$USER->altera($USER->getNome(), $USER->admin(), new Turma($USER->getTurma()), $_POST['senha']);
 			echo "<h3>Senha alterada!</h3>";
+		} else {
+			echo "<h3>As senhas digitadas n&atilde;o s&atilde;o iguais!</h3>";
 		}
-		else {
-			echo "As senhas digitadas n&atilde;o s&atilde;o iguais!";
-		}
-	}
+  } else {
+    echo "<h3>Campo 'senha' em branco!</h3>";
+  }
 }
 ?>
 <form action='senha.php' method='POST'>
