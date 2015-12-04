@@ -36,7 +36,7 @@ function emUso($file) {
   $res->bind_param('ss', $file, $file);
   $res->execute();
   $res->bind_result($n_uso);
-  echo "Usos: $n_uso";
+  $res->fetch();
   return($n_uso > 0);
 }
 ?>
@@ -46,7 +46,7 @@ function emUso($file) {
 foreach (glob($BASEDIR."/files/*") as $file) {
   $file = basename($file);
   echo "<tr><td><a href='?delete=".$file."'><span class='glyphicon glyphicon-remove'></span></a></td><td>".$file."</td><td align='center'>";
-    if(emUso($file)) echo "<span class='glyphicon glyphicon-file'></span>'";
+    if(emUso($file)) echo "<span class='glyphicon glyphicon-file'></span>";
   echo "</td></tr>";
   }
 ?>
