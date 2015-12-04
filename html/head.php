@@ -11,15 +11,27 @@ require_once("class/teste.php");
 ?>
 <!DOCTYPE html>
 <html>
-		<head>
+    <head>
+				<meta charset="iso-8859-1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+				<title>notaR</title>
+				<meta name="description" content="Um sistema para notas automatizadas em cursos que utilizam a linguagem R" />
+
+  <!-- CSS -->
+  <!-- jquery ui css -->
+				<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.4/themes/blitzer/jquery-ui.css" />
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- local css -->
 				<link rel="stylesheet" type="text/css" href="style.css" />
-				<link rel="stylesheet" type="text/css" href="jquery-ui-1.10.2.custom.css" />
+
 				<script language="javascript" src="java.js"></script>
-				<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-				<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+				<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+				<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 				<script src="jquery-ui-timepicker-addon.js"></script>
 				<script src="jquery-jslatex.js"></script>
-<script>
+        <script>
 $(document).ready(function() {
 	$('.timepick').datetimepicker({
 		dateFormat: "dd/mm/yy",
@@ -29,13 +41,12 @@ $(document).ready(function() {
 
     $(".latex").latex();
 });
-</script>
+        </script>
+  <!-- Bootstrap code  -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-				<meta charset="iso-8859-1" />
-				<meta name="description" content="Um sistema para notas automatizadas em cursos que utilizam a linguagem R" />
-				<title>notaR</title>
 		</head>
-<body onload="defch()">
+<body>
 	<div id="Top">
 		<div style="float:left">
 			<h1><a href="index.php">notaR</a></h1>

@@ -16,7 +16,7 @@ echo $X->getHtml();
 <br><button type="submit" value="Submit">Submeter!</button>
 <a href="https://github.com/lageIBUSP/notaR/wiki/Submetendo-respostas">ajuda?</a>
 </form>
-<div id="corretoR" >
+<div id="corretoR">
 <?php 
 if (isset($_POST['exerc'])) {
 	require_once 'Rserve-php/Connection.php';
@@ -71,7 +71,6 @@ else
 }
 ?>
 </div>
-<div id="etc" onclick="fullch(); return null;">...</div>
 
 </div>
 </body>
