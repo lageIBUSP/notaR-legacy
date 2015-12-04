@@ -40,6 +40,14 @@ $(document).ready(function() {
 	});
 
     $(".latex").latex();
+  // for replacing the ugly file selector with a styled bootstrap alternative
+  $("#fakerfile").click(function(e) {
+    e.preventDefault();
+    $("#rfile").trigger("click");
+  });
+  $("#rfile").change(function (){
+    $("#submit").trigger("click");
+  });
 });
         </script>
   <!-- Bootstrap code  -->
