@@ -33,6 +33,28 @@ if (isset($_POST['submit']) AND $_POST['submit'] == "addnimp") {
 	$nimp++;
 }
 
+# Codigo de reordenacao de testes
+$condicao = $_REQUEST['condicao'];
+$peso = $_REQUEST['peso'];
+$dica = $_REQUEST['dica'];
+$TROCA=-2;
+if (isset($_REQUEST['down'])) 
+  $TROCA = $_REQUEST['down'];
+if (isset($_REQUEST['up'])) 
+  $TROCA = $_REQUEST['up'] - 1;
+
+if($TROCA >= 0) {
+  $tmp = $condicao[$TROCA+1];
+  $condicao[$TROCA+1] = $condicao[$TROCA];
+  $condicao[$TROCA] = $tmp;
+  $tmp = $dica[$TROCA+1];
+  $dica[$TROCA+1] = $dica[$TROCA];
+  $dica[$TROCA] = $tmp;
+  $tmp = $peso[$TROCA+1];
+  $peso[$TROCA+1] = $peso[$TROCA];
+  $peso[$TROCA] = $tmp;
+}
+
 ?>
 <h2>Cadastro de exerc&iacute;cios</h2>
 <?php 
@@ -83,21 +105,32 @@ echo "<table class='Cadastra'><tr><td><center><b>Ordem</b></center></td><td><cen
 for ($i = 0; $i < $ntestes; $i ++) {
 	if (!empty($id)) {$T = new Teste($id, $i+1);}
 		echo "<tr>";
-		echo "<td><center>".($i+1)."</center></td>";
+echo "<td>";
+if($i > 0) 
+  echo "<button class='btn btn-default' type='submit' name='up' value=$i style='width:20px; padding:0px; border:none;'>
+  <span class='glyphicon glyphicon-chevron-up'></span></button>";
+else 
+  echo "<button class='btn btn-default' style='width:20px; padding:0px; border:none;' disabled>&nbsp;</button>";
+echo ($i+1);
+if($i == $ntestes - 1) 
+  echo "<button class='btn btn-default' style='width:20px; padding:0px; border:none;' disabled>&nbsp;</button>";
+else 
+  echo "<button class='btn btn-default' type='submit' name='down' value=$i style='width:20px; padding:0px; border:none;'>
+  <span class='glyphicon glyphicon-chevron-down'></span></button>";
+ echo"</td>";
 		echo "<td><input type='text' name='peso[]' value='";
-		if (isset($_POST['peso'][$i])) {echo $_POST['peso'][$i];} 
+		if (isset($peso[$i])) {echo $peso[$i];} 
 		elseif (!empty($id) AND $T->peso()) echo $T->peso();
 		else {echo 1;}
 		echo "'></td><td><input class='long' type='text' name='condicao[]' value=\"";
-		if (isset($_POST['condicao'][$i])) {echo htmlspecialchars($_POST['condicao'][$i]);}
+		if (isset($condicao[$i])) {echo htmlspecialchars($condicao[$i]);}
 		elseif (!empty($id)) echo htmlspecialchars($T->condicao());
 		echo "\"></td><td><input class='long' type='text' name='dica[]' value=\"";
-		if (isset($_POST['dica'][$i])) {echo htmlspecialchars($_POST['dica'][$i]);}
+		if (isset($dica[$i])) {echo htmlspecialchars($dica[$i]);}
 		elseif (!empty($id)) echo htmlspecialchars($T->dica());
 		echo "\"></td></tr>";
 }
 		echo "</table>";
-
 
 echo "<button type=\"submit\" name=\"submit\" value=\"submit\">OK</button>";
 echo "</form>";
