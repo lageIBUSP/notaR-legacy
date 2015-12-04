@@ -47,7 +47,7 @@ foreach(ListExercicio() as $ex) {
 	echo "<tr><td>".$ex->getNome()."</td><td>";
 	echo "<input type='text' id='ex".$ex->getId()."' name='ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."' class='timepick'>";
 	echo "<input type='hidden' name='old_ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."'>";
-	echo "<a href='#' onclick='delprazo(".$ex->getId()."); return false;'><img src='img/x.png'></a>";
+	echo "<a href='#' onclick='delprazo(".$ex->getId()."); return false;' style='padding-left: 3px;'><span class='glyphicon glyphicon-remove'></span></a>";
 	echo "</td></tr>";
 }
 ?>

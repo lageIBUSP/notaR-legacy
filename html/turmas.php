@@ -25,7 +25,7 @@ if(isset($_REQUEST['submit'])) {
 <table><tr><th colspan=2>Nome</th><th>Alunos</th><th>Exerc&iacute;cios</th></tr>
 <?php
 foreach (ListTurmas() as $turma) {
-	echo "<tr><td><a href='?delete=".$turma->getId()."'><img src='img/x.png'></a></td><td>".$turma->getNome()."</td><td>".$turma->getAlunos()."</td><td>".$turma->getNEx()."</td></tr>";
+	echo "<tr><td><a href='?delete=".$turma->getId()."'><span class='glyphicon glyphicon-remove'></span></a></td><td>".$turma->getNome()."</td><td>".$turma->getAlunos()."</td><td>".$turma->getNEx()."</td></tr>";
 }
 ?>
 </table>

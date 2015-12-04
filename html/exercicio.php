@@ -4,7 +4,7 @@ $X = new Exercicio($_REQUEST['exerc']);
 ?>
 <h2><?php 
 echo $X->getNome(); 
-if ($USER->admin()) echo "&nbsp;<a href='cadastra.php?exerc=".$X->getId()."'><img src='img/pen.png'></a>";
+if ($USER->admin()) echo "&nbsp;<span class='small'><a href='cadastra.php?exerc=".$X->getId()."'><span class='glyphicon glyphicon-pencil'></span></a></span>";
 ?></h2>
 <?php 
 echo $X->getHtml();

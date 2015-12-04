@@ -38,8 +38,8 @@ e completar os exerc&iacute;cios abaixo.</p>
 	echo ">Nome</th><th>Nota</th><th>Prazo</th></tr></thead><tbody>";
 	foreach (ListExercicio($t) as $X) {
 		echo "<tr><td>";
-		if ($USER->admin()) echo "<a href='cadastra.php?exerc=".$X->getId()."'><img src='img/pen.png'></a></td><td>";
-		if ($X->getNota() == 100) echo "<img src='img/check.png'>";
+		if ($USER->admin()) echo "<a href='cadastra.php?exerc=".$X->getId()."'><span class='glyphicon glyphicon-pencil'></span></a></td><td>";
+		if ($X->getNota() == 100) echo "<span class='glyphicon glyphicon-ok-circle icon-ok'></span>";
 		echo "<a href='exercicio.php?exerc=".$X->getId()."'>".$X->getNome()."</a>";
 		echo "</td><td>".$X->getNota()."</td><td>".$X->getPrazo()."</td></tr>";
 	}
@@ -50,7 +50,7 @@ e completar os exerc&iacute;cios abaixo.</p>
 	echo ">Nome</th><th>Nota</th></tr></thead><tbody>";
 	foreach (ListExercicio($t, true) as $X) {
 		echo "<tr><td>";
-		if ($USER->admin()) echo "<a href='cadastra.php?exerc=".$X->getId()."'><img src='img/pen.png'></a></td><td>";
+		if ($USER->admin()) echo "<a href='cadastra.php?exerc=".$X->getId()."'><span class='glyphicon glyphicon-pencil'></span></a></td><td>";
 		echo "<a href='exercicio.php?exerc=".$X->getId()."'>".
 			$X->getNome()."</a></td><td>".$X->getNota()."</td></tr>";
 	}

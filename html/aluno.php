@@ -20,7 +20,7 @@ if(! isset($_REQUEST['id'])) {
 <br>Turma: <?php echo SelectTurma(false); ?>
 <br><label><input type="checkbox" name="admin" value="1" 
 <?php if ($aluno->admin()) echo "checked"; ?>
-/> Admin</label>
+/><span class='glyphicon glyphicon-education' style='padding-left: 5px;'></span> Admin</label>
 <br>
 	<button type='submit' name='submit' value='altera'>Alterar</button>
 

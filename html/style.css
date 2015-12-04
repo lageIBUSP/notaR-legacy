@@ -1,5 +1,9 @@
+.icon-ok {
+  color: #0f8;
+  padding-right: 3px;
+}
 th { 
-	border: 1px solid #555; 
+	border: 1px solid #888; 
 	font-weight: bold;
 	border-radius: 2px;
 	font-size: 17px;
@@ -7,7 +11,7 @@ th {
 }
 td {
 	border-radius: 2px;
-	border: 1px solid #555;
+	border: 1px solid #888;
 	font-size: 16px;
   padding: 5px;
 }
@@ -47,7 +51,7 @@ td {
 	overflow: auto;
 	font-style: normal;
 }
-input {
+input[type="text"] {
 	margin: 4px 0px 4px 0px;
        	background-color: #eee;
        	color: #555; 
@@ -64,13 +68,6 @@ td img {
 	vertical-align:middle;
 	padding: 3px;
 	margin: 0;
-}
-#corrInput {
-	width: 580px;
-}
-#Rfile {
-	width: 200px;
-	height: 30px;
 }
 button {
 	margin: 4px 0px 4px 0px; 
@@ -93,7 +90,7 @@ button:hover {
 .small {
 		font-size: 10px;
 }
-.long {
+input[type="text"].long {
 		width: 360px;
 }
 .code {

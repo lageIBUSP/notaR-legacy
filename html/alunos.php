@@ -29,13 +29,13 @@ if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 <?php echo SelectTurma(); ?>
 
 <p>Alunos cadastrados:</p>
-<table><tr><td>Admin</td><td>Login</td><td>Notas</td><td>Editar</td>
+<table><tr><th>Admin</th><th>Login</th><th>Notas</th><th>Editar</th>
 <?php
 foreach (ListAlunos($TURMA) as $aluno) {
-	echo "<tr><td>";
-	if ($aluno->admin()) echo "<img src='img/check.png'>"; else echo "&nbsp;";
-	echo "</td><td>".$aluno->getNome()."</td><td>".$aluno->numNotas()."</td><td>";
-	echo "<a href='aluno.php?id=".$aluno->getId()."'><img src='img/pen.png'></a></td></tr>";
+	echo "<tr><td align='center'>";
+	if ($aluno->admin()) echo "<span class='glyphicon glyphicon-education'></span>"; else echo "&nbsp;";
+	echo "</td><td>".$aluno->getNome()."</td><td>".$aluno->numNotas()."</td><td align='center'>";
+	echo "<a href='aluno.php?id=".$aluno->getId()."'><span class='glyphicon glyphicon-cog'></span></a></td></tr>";
 }
 ?>
 </table>
