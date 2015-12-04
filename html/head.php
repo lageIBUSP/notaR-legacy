@@ -35,7 +35,7 @@ require_once("class/teste.php");
 $(document).ready(function() {
 	$('.timepick').datetimepicker({
 		dateFormat: "dd/mm/yy",
-		timeFormat: "hh:mm",
+		timeFormat: "HH:mm",
 		stepMinute: 10
 	});
 
