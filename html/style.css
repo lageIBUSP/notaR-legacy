@@ -64,6 +64,19 @@ input[type="text"] {
 	outline: none;
 	font-size: 12px;
 }
+input[type="password"] {
+	margin: 4px 0px 4px 0px;
+       	background-color: #eee;
+       	color: #555; 
+	border: 1px solid #555;
+	border-radius: 2px;
+	width: 120px;
+	height: 20px;
+	font-style: italic;
+	padding: 3px;
+	outline: none;
+	font-size: 12px;
+}
 td img { 
 	vertical-align:middle;
 	padding: 3px;

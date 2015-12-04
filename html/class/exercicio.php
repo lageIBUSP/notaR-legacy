@@ -184,7 +184,7 @@ function ListExercicio($turma = null, $reverse = false) {
 function SelectExercicio () {
 	global $EXERCICIO;
 	global $TURMA;
-	$T = "<select id='exercicio' name='exercicio'>";
+	$T = "<select id='exercicio' name='exercicio' class='form-control'>";
 	$T .= "<option value='".MIN_EX."'>---- Exerc&iacute;cios obrigat&oacute;rios ----</option>";
 	foreach (ListExercicio($TURMA) as $exercicio) {
 		$T .="<option value='".$exercicio->getId()."'";

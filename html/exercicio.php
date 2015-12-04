@@ -13,7 +13,7 @@ echo $X->getHtml();
 
 <form name="notaR" action="#" method="post" enctype="multipart/form-data">
   <span class="btn btn-success fileinput-button" id="fakerfile">
-        <i class="glyphicon glyphicon-plus"></i>
+        <i class="glyphicon glyphicon-ok"></i>
         <span>Submeter resposta</span>
   </span>
 <input type="file" name="rfile" id="rfile" accept=".R,.r" style="display:none;">

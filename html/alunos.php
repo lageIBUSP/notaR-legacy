@@ -24,12 +24,14 @@ if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 }
 ?>
 <h2>Cadastro de alunos</h2>
-<p>Escolha a turma</p>
-<form action='alunos.php' method='POST'>
-<?php echo SelectTurma(); ?>
+<form action='alunos.php' method='POST' style='width:600px'>
+<div class='form-group'>
+  <label>Escolha a turma:</label><?php echo SelectTurma(); ?>
+</div>
 
-<p>Alunos cadastrados:</p>
-<table><tr><th>Admin</th><th>Login</th><th>Notas</th><th>Editar</th>
+<div class='form-group'>
+<label>Alunos cadastrados:</label>
+  <table style='width:100%'><tr><th>Admin</th><th>Login</th><th>Notas</th><th>Editar</th>
 <?php
 foreach (ListAlunos($TURMA) as $aluno) {
 	echo "<tr><td align='center'>";
@@ -38,11 +40,14 @@ foreach (ListAlunos($TURMA) as $aluno) {
 	echo "<a href='aluno.php?id=".$aluno->getId()."'><span class='glyphicon glyphicon-cog'></span></a></td></tr>";
 }
 ?>
-</table>
+  </table>
+</div>
 <p>Para cadastrar novos alunos nesta turma, preencha os logins na caixa de texto abaixo, um por linha:</p>
-<textarea name="novos" rows=5 cols=70>
-</textarea>
-<p>Senha: <input type="text" name="senha">
+<textarea name="novos" rows=5 class='form-control'> </textarea>
+<div class='form-group'>
+  <label>Senha:</label> 
+  <input type="text" name="senha" class='form-control'>
+</div>
 <br><button type='submit' name='submit' value='insere'>Inserir</button></p>
 
 </form>

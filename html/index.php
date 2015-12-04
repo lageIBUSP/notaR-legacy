@@ -58,7 +58,8 @@ e completar os exerc&iacute;cios abaixo.</p>
 } // USER->getID()
 
 ?>
-<?php if ($USER->admin()) echo "<p><a href=\"cadastra.php\">Cadastrar novo exerc&iacute;cio</a></p>"; ?>
+<p>&nbsp;</p>
+<?php if ($USER->admin()) echo "<a href=\"cadastra.php\"><span class='btn btn-success'><span class='glyphicon glyphicon-plus' style='padding-right:5px;'></span>Cadastrar novo exerc&iacute;cio</span></a>"; ?>
 </div>
 </body>
 </html>

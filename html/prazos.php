@@ -37,10 +37,10 @@ if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 
 ?>
 <h2>Administra&ccedil;&atilde;o de prazos</h2>
-<form action='prazos.php' method='POST'>
+<form action='prazos.php' method='POST' style='width: 600px;'>
 
 <p>Prazos cadastrados para a turma: <?php echo SelectTurma(); ?></p>
-<table>
+<table style='width: 100%'>
 <tr><th>Exerc&iacute;cio</th><th>Data</th></tr>
 <?php
 foreach(ListExercicio() as $ex) {
