@@ -3,6 +3,7 @@ if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
+require('menu.php');
 
 if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 	// TODO: Transformar isso em algo mais OO

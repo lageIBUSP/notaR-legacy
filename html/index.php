@@ -1,16 +1,6 @@
-<?php require("head.php"); ?>
-<?php
-if ($USER->admin()) {
-	echo "<div id='Menu'>";
-	echo "Administrar:<br><ul><li><a href='turmas.php'>Turmas</a></li>";
-	echo "<li><a href='alunos.php'>Alunos</a></li><li><a href='prazos.php'>Prazos</a></li></ul>";
-	echo "<br>Relat&oacute;rios:<ul><li><a href='notas.php'>Notas</a></li>";
-	echo "<li><a href='complecao.php'>Realiza&ccedil;&atilde;o</a></li>";
-	echo "<li><a href='texto.php'>Busca de texto</a></li>";
-	echo "<li><a href='plagio.php'>Detec&ccedil;&atilde;o de pl&aacute;gio</a></li>";
-	echo "<li><a href='graficos.php'>Gr&aacute;ficos</a></li>";
-	echo"</ul></div>";
-}
+<?php require("head.php"); 
+
+if ($USER->admin()) require("menu.php");
 ?>
 <br>&nbsp;
 <?php if (! $USER->getId()) { ?>

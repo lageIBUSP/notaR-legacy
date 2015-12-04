@@ -3,6 +3,7 @@ if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
+require('menu.php');
 ?>
 <h2>Administra&ccedil;&atilde;o de arquivos de dados</h2>
 <?php

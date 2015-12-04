@@ -4,6 +4,7 @@ if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
+require('menu.php');
 
 ###### Codigo aqui
 if(isset($_POST['submit']) AND $_POST['submit']=="altera") {

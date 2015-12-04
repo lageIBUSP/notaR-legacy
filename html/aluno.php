@@ -3,6 +3,7 @@ if (! $USER->admin()) {
 	echo "Acesso negado";
 	exit;
 }
+require('menu.php');
 if(! isset($_REQUEST['id'])) {
 	echo "<p>Erro interno!</p></div></body></html>";
 	exit;
@@ -13,7 +14,7 @@ if(! isset($_REQUEST['id'])) {
 <h2>Cadastro de alunos</h2>
 <p>Para alterar detalhes do aluno, edite o formul&aacute;rio abaixo.</p>
 <p>Para recadastrar a senha do aluno, digite uma nova senha.</p>
-<form action='alunos.php' method='POST'>
+<form action='alunos.php' method='POST' style='width:500px;'>
 <input type='hidden' name='id' value='<?php echo $aluno->getId(); ?>'>
 <p>Login: <input type='text' name='nome' value='<?php echo $aluno->getNome(); ?>'>
 <br>Senha: <input type='text' name='senha' value=''>
