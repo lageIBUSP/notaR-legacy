@@ -89,7 +89,7 @@ class Exercicio {
 		$res->bind_param('sssi', $precondicoes, $html, $nome, $this->id);
 		$res->execute();
 		if ($mysqli->error) return "<p class='alert alert-danger'>Erro ao alterar o exerc&iacute;cio!</p>";
-		return $this->cadastraTestes($testes, "<p class='alert alert-success'>Exerc&iacute;cio alterado</p>");
+		return $this->cadastraTestes($testes, "<p class='alert alert-success'>Exerc&iacute;cio alterado");
 	}
 	public function getNome() {return $this->nome;}
 	public function getHtml() {return $this->html;}

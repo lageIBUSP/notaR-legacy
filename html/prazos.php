@@ -4,7 +4,9 @@ if (! $USER->admin()) {
 	exit;
 }
 require('menu.php');
-
+?>
+<h2>Administra&ccedil;&atilde;o de prazos</h2>
+<?php
 if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 	// TODO: Transformar isso em algo mais OO
 	$post = $_POST;
@@ -37,7 +39,6 @@ if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 }
 
 ?>
-<h2>Administra&ccedil;&atilde;o de prazos</h2>
 <form action='prazos.php' method='POST' style='width: 600px;'>
 
 <p>Prazos cadastrados para a turma: <?php echo SelectTurma(); ?></p>

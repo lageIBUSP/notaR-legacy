@@ -19,7 +19,7 @@ if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 	else {
 		foreach ($arr as $novo) {
 			$aluno = new Aluno();
-			echo $aluno->create($novo, $TURMA, $senha)."<br>";
+			echo $aluno->create(trim($novo), $TURMA, $senha)."<br>";
 		}
 	}
 }

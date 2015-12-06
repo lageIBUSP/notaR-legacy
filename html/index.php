@@ -21,9 +21,17 @@ e completar os exerc&iacute;cios abaixo.</p>
 	}
 	echo "</tbody></table>";
 } else { // $USER->getId()
-if ($USER->admin()) echo "<a href=\"cadastra.php\"><span class='btn btn-success'><span class='glyphicon glyphicon-plus' style='padding-right:5px;'></span>Cadastrar novo exerc&iacute;cio</span></a><p></p>"; 
+  if ($USER->admin()) {
+    echo "<form action='?' method='get'><a href=\"cadastra.php\"><span class='btn btn-success'><span class='glyphicon glyphicon-plus' style='padding-right:5px;'></span>Cadastrar novo exerc&iacute;cio</span></a><p></p>"; 
+    echo "Ver prazos para a turma: ";
+    echo SelectTurma();
+    echo "</form>";
+    $t = $TURMA;
+  } else {
+    $t = new Turma ($USER->getTurma());
+  }
+
 	echo "<p>Exerc&iacute;cios obrigat&oacute;rios:</p>";
-	$t = new Turma ($USER->getTurma());
 	echo "<table><thead><tr><th ";
 	if ($USER->admin()) echo "colspan=2";
 	echo ">Nome</th><th>Nota</th><th>Prazo</th></tr></thead><tbody>";
@@ -32,7 +40,7 @@ if ($USER->admin()) echo "<a href=\"cadastra.php\"><span class='btn btn-success'
 		if ($USER->admin()) echo "<a href='cadastra.php?exerc=".$X->getId()."'><span class='glyphicon glyphicon-pencil'></span></a></td><td>";
 		if ($X->getNota() == 100) echo "<span class='glyphicon glyphicon-ok-circle icon-ok'></span>";
 		echo "<a href='exercicio.php?exerc=".$X->getId()."'>".$X->getNome()."</a>";
-		echo "</td><td>".$X->getNota()."</td><td>".$X->getPrazo()."</td></tr>";
+		echo "</td><td>".$X->getNota()."</td><td>".$X->getPrazo($t)."</td></tr>";
 	}
 	echo "</tbody></table>";
 	echo "<p>Exerc&iacute;cios opcionais:</p>";
