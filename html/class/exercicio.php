@@ -44,9 +44,9 @@ class Exercicio {
 			VALUES (REPLACE(?, CHAR(13), ''), ?, ?)");
 		$res->bind_param('sss', $precondicoes, $html, $nome);
 		$res->execute();
-		if ($mysqli->error) return "Erro ao cadastrar o exerc&iacute;cio!";
+		if ($mysqli->error) return "<p class='alert alert-danger'>Erro ao cadastrar o exerc&iacute;cio!</p>";
 		$this->id = $mysqli->insert_id; 
-		return $this->cadastraTestes($testes, "Exerc&iacute;cio criado");
+		return $this->cadastraTestes($testes, "<p class='alert alert-success'>Exerc&iacute;cio criado.");
 	}
 	public function cadastraTestes($testes, $msg) { // E impedimentos, por preguiça do programador
 		global $mysqli;
@@ -62,8 +62,8 @@ class Exercicio {
 				$ok = $ok AND $T->create($this->id, $j, $testes[0][$i], $testes[1][$i],$testes[2][$i]);
 			}
 		}
-		if (! $ok) $msg .= "<p>Falha ao cadastrar os testes!</p>";
-		else $msg .= " com $c testes. ";
+		if (! $ok) $msg .= "</p><p class='alert alert-danger'>Falha ao cadastrar os testes!</p>";
+		else $msg .= " com $c testes. </p>";
 
 		$res = $mysqli->prepare("DELETE FROM proibido WHERE id_exercicio=?");
 		$res->bind_param('i', $this->id);
@@ -76,7 +76,7 @@ class Exercicio {
 				$ok = $ok AND $T->create($testes[3][$i], $this->id);
 			}
 		}
-		if (! $ok) $msg .= "<p>Falha ao cadastrar os impedimentos!</p>";
+		if (! $ok) $msg .= "<p class='alert alert-danger'>Falha ao cadastrar os impedimentos!</p>";
 
 		$msg .= "Pr&oacute;ximos passos: <ul>
 			<li><a href='exercicio.php?exerc=$this->id'>Teste</a> se a corre&ccedil;&atilde;o funciona</li><li><a href='cadastra.php?exerc=$this->id'>Edite</a> as defini&ccedil;&otilde;es deste exerc&iacute;cio</li><li>Determine o <a href='prazos.php'>prazo</a> de entrega</li></ul>";
@@ -88,8 +88,8 @@ class Exercicio {
 			precondicoes = REPLACE(?, CHAR(13), ''), html=?, nome=? WHERE id_exercicio=?");
 		$res->bind_param('sssi', $precondicoes, $html, $nome, $this->id);
 		$res->execute();
-		if ($mysqli->error) return "Erro ao alterar o exerc&iacute;cio!";
-		return $this->cadastraTestes($testes, "Exerc&iacute;cio alterado");
+		if ($mysqli->error) return "<p class='alert alert-danger'>Erro ao alterar o exerc&iacute;cio!</p>";
+		return $this->cadastraTestes($testes, "<p class='alert alert-success'>Exerc&iacute;cio alterado</p>");
 	}
 	public function getNome() {return $this->nome;}
 	public function getHtml() {return $this->html;}

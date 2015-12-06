@@ -1,7 +1,7 @@
 <?php
 require("head.php");
 if (! $USER->admin()) {
-	echo "Acesso negado";
+	echo "<p class='alert alert-danger'>Acesso negado</p>";
 	exit;
 }
 require('menu.php');
@@ -15,7 +15,7 @@ if(isset($_POST['submit']) AND $_POST['submit']=="altera") {
 if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 	$arr=preg_split("/\r\n|\r|\n/",$_POST['novos']);
 	$senha = $_POST['senha'];
-	if (empty($senha)) { echo "<p>Voc&ecirc; deve informar uma senha!</p>";}
+	if (empty($senha)) { echo "<p class='alert alert-danger'>Voc&ecirc; deve informar uma senha!</p>";}
 	else {
 		foreach ($arr as $novo) {
 			$aluno = new Aluno();
@@ -25,7 +25,7 @@ if(isset($_POST['submit']) AND $_POST['submit']=="insere") {
 }
 ?>
 <h2>Cadastro de alunos</h2>
-<form action='alunos.php' method='POST' style='width:600px'>
+<form action='alunos.php' method='POST'>
 <div class='form-group'>
   <label>Escolha a turma:</label><?php echo SelectTurma(); ?>
 </div>

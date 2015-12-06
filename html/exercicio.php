@@ -1,6 +1,10 @@
 <?php require('head.php');
-if(empty($_REQUEST['exerc'])) {echo "Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador"; exit;}
+if(empty($_REQUEST['exerc'])) {echo "<p class='alert alert-danger'>Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador</p>"; exit;}
+
 $X = new Exercicio($_REQUEST['exerc']);
+
+if (empty($X->getNome())) {echo "<p class='alert alert-danger'>Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador</p>"; exit;}
+
 ?>
 <h2><?php 
 echo $X->getNome(); 

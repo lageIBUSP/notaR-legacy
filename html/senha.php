@@ -1,6 +1,6 @@
 <?php require('head.php');
 if (! $USER->getId()) {
-		echo "Voc&ecirc; precisa estar logado para acessar esta p&aacute;gina.";
+		echo "<p class='alert alert-danger'>Voc&ecirc; precisa estar logado para acessar esta p&aacute;gina.</p>";
 		exit;
 }
 ?>
@@ -12,12 +12,12 @@ if(isset($_POST['submit']) AND $_POST['submit']=="altera") {
 	if(!empty($_POST['senha'])) {
 		if ($_POST['senha'] === $_POST['senha2']) {
 			$USER->altera($USER->getNome(), $USER->admin(), new Turma($USER->getTurma()), $_POST['senha']);
-			echo "<h3>Senha alterada!</h3>";
+			echo "<p class='alert alert-success'>Senha alterada!</p>";
 		} else {
-			echo "<h3>As senhas digitadas n&atilde;o s&atilde;o iguais!</h3>";
+			echo "<p class='alert alert-danger'>As senhas digitadas n&atilde;o s&atilde;o iguais!</p>";
 		}
   } else {
-    echo "<h3>Campo 'senha' em branco!</h3>";
+    echo "<p class='alert alert-warning'>Campo 'senha' em branco!</p>";
   }
 }
 ?>

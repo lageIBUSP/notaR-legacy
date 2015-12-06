@@ -1,3 +1,9 @@
+form {
+  max-width: 500px;
+}
+.alert {
+  max-width: 500px;
+}
 .icon-ok {
   color: #0f8;
   padding-right: 3px;
@@ -22,13 +28,6 @@ td {
 	width: 190px;
 	float: right;
 	border: 0.5px dashed #555;
-}
-#Erro {
-	font-size: 13px;
-	color: #d66;
-	border: 2px solid #d66;
-	width: 50%;
-	padding: 15px;
 }
 .Cadastra td { border: none;}
 #Top {
@@ -134,6 +133,7 @@ p {
 		border-radius: 5px;
 		background: #eef;
 		padding: 7px;
+    padding-top: 13px;
 		overflow-x: hidden;
     overflow-y: auto;
     height: 100%;

@@ -1,6 +1,6 @@
 <?php require('head.php');
 if (! $USER->admin()) {
-	echo "Acesso negado";
+	echo "<p class='alert alert-danger'>Acesso negado</p>";
 	exit;
 }
 require('menu.php');
@@ -32,8 +32,8 @@ if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 			}
 		}
 	}
-	if ($ok) echo "Prazos alterados!";
-	else echo "Houveram erros ao alterar os prazos! Confira os valores abaixo!!";
+	if ($ok) echo "<p class='alert alert-success'>Prazos alterados!</p>";
+	else echo "<p class='alert alert-danger'>Houveram erros ao alterar os prazos! Confira os valores abaixo!!</p>";
 }
 
 ?>

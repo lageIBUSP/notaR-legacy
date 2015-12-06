@@ -1,6 +1,6 @@
 <?php require('head.php');
 if (! $USER->admin()) {
-	echo "Acesso negado";
+	echo "<p class='alert alert-danger'>Acesso negado</p>";
 	exit;
 }
 require('menu.php');
@@ -10,16 +10,16 @@ require('menu.php');
 if (isset($_REQUEST['delete'])) {
 		$turma = new Turma($_REQUEST['delete']);
 		if ($turma->remove())
-			echo "<p>Turma removida</p>";
+			echo "<p class='alert alert-success'>Turma removida</p>";
 		else 
-			echo "<p>Erro ao remover turma! S&oacute; &eacute; poss&iacute;vel remover turmas vazias!</p>";
+			echo "<p class='alert alert-danger'>Erro ao remover turma! S&oacute; &eacute; poss&iacute;vel remover turmas vazias!</p>";
 }
 if(isset($_REQUEST['submit'])) {
 		$turma = new Turma();
 		if ($turma->create($_REQUEST['nome'])) 
-			echo "<p>Turma criada</p>"; 
+			echo "<p class='alert alert-success'>Turma criada</p>"; 
 		else 
-			echo "<p>Erro ao criar turma!</p>";
+			echo "<p class='alert alert-danger'>Erro ao criar turma!</p>";
 }
 ?>
 <p>Turmas cadastradas:</p>
@@ -31,7 +31,7 @@ foreach (ListTurmas() as $turma) {
 ?>
 </table>
 
-<form name="cadastro" action="#" method="post">
+<form name="cadastro" action="?" method="post">
 <p>&nbsp;</p>
 <p>Criar nova turma: <input type="text" name="nome" style="width: 300px;"></p>
 <p><button type="submit" name="submit" value="submit">ok</button></p>
