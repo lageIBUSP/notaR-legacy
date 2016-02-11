@@ -1,9 +1,12 @@
 <?php require('head.php');
 if (! $USER->admin()) {
-	echo "Acesso negado";
+	echo "<p class='alert alert-danger'>Acesso negado</p>";
 	exit;
 }
-
+require('menu.php');
+?>
+<h2>Administra&ccedil;&atilde;o de prazos</h2>
+<?php
 if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 	// TODO: Transformar isso em algo mais OO
 	$post = $_POST;
@@ -31,23 +34,22 @@ if (isset($_POST['submit']) AND $_POST['submit'] == "atualiza") {
 			}
 		}
 	}
-	if ($ok) echo "Prazos alterados!";
-	else echo "Houveram erros ao alterar os prazos! Confira os valores abaixo!!";
+	if ($ok) echo "<p class='alert alert-success'>Prazos alterados!</p>";
+	else echo "<p class='alert alert-danger'>Houveram erros ao alterar os prazos! Confira os valores abaixo!!</p>";
 }
 
 ?>
-<h2>Administra&ccedil;&atilde;o de prazos</h2>
-<form action='prazos.php' method='POST'>
+<form action='prazos.php' method='POST' style='width: 600px;'>
 
 <p>Prazos cadastrados para a turma: <?php echo SelectTurma(); ?></p>
-<table>
+<table style='width: 100%'>
 <tr><th>Exerc&iacute;cio</th><th>Data</th></tr>
 <?php
 foreach(ListExercicio() as $ex) {
 	echo "<tr><td>".$ex->getNome()."</td><td>";
 	echo "<input type='text' id='ex".$ex->getId()."' name='ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."' class='timepick'>";
 	echo "<input type='hidden' name='old_ex".$ex->getId()."' value='".$ex->getPrazo($TURMA)."'>";
-	echo "<a href='#' onclick='delprazo(".$ex->getId()."); return false;'><img src='img/x.png'></a>";
+	echo "<a href='#' onclick='delprazo(".$ex->getId()."); return false;' style='padding-left: 3px;'><span class='glyphicon glyphicon-remove'></span></a>";
 	echo "</td></tr>";
 }
 ?>

@@ -17,13 +17,14 @@ class Aluno {
 	}
 	public function create($nome, $turma, $senha) {
 		global $mysqli;
+    if ($nome == " ") return;
 		if (strlen($nome) < 4) 
-			return "O nome $nome &eacute; muito curto. Crie usu&aacute;rios com no m&iacute;nimo 4 caracteres";
+			return "<p class='alert alert-warning'>O nome $nome &eacute; muito curto. Crie usu&aacute;rios com no m&iacute;nimo 4 caracteres</p>";
 		$res = $mysqli->prepare("INSERT INTO aluno (nome_aluno, id_turma, senha) VALUES (?, ?, SHA1(?))");
 		$res->bind_param('sis', $nome, $turma->getId(), $senha);
 		$res->execute();
-		if ($mysqli->error) return "Houve um erro ao inserir o aluno $nome!";
-		else return "Aluno $nome inserido com sucesso";
+		if ($mysqli->error) return "<p class='alert alert-danger'>Houve um erro ao inserir o aluno $nome!</p>";
+		else return "<p class='alert alert-success'>Aluno $nome inserido com sucesso</p>";
 	}
 	public function getNome() {return $this->nome;}
 	public function getId() { return $this->id; } 
@@ -41,7 +42,7 @@ class Aluno {
 	public function altera($nome, $admin, $turma, $senha) {
 		global $mysqli;
 		if (strlen($nome) < 4) 
-			return "O nome $nome &eacute; muito curto. Crie usu&aacute;rios com no m&iacute;nimo 4 caracteres";
+			return "<p class='alert alert-warning'>O nome $nome &eacute; muito curto. Crie usu&aacute;rios com no m&iacute;nimo 4 caracteres</p>";
 		if ($senha) {
 			$res = $mysqli->prepare("UPDATE aluno set nome_aluno=?, admin=?, id_turma=?, senha=SHA1(?) WHERE id_aluno=?");
 			$res->bind_param('siisi', $nome, $admin, $turma->getId(), $senha, $this->id);
@@ -50,8 +51,8 @@ class Aluno {
 			$res->bind_param('siii', $nome, $admin, $turma->getId(), $this->id);
 		}
 		$res->execute();
-		if (! $mysqli->error) return "Altera&ccedil;&otilde;es feitas com sucesso";
-		else return "N&atilde;o foi poss&iacute;vel realizar as altera&ccedil;&otilde;es!";
+		if (! $mysqli->error) return "<p class='alert alert-success'>Altera&ccedil;&otilde;es feitas com sucesso</p>";
+		else return "<p class='alert alert-danger'>N&atilde;o foi poss&iacute;vel realizar as altera&ccedil;&otilde;es!</p>";
 	}
 }
 

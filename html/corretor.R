@@ -190,13 +190,14 @@ porHora <- function() {
 	par(fg='#FF6666', family='Verdana')
 	plot(spline(x[,2],x[,1]), type='l', bty='n', xaxt='n', yaxt='n', xlab='Hora', ylab='% entregas', col='#007788', lwd=3)
 	axis(1, at=2*0:11, lwd=3)
-	axis(2, wd=3)
+	axis(2, lwd=3)
 	dev.off()
 }
 porExercicio <- function(turma) {
 	startpng(paste("exercicio",turma,".png",sep=""))
 	n_turma <- dbGetQuery(con, paste("select count(distinct id_aluno) from aluno join nota using(id_aluno) where id_turma=",turma))
 	x <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) join prazo using (id_exercicio, id_turma) where id_turma=",turma,"group by nome"))
+  if(dim(x)[1] == 0) {dev.off(); return();}
 	y <- dbGetQuery(con, paste("select nome, count(distinct id_aluno) from nota join aluno using(id_aluno)  join exercicio using (id_exercicio) join prazo using (id_exercicio, id_turma) where id_turma=",turma," and nota=100 group by nome"))
 	x <- merge(x, y, by="nome", all=TRUE)
 	x[,2:3] <- x[,2:3] / as.numeric(n_turma)

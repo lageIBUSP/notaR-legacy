@@ -1,10 +1,11 @@
 <?php require('head.php');
 if (! $USER->admin()) {
-	echo "Acesso negado";
+	echo "<p class='alert alert-danger'>Acesso negado</p>";
 	exit;
 }
+require('menu.php');
 if(! isset($_REQUEST['id'])) {
-	echo "<p>Erro interno!</p></div></body></html>";
+	echo "<p class='alert alert-danger'>Erro interno!</p></div></body></html>";
 	exit;
 }
 	$aluno = new Aluno($_REQUEST['id']);
@@ -20,7 +21,7 @@ if(! isset($_REQUEST['id'])) {
 <br>Turma: <?php echo SelectTurma(false); ?>
 <br><label><input type="checkbox" name="admin" value="1" 
 <?php if ($aluno->admin()) echo "checked"; ?>
-/> Admin</label>
+/><span class='glyphicon glyphicon-education' style='padding-left: 5px;'></span> Admin</label>
 <br>
 	<button type='submit' name='submit' value='altera'>Alterar</button>
 

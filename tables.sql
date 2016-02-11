@@ -77,13 +77,14 @@ CREATE TABLE proibido (
 	id_proibido int(10) PRIMARY KEY AUTO_INCREMENT,
 	palavra VARCHAR(200),
 	id_exercicio INT(10),
+  hard BIT(1) DEFAULT 0,
 	INDEX (id_exercicio), 
 	FOREIGN KEY (id_exercicio) REFERENCES exercicio (id_exercicio)
 ) ENGINE=INNODB;
 
-INSERT INTO proibido (palavra) VALUES ('system'),('save.image'),('file.copy'),('set.seed'),('library'),
-('MySQL'),('dbApply'),('dbBuild'),('dbCall'),('dbConnect'),('dbEscape'),('dbSendQuery'),
-('mysql'),('unlink'),('setwd'),('shell'),('.C'),('dyn.load'),('library.dynam'),('.External'),
-('.Fortran'),('.Call'),('.Platform'),('<<-'),('set.global'),('reg.finalizer'),('on.exit'),
-('assign'),('deparse'),('new.env'),('.Last'),('parse'),('eval');
+INSERT INTO proibido (palavra, hard) VALUES ('system',1),('save.image',0),('file.copy',0),('set.seed',0),('library',0),
+('MySQL',1),('dbApply',1),('dbBuild',1),('dbCall',1),('dbConnect',1),('dbEscape',1),('dbSendQuery',1),
+('mysql',1),('unlink',1),('setwd',1),('shell',1),('.C',1),('dyn.load',1),('library.dynam',1),('.External',1),
+('.Fortran',1),('.Call',1),('.Platform',1),('<<-',1),('set.global',1),('reg.finalizer',1),('on.exit',0),
+('assign',1),('deparse',1),('new.env',1),('.Last',1),('parse',1),('eval',1);
 

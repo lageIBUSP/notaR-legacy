@@ -1,22 +1,35 @@
 <?php require('head.php');
-if(empty($_REQUEST['exerc'])) {echo "Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador"; exit;}
+if(empty($_REQUEST['exerc'])) {echo "<p class='alert alert-danger'>Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador</p>"; exit;}
+
 $X = new Exercicio($_REQUEST['exerc']);
+$nome = $X->getNome();
+
+if (empty($nome)) {echo "<p class='alert alert-danger'>Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador</p>"; exit;}
+
 ?>
 <h2><?php 
 echo $X->getNome(); 
-if ($USER->admin()) echo "&nbsp;<a href='cadastra.php?exerc=".$X->getId()."'><img src='img/pen.png'></a>";
+if ($USER->admin()) echo "&nbsp;<span class='small'><a href='cadastra.php?exerc=".$X->getId()."'><span class='glyphicon glyphicon-pencil'></span></a></span>";
 ?></h2>
 <?php 
 echo $X->getHtml();
 ?>
+<p>&nbsp;</p>
+
 <form name="notaR" action="#" method="post" enctype="multipart/form-data">
+  <span class="btn btn-success fileinput-button" id="fakerfile">
+        <i class="glyphicon glyphicon-ok"></i>
+        <span>Submeter resposta</span>
+  </span>
+<input type="file" name="rfile" id="rfile" accept=".R,.r" style="display:none;">
 <input type="hidden" name="exerc" value="<?php echo $X->getId(); ?>">
 <input type="hidden" name="MAX_FILE_SIZE" value="30000">
-<input type="file" name="rfile" id="rfile" accept=".R">
-<br><button type="submit" value="Submit">Submeter!</button>
+<button id="submit" type="submit" value="Submit" style="display: none;">Submeter!</button>
 <a href="https://github.com/lageIBUSP/notaR/wiki/Submetendo-respostas">ajuda?</a>
+
 </form>
-<div id="corretoR" >
+<p>&nbsp;</p>
+<div id="corretoR">
 <?php 
 if (isset($_POST['exerc'])) {
 	require_once 'Rserve-php/Connection.php';
@@ -67,11 +80,10 @@ if (isset($_POST['exerc'])) {
 	}
 }
 else 
-{ echo "<p>Insira sua resposta no campo acima e aperte OK</p>";
+{ echo "<p>Escolha o arquivo de resposta usando o bot&atilde;o acima</p>";
 }
 ?>
 </div>
-<div id="etc" onclick="fullch(); return null;">...</div>
 
 </div>
 </body>

@@ -2,7 +2,7 @@
 require_once("head.php");
 ## COMECA AQUI
 if (! $USER->admin()) {
-	echo "Acesso negado";
+	echo "<p class='alert alert-danger'>Acesso negado</p>";
 	exit;
 }
 
@@ -17,7 +17,7 @@ else $texto = "";
 ?>
 <h2>Busca em texto</h2>
 <p>Encontre o texto submetido pelos alunos para cada exerc&iacute;cio.</p>
-<form action='texto.php' method='POST'>
+<form action='texto.php' method='POST' style='width: 500px;'>
 <p>Escolha a turma:<?php echo SelectTurma(); ?></p>
 <p>Escolha um exerc&iacute;cio: <?php echo SelectExercicio() ; ?></p>
 <ul><li>Escolha um aluno para ver todas as tentativas aqui:

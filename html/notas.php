@@ -1,7 +1,7 @@
 <?php
 require_once("head.php");
 if (! $USER->admin()) {
-	echo "Acesso negado";
+	echo "<p class='alert alert-danger'>Acesso negado</p>";
 	exit;
 }
 ?>

@@ -63,7 +63,7 @@ function SelectTurma($reload = true) { // change the elem id to prevent auto rel
 	global $TURMA;
 	$T = "<select id='turma' name='turma' ";
 	if ($reload) $T.= "onchange=\"window.location='?turma='+this.value;\"";
-	$T .=">";
+	$T .=" class='form-control'>";
 	$turmas = ListTurmas();
 	foreach($turmas as $esta) {
 		$T.= "<option value=".$esta->getId();
