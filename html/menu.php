@@ -3,6 +3,7 @@ echo" <div id='Menu'>
 Administrar:<br><ul><li><a href='turmas.php'>Turmas</a></li>
 <li><a href='alunos.php'>Alunos</a></li><li><a href='prazos.php'>Prazos</a></li>
 <li><a href='arquivos.php'>Arquivos</a></li>
+<li><a href='proibidos.php'>Impedimentos</a></li>
 </ul>
 <br>Relat&oacute;rios:<ul><li><a href='notas.php'>Notas</a></li>
 <li><a href='complecao.php'>Realiza&ccedil;&atilde;o</a></li>

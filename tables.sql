@@ -77,7 +77,7 @@ CREATE TABLE proibido (
 	id_proibido int(10) PRIMARY KEY AUTO_INCREMENT,
 	palavra VARCHAR(200),
 	id_exercicio INT(10),
-  hard BIT(1),
+  hard BIT(1) DEFAULT 0,
 	INDEX (id_exercicio), 
 	FOREIGN KEY (id_exercicio) REFERENCES exercicio (id_exercicio)
 ) ENGINE=INNODB;

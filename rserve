@@ -31,9 +31,9 @@ local NO_COLOUR="\033[0m"
 
 	N=`ps -ef | grep Rserve | wc -l`
 	if [ "$N" -lt 2 ]; then
-		echo "Rserve is ${RED}down${NO_COLOUR}.";
+		echo -e "Rserve is ${RED}down${NO_COLOUR}.";
 	else
-		echo "Rserve is ${GREEN}up${NO_COLOUR}.";
+		echo -e "Rserve is ${GREEN}up${NO_COLOUR}.";
 	fi
 }
 
