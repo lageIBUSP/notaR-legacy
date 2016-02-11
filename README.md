@@ -23,3 +23,12 @@ Para instalar uma nova plataforma notaR, siga os passos descritos na wiki acima.
 *NOTE* que a versão atual no Github é uma versão de desenvolvimento (ou seja, warnings e erros são 
 mostrados sem filtros ao usuário), enquanto versões na página 
 de [Releases] (https://github.com/lageIBUSP/notaR/releases) são adequadas para produção.
+
+**Importante:** se você está fazendo clone a partir do Github, lembre-se de executar os seguintes comandos de dentro
+do diretório clonado:
+```
+git submodule init 
+git submodule update
+```
+
+
