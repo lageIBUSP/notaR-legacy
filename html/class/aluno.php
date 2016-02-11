@@ -24,7 +24,7 @@ class Aluno {
 		$res->bind_param('sis', $nome, $turma->getId(), $senha);
 		$res->execute();
 		if ($mysqli->error) return "<p class='alert alert-danger'>Houve um erro ao inserir o aluno $nome!</p>";
-		else return "Aluno $nome inserido com sucesso";
+		else return "<p class='alert alert-success'>Aluno $nome inserido com sucesso</p>";
 	}
 	public function getNome() {return $this->nome;}
 	public function getId() { return $this->id; } 

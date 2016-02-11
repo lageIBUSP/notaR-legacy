@@ -2,8 +2,9 @@
 if(empty($_REQUEST['exerc'])) {echo "<p class='alert alert-danger'>Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador</p>"; exit;}
 
 $X = new Exercicio($_REQUEST['exerc']);
+$nome = $X->getNome();
 
-if (empty($X->getNome())) {echo "<p class='alert alert-danger'>Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador</p>"; exit;}
+if (empty($nome)) {echo "<p class='alert alert-danger'>Erro. Se voc&ecirc; usou um link para chegar aqui, notifique o administrador</p>"; exit;}
 
 ?>
 <h2><?php 
