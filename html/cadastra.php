@@ -1,5 +1,8 @@
 <?php
 require_once("head.php");
+
+function hsc ($x) {return htmlspecialchars($x, ENT_QUOTES, "iso-8859-1");}
+
 ### comeca aqui
 if (! $USER->admin()) {
 	echo "<p class= 'alert alert-danger'>Acesso negado</p>";
@@ -88,8 +91,8 @@ echo "<h3>Impedimentos</h3>";
 echo "<table class='Cadastra'>";
 for ($i = 0; $i < $nimp; $i ++) {
 		echo "<tr><td><input type='text' class='long' name='imp[]' value='";
-		if (isset($_POST['imp'][$i])) {echo htmlspecialchars($_POST['imp'][$i]);} 
-		elseif (!empty($id) AND isset($imp[$i])) echo htmlspecialchars($imp[$i]->getPalavra());
+		if (isset($_POST['imp'][$i])) {echo hsc($_POST['imp'][$i]);} 
+		elseif (!empty($id) AND isset($imp[$i])) echo hsc($imp[$i]->getPalavra());
 		echo "'></td></tr>";
 }
 echo "</table>";
@@ -123,11 +126,11 @@ else
 		elseif (!empty($id) AND $T->peso()) echo $T->peso();
 		else {echo 1;}
 		echo "'></td><td><input class='long' type='text' name='condicao[]' value=\"";
-		if (isset($condicao[$i])) {echo htmlspecialchars($condicao[$i]);}
-		elseif (!empty($id)) echo htmlspecialchars($T->condicao());
+		if (isset($condicao[$i])) {echo hsc($condicao[$i]);}
+		elseif (!empty($id)) echo hsc($T->condicao());
 		echo "\"></td><td><input class='long' type='text' name='dica[]' value=\"";
-		if (isset($dica[$i])) {echo htmlspecialchars($dica[$i]);}
-		elseif (!empty($id)) echo htmlspecialchars($T->dica());
+		if (isset($dica[$i])) {echo hsc($dica[$i]);}
+		elseif (!empty($id)) echo hsc($T->dica());
 		echo "\"></td></tr>";
 }
 		echo "</table>";
