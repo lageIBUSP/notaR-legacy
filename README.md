@@ -8,21 +8,21 @@ visualização das notas resultantes. Ele é um software colaborativo, desenvolv
 
 O notaR é usado hoje em cursos oferecidos pela Universade de São Paulo (USP),
 Instituto Nacional de Pesquisas da Amazônia (INPA) e Universidade Federal do Rio Grande do Norte (UFRN):
-* [Introdução à Linguagem R] (http://www.ecologia.ib.usp.br/bie5782/doku.php)
-* [Modelagem Estatística para Ecologia e Recursos Naturais] (http://cmq.esalq.usp.br/BIE5781/doku.php)
+* [Introdução à Linguagem R](http://www.ecologia.ib.usp.br/bie5782/doku.php)
+* [Modelagem Estatística para Ecologia e Recursos Naturais](http://cmq.esalq.usp.br/BIE5781/doku.php)
 
-Para acessar a plataforma online usada por estes cursos, clique [aqui] (http://www.lage.ib.usp.br/rserve/).
+Para acessar a plataforma online usada por estes cursos, clique [aqui](http://www.lage.ib.usp.br/rserve/).
 
 ## Documentação
 
-A documentação do sistema notaR está disponível em um sistema wiki. Clique [aqui] (https://github.com/lageIBUSP/notaR/wiki).
+A documentação do sistema notaR está disponível em um sistema wiki. Clique [aqui](https://github.com/lageIBUSP/notaR/wiki).
 
 ## Instalando o notaR
 
 Para instalar uma nova plataforma notaR, siga os passos descritos na wiki acima.
 *NOTE* que a versão atual no Github é uma versão de desenvolvimento (ou seja, warnings e erros são 
 mostrados sem filtros ao usuário), enquanto versões na página 
-de [Releases] (https://github.com/lageIBUSP/notaR/releases) são adequadas para produção.
+de [Releases](https://github.com/lageIBUSP/notaR/releases) são adequadas para produção.
 
 **Importante:** se você está fazendo clone a partir do Github, lembre-se de executar os seguintes comandos de dentro
 do diretório clonado:
