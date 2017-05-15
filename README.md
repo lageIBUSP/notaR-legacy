@@ -4,6 +4,9 @@ Um sistema para notas automatizadas em cursos que utilizam a linguagem R
 O notaR é um sistema para correção automática de exercícios em linguagem R, armazenamento e 
 visualização das notas resultantes. Ele é um software colaborativo, desenvolvido em linguagens de código aberto.
 
+Se você for usar o notaR, cite como:
+Chalom, A., Prado, P. I. & Adalardo, A. (2012). notaR - Um sistema para notas automatizadas em cursos que utilizam a linguagem R (Version 2.0), from https://github.com/lageIBUSP/notaR.
+
 ## Usando o notaR
 
 O notaR é usado hoje em cursos oferecidos pela Universade de São Paulo (USP),
@@ -31,4 +34,5 @@ git submodule init
 git submodule update
 ```
 
-
+## Licença de uso
+O código fonte do notaR está disponível sob licença GPLv3.
