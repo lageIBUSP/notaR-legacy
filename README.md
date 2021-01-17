@@ -1,3 +1,7 @@
+# NOTA!
+
+Esse repositório é um arquivo de uma versão antiga do notaR. Para o repositório atual, navegue para https://github.com/lageIBUSP/notaR
+
 # notaR
 Um sistema para notas automatizadas em cursos que utilizam a linguagem R
 
